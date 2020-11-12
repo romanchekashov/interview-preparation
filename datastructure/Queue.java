@@ -1,69 +1,81 @@
 package datastructure;
 
-public class Queue {
-    private int maxSize;
-    private long[] queArray;
-    private int front;
-    private int rear;
-    private int nItems;
+import java.util.NoSuchElementException;
 
-    public Queue(int s) {
-        maxSize = s;
-        queArray = new long[maxSize];
-        front = 0;
-        rear = -1;
-        nItems = 0;
-    }
+/**
+ * A queue implements FIFO (first-in first-out) ordering. As in a line or queue
+ * at a ticket stand, items are removed from the data structure in the same
+ * order that they are added.
+ * 
+ * A queue can also be implemented with a linked list. In fact, they are
+ * essentially the same thing, as long as items are added and removed from
+ * opposite sides.
+ */
+public class Queue<T> {
+    private static class QueueNode<T> {
+        private T data;
+        private QueueNode<T> next;
 
-    public void offer(long j) { // put item at rear of queue
-        if (rear == maxSize - 1) { // deal with wraparound
-            rear = -1;
+        public QueueNode(T data) {
+            this.data = data;
         }
-        queArray[++rear] = j; // increment rear and insert
-        nItems++; // one more item
     }
 
-    public long remove() { // take item from front of queue
-        long temp = queArray[front++]; // get value and incr front
-        if (front == maxSize) { // deal with wraparound
-            front = 0;
+    private QueueNode<T> first;
+    private QueueNode<T> last;
+
+    // Add an item to the end of the list.
+    public void add(T item) {
+        QueueNode<T> t = new QueueNode<T>(item);
+        if (last != null) {
+            last.next = t;
         }
-        nItems--; // one less item
-        return temp;
+        last = t;
+        if (first == null) {
+            first = last;
+        }
     }
 
-    public long peekFront() { // peek at front of queue
-        return queArray[front];
+    // Remove the first item in the list.
+    public T remove() {
+        if (first == null)
+            throw new NoSuchElementException();
+        T data = first.data;
+        first = first.next;
+        if (first == null) {
+            last = null;
+        }
+        return data;
     }
 
-    public boolean isEmpty() { // true if queue is empty
-        return (nItems == 0);
+    // Return the top of the queue.
+    public T peek() {
+        if (first == null)
+            throw new NoSuchElementException();
+        return first.data;
     }
 
-    public boolean isFull() { // true if queue is full
-        return (nItems == maxSize);
-    }
-
-    public int size() { // number of items in queue
-        return nItems;
+    // Return true if and only if the queue is empty.
+    public boolean isEmpty() {
+        return first == null;
     }
 
     ///////////////////////////////////////////////////////////////////
     public static void main(String[] args) {
-        Queue theQueue = new Queue(5);
-        theQueue.offer(10);
-        theQueue.offer(20);
-        theQueue.offer(30);
-        theQueue.offer(40);
+        Queue<Integer> theQueue = new Queue<Integer>();
+        theQueue.add(10);
+        theQueue.add(20);
+        theQueue.add(30);
+        theQueue.add(40);
 
         theQueue.remove();
         theQueue.remove();
         theQueue.remove();
 
-        theQueue.offer(50);
-        theQueue.offer(60);
-        theQueue.offer(70);
-        theQueue.offer(80);
+        theQueue.add(50);
+        theQueue.add(60);
+        theQueue.add(70);
+        theQueue.add(80);
 
         while (!theQueue.isEmpty()) {
             long item = theQueue.remove();
