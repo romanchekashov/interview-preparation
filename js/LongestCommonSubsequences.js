@@ -1,8 +1,8 @@
-const { assert, measurePerformance } = require("./Utils");
+const { assert, measurePerformance } = require('./Utils');
 
 /**
  * https://www.ics.uci.edu/~eppstein/161/960229.html
- * 
+ *
  * https://interviewing.io/recordings/Javascript-Google-3/
  */
 
@@ -21,17 +21,18 @@ const { assert, measurePerformance } = require("./Utils");
     the the time bounds are binomial coefficients, which (if m=n) are close to 2^n.
  */
 function longestCommonSubsequencesRecursive(s1, s2) {
-  if (s1.length === 0 || s2.length === 0) return "";
+    if (s1.length === 0 || s2.length === 0) return '';
 
-  if (s1[0] === s2[0])
-    return (
-      s1[0] +
-      longestCommonSubsequencesRecursive(s1.substring(1), s2.substring(1))
-    );
+    if (s1[0] === s2[0]) {
+        return (
+            s1[0] +
+            longestCommonSubsequencesRecursive(s1.substring(1), s2.substring(1))
+        );
+    }
 
-  const first = longestCommonSubsequencesRecursive(s1.substring(1), s2);
-  const second = longestCommonSubsequencesRecursive(s1, s2.substring(1));
-  return first.length > second.length ? first : second;
+    const first = longestCommonSubsequencesRecursive(s1.substring(1), s2);
+    const second = longestCommonSubsequencesRecursive(s1, s2.substring(1));
+    return first.length > second.length ? first : second;
 }
 
 /**
@@ -70,28 +71,30 @@ function longestCommonSubsequencesRecursive(s1, s2) {
     For instance if the two strings match exactly, we'll only fill in diagonal entries and the algorithm will be fast. 
  */
 function longestCommonSubsequencesRecursiveMemoization(s1, s2) {
-  let memo = [];
-  for (let i = 0; i <= s1.length; i++) {
-    memo[i] = [];
-  }
-
-  function lcsRecursive(s1Idx, s2Idx) {
-    if (memo[s1Idx][s2Idx] === undefined) {
-      if (s1[s1Idx] === undefined || s2[s2Idx] === undefined) {
-        memo[s1Idx][s2Idx] = "";
-      } else if (s1[s1Idx] === s2[s2Idx]) {
-        memo[s1Idx][s2Idx] = s1[s1Idx] + lcsRecursive(s1Idx + 1, s2Idx + 1);
-      } else {
-        const first = lcsRecursive(s1Idx + 1, s2Idx);
-        const second = lcsRecursive(s1Idx, s2Idx + 1);
-        memo[s1Idx][s2Idx] = first.length > second.length ? first : second;
-      }
+    let memo = [];
+    for (let i = 0; i <= s1.length; i++) {
+        memo[i] = [];
     }
-    return memo[s1Idx][s2Idx];
-  }
 
-  const result = lcsRecursive(0, 0);
-  return result;
+    function lcsRecursive(s1Idx, s2Idx) {
+        if (memo[s1Idx][s2Idx] === undefined) {
+            if (s1[s1Idx] === undefined || s2[s2Idx] === undefined) {
+                memo[s1Idx][s2Idx] = '';
+            } else if (s1[s1Idx] === s2[s2Idx]) {
+                memo[s1Idx][s2Idx] =
+                    s1[s1Idx] + lcsRecursive(s1Idx + 1, s2Idx + 1);
+            } else {
+                const first = lcsRecursive(s1Idx + 1, s2Idx);
+                const second = lcsRecursive(s1Idx, s2Idx + 1);
+                memo[s1Idx][s2Idx] =
+                    first.length > second.length ? first : second;
+            }
+        }
+        return memo[s1Idx][s2Idx];
+    }
+
+    const result = lcsRecursive(0, 0);
+    return result;
 }
 
 /**
@@ -118,92 +121,92 @@ function longestCommonSubsequencesRecursiveMemoization(s1, s2) {
     it might be possible to solve the problem by looking at only a fraction of the array's cells 
  */
 function longestCommonSubsequencesIterative(s1, s2) {
-  const memo = [];
+    const memo = [];
 
-  for (let i = s1.length; i >= 0; i--) {
-    if (i <= s1.length - 2) {
-      memo[i] = memo[i + 2];
-    } else {
-      memo[i] = [];
-    }
+    for (let i = s1.length; i >= 0; i--) {
+        if (i <= s1.length - 2) {
+            memo[i] = memo[i + 2];
+        } else {
+            memo[i] = [];
+        }
 
-    for (let j = s2.length; j >= 0; j--) {
-      if (s1[i] === undefined || s2[j] === undefined) {
-        memo[i][j] = "";
-      } else if (s1[i] === s2[j]) {
-        memo[i][j] = s1[i] + (memo[i + 1][j + 1] || "");
-      } else {
-        const first = memo[i + 1][j] || "";
-        const second = memo[i][j + 1] || "";
-        memo[i][j] = first.length > second.length ? first : second;
-      }
+        for (let j = s2.length; j >= 0; j--) {
+            if (s1[i] === undefined || s2[j] === undefined) {
+                memo[i][j] = '';
+            } else if (s1[i] === s2[j]) {
+                memo[i][j] = s1[i] + (memo[i + 1][j + 1] || '');
+            } else {
+                const first = memo[i + 1][j] || '';
+                const second = memo[i][j + 1] || '';
+                memo[i][j] = first.length > second.length ? first : second;
+            }
+        }
     }
-  }
-  return memo[0][0];
+    return memo[0][0];
 }
 
 function lcsIterative(s1, s2) {
-  const memo = [];
+    const memo = [];
 
-  function lcsLength() {
-    for (let i = s1.length; i >= 0; i--) {
-      memo[i] = [];
+    function lcsLength() {
+        for (let i = s1.length; i >= 0; i--) {
+            memo[i] = [];
 
-      for (let j = s2.length; j >= 0; j--) {
-        if (s1[i] === undefined || s2[j] === undefined) {
-          memo[i][j] = 0;
-        } else if (s1[i] === s2[j]) {
-          memo[i][j] = 1 + (memo[i + 1][j + 1] || 0);
-        } else {
-          const first = memo[i + 1][j] || 0;
-          const second = memo[i][j + 1] || 0;
-          memo[i][j] = first.length > second.length ? first : second;
+            for (let j = s2.length; j >= 0; j--) {
+                if (s1[i] === undefined || s2[j] === undefined) {
+                    memo[i][j] = 0;
+                } else if (s1[i] === s2[j]) {
+                    memo[i][j] = 1 + (memo[i + 1][j + 1] || 0);
+                } else {
+                    const first = memo[i + 1][j] || 0;
+                    const second = memo[i][j + 1] || 0;
+                    memo[i][j] = first.length > second.length ? first : second;
+                }
+            }
         }
-      }
+
+        return memo[0][0];
     }
 
-    return memo[0][0];
-  }
+    function getSequence() {
+        let s = '';
+        let i = 0;
+        let j = 0;
 
-  function getSequence() {
-    let s = "";
-    let i = 0;
-    let j = 0;
+        while (i < s1.length && j < s2.length) {
+            if (s1[i] === s2[j]) {
+                s += s1[i];
+                i++;
+                j++;
+            } else if (memo[i + 1][j] >= memo[i][j + 1]) {
+                i++;
+            } else j++;
+        }
 
-    while (i < s1.length && j < s2.length) {
-      if (s1[i] === s2[j]) {
-        s += s1[i];
-        i++;
-        j++;
-      } else if (memo[i + 1][j] >= memo[i][j + 1]) {
-        i++;
-      } else j++;
+        return s;
     }
 
-    return s;
-  }
-
-  lcsLength();
-  const sequence = getSequence();
-  return sequence;
+    lcsLength();
+    const sequence = getSequence();
+    return sequence;
 }
 
 const solutions = [
-  longestCommonSubsequencesRecursive,
-  longestCommonSubsequencesRecursiveMemoization,
-  longestCommonSubsequencesIterative,
-  lcsIterative,
+    longestCommonSubsequencesRecursive,
+    longestCommonSubsequencesRecursiveMemoization,
+    longestCommonSubsequencesIterative,
+    lcsIterative,
 ];
 
 solutions.forEach((solution) => {
-  console.log(`Run tests for: ${solution.name}`);
-  measurePerformance(() => {
-    assert("AC", solution("ArtyhC", "BACBAD"));
-    assert("ABAD", solution("ABAZDC", "BACBAD"));
-    assert("GTAB", solution("AGGTAB", "GXTXAYB"));
-    assert("aa", solution("aaaa", "aa"));
-    assert("", solution("", "..."));
-    assert("ABBA", solution("ABBA", "ABCABA"));
-    assert("", solution("qwertyuiop", "asdfghjklzxcvbnm"));
-  });
+    console.log(`Run tests for: ${solution.name}`);
+    measurePerformance(() => {
+        assert('AC', solution('ArtyhC', 'BACBAD'));
+        assert('ABAD', solution('ABAZDC', 'BACBAD'));
+        assert('GTAB', solution('AGGTAB', 'GXTXAYB'));
+        assert('aa', solution('aaaa', 'aa'));
+        assert('', solution('', '...'));
+        assert('ABBA', solution('ABBA', 'ABCABA'));
+        assert('', solution('qwertyuiop', 'asdfghjklzxcvbnm'));
+    });
 });
