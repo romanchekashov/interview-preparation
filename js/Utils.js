@@ -1,11 +1,19 @@
 const { performance } = require('perf_hooks');
 const process = require('process');
 
+const logError = (expected, actual) =>
+    console.error(`Assertion Error: Expected: ${expected}, Actual: ${actual}`);
+
 function assert(expected, actual) {
-    if (expected !== actual) {
-        console.error(
-            `Assertion Error: Expected: ${expected}, Actual: ${actual}`
-        );
+    if (Array.isArray(expected)) {
+        for (let i = 0; i < expected.length; i++) {
+            if (expected[i] !== actual[i]) {
+                logError(expected, actual);
+                break;
+            }
+        }
+    } else if (expected !== actual) {
+        logError(expected, actual);
     }
 }
 
