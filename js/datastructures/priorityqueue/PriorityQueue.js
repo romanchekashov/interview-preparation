@@ -1,4 +1,14 @@
+const { BinaryHeap } = require('./BinaryHeap');
+
 /**
+ * A Priority Queue(PQ) is an Abstract Data Type(ADT) that operates similar to a normal queue
+ * except that EACH ELEMENT HAS A CERTAIN PRIORITY.
+ * The priority of the elements in the PQ determine the order in which elements are removed from the PQ.
+ *
+ * NOTE: PQ-s only supports COMPARABLE DATA, meaning the data inserted into the PQ
+ * must be able to be ordered in some way either from least to greatest or greatest to least.
+ * This is so that we are able to assign relative priorities to each element.
+ *
  * A priority queue is an Abstract Data Type (ADT) offering methods that allow removal of the item with the
  * maximum (or minimum) key value, insertion, and sometimes other operations.
  *
@@ -15,3 +25,20 @@
  * IMPORTANT:
  * Each node in a heap satisfies the heap condition, which states that every node’s key is larger(less) than (or equal to) the keys of its children.
  */
+class PriorityQueue {
+    #binaryMinHeap = new BinaryHeap();
+
+    push = (element) => this.#binaryMinHeap.push(element);
+
+    pop = () => this.#binaryMinHeap.pop();
+
+    toString() {
+        return '' + this.#binaryMinHeap;
+    }
+
+    toArray() {
+        return [...this.#binaryMinHeap._heap];
+    }
+}
+
+module.exports = { PriorityQueue };
