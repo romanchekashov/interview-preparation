@@ -1,3 +1,5 @@
+package java;
+
 import java.io.*;
 
 public class OldWall {

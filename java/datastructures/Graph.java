@@ -1,4 +1,4 @@
-package datastructure;
+package java.datastructures;
 
 public class Graph<T> {
     private final int MAX_VERTS = 20;

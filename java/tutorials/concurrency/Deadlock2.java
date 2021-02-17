@@ -1,4 +1,4 @@
-package tutorials.concurrency;
+package java.tutorials.concurrency;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
