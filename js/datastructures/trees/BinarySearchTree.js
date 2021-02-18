@@ -38,9 +38,21 @@ class Node {
     }
 }
 
+/*
+ * These symbols are used to represent properties that should not be part of
+ * the public interface. You could also use ES2019 private fields, but those
+ * are not yet widely available as of the time of my writing.
+ */
+const root = Symbol('root');
+
 class BinarySearchTree {
-    size = 0;
-    root = null;
+    #size = 0;
+    [root] = null;
+
+    // read-only
+    get size() {
+        return this.#size;
+    }
 
     /**
      * Add an element to this binary tree.
@@ -53,8 +65,8 @@ class BinarySearchTree {
         if (this.contains(elem)) return false;
 
         // Otherwise add this element to the binary tree
-        this.root = this.#add(this.root, elem);
-        this.size++;
+        this[root] = this.#add(this[root], elem);
+        this.#size++;
         return true;
     }
 
@@ -66,8 +78,8 @@ class BinarySearchTree {
         // Make sure the node we want to remove
         // actually exists before we remove it
         if (this.contains(elem)) {
-            this.root = this.#remove(this.root, elem);
-            this.size--;
+            this[root] = this.#remove(this[root], elem);
+            this.#size--;
             return true;
         }
         return false;
@@ -78,14 +90,14 @@ class BinarySearchTree {
      * @param {*} elem
      */
     contains(elem) {
-        return this.#contains(this.root, elem);
+        return this.#contains(this[root], elem);
     }
 
     /**
      * Computes the height of the tree, O(n)
      */
     height() {
-        return this.#height(this.root);
+        return this.#height(this[root]);
     }
 
     /**
@@ -93,12 +105,12 @@ class BinarySearchTree {
      * @param {*} node
      */
     #height(node) {
-        if (node == null) return 0;
+        if (node === null) return 0;
         return Math.max(this.#height(node.left), this.#height(node.right)) + 1;
     }
 
     #remove(node, elem) {
-        if (!node) return null;
+        if (node === null) return null;
 
         // Dig into left subtree, the value we're looking
         // for is smaller than the current value
@@ -115,13 +127,13 @@ class BinarySearchTree {
             // This is the case with only a right subtree or
             // no subtree at all. In this situation just
             // swap the node we wish to remove with its right child.
-            if (node.left == null) {
+            if (node.left === null) {
                 return node.right;
 
                 // This is the case with only a left subtree or
                 // no subtree at all. In this situation just
                 // swap the node we wish to remove with its left child.
-            } else if (node.right == null) {
+            } else if (node.right === null) {
                 return node.left;
 
                 // When removing a node from a binary tree with two links the
@@ -159,7 +171,7 @@ class BinarySearchTree {
      * @param {*} node
      */
     #findMin(node) {
-        while (node.left != null) node = node.left;
+        while (node.left !== null) node = node.left;
         return node;
     }
 
@@ -168,7 +180,7 @@ class BinarySearchTree {
      * @param {*} node
      */
     #findMax(node) {
-        while (node.right != null) node = node.right;
+        while (node.right !== null) node = node.right;
         return node;
     }
 
@@ -179,7 +191,7 @@ class BinarySearchTree {
      */
     #add(node, elem) {
         // Base case: found a leaf node
-        if (node == null) {
+        if (node === null) {
             node = new Node(null, null, elem);
         } else {
             // Pick a subtree to insert element
@@ -200,7 +212,7 @@ class BinarySearchTree {
      */
     #contains(node, elem) {
         // Base case: reached bottom, value not found
-        if (!node) return false;
+        if (node === null) return false;
 
         // Dig into the left subtree because the value we're
         // looking for is smaller than the current value
@@ -213,4 +225,157 @@ class BinarySearchTree {
         // We found the value we were looking for
         return true;
     }
+
+    /**
+     * The default iterator for the class.
+     * @returns {Iterator} inOrderTraversal iterator
+     */
+    [Symbol.iterator]() {
+        return this.inOrderTraversal();
+    }
+
+    /**
+     * In-order traversal means to "visit" (often, print) the left branch,
+     * then the current node, and finally, the right branch.
+     * For BST:
+     * When performed on a binary search tree,
+     * it visits the nodes in ascending order (hence the name "in-order").
+     */
+    *inOrderTraversal() {
+        /*
+         * Traversal is easiest when using a recursive function, so define
+         * a helper function here. This function does an in-order traversal
+         * of the tree, meaning it yields values in sorted order from
+         * lowest value to highest. It does this by traversing to the leftmost
+         * node first, then working its way back up the tree, visiting right nodes
+         * along the way.
+         *
+         * This function cannot be an arrow function because arrow functions
+         * cannot be generators.
+         */
+        function* traverse(node) {
+            // special case: there is no node
+            if (node) {
+                //traverse the left subtree
+                if (node.left !== null) {
+                    yield* traverse(node.left);
+                }
+
+                // emit the value
+                yield node.data;
+
+                //traverse the right subtree
+                if (node.right !== null) {
+                    yield* traverse(node.right);
+                }
+            }
+        }
+
+        yield* traverse(this[root]);
+    }
+
+    /**
+     * Pre-order traversal visits the current node before its child nodes
+     * (hence the name "pre-order").
+     * In a pre-order traversal, the root is always the first node visited.
+     */
+    *preOrderTraversal() {
+        function* traverse(node) {
+            // special case: there is no node
+            if (node) {
+                // emit the value
+                yield node.data;
+
+                //traverse the left subtree
+                if (node.left !== null) {
+                    yield* traverse(node.left);
+                }
+
+                //traverse the right subtree
+                if (node.right !== null) {
+                    yield* traverse(node.right);
+                }
+            }
+        }
+
+        yield* traverse(this[root]);
+    }
+
+    /**
+     * Post-order traversal visits the current node after its child nodes
+     * (hence the name "post-order").
+     * In a post-order traversal, the root is always the last node visited.
+     */
+    *postOrderTraversal() {
+        function* traverse(node) {
+            // special case: there is no node
+            if (node) {
+                //traverse the left subtree
+                if (node.left !== null) {
+                    yield* traverse(node.left);
+                }
+
+                //traverse the right subtree
+                if (node.right !== null) {
+                    yield* traverse(node.right);
+                }
+
+                // emit the value
+                yield node.data;
+            }
+        }
+
+        yield* traverse(this[root]);
+    }
+
+    /**
+     * In a level order traversal we want to print the nodes as they appear
+     * one layer at a time.
+     *
+     * To obtain this ordering we want to do a BREADTH FIRST SEARCH (BFS) from the
+     * root node down to the leaf nodes.
+     * To do a BFS we will need to maintain a Queue of the nodes left to explore.
+     * Begin with the root inside of the queue and finish when the queue is empty.
+     * At each iteration we add the left child and then the right child of the
+     * current node to our Queue.
+     */
+    *levelOrderTraversal() {
+        const queue = {
+            head: null,
+            tail: null,
+            push(el) {
+                const node = {
+                    data: el,
+                    next: null,
+                };
+
+                if (this.tail) this.tail.next = node;
+                this.tail = node;
+                if (!this.head) this.head = this.tail;
+            },
+            poll() {
+                if (!this.head) return undefined;
+
+                const data = this.head.data;
+                this.head = this.head.next;
+                if (!this.head) this.tail = null;
+
+                return data;
+            },
+            isNotEmpty() {
+                return !!this.head;
+            },
+        };
+
+        queue.push(this[root]);
+
+        while (queue.isNotEmpty()) {
+            const node = queue.poll();
+            if (node.left !== null) queue.push(node.left);
+            if (node.right !== null) queue.push(node.right);
+            yield node.data;
+        }
+    }
 }
+
+module.exports = { BinarySearchTree };
