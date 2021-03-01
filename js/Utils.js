@@ -22,6 +22,7 @@ function assert(expected, actual) {
  * @param {*} fun
  */
 function measurePerformance(fun) {
+    gc();
     let t0 = performance.now();
     fun();
     let t1 = performance.now();
@@ -33,7 +34,6 @@ function measurePerformance(fun) {
         } MB`
     );
     // console.log(process.memoryUsage());
-    gc();
 }
 
 module.exports = { assert, measurePerformance };
