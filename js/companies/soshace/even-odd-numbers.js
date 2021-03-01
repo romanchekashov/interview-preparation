@@ -2,18 +2,22 @@ const { assert, measurePerformance } = require('./../../Utils');
 
 function differentEvenness_replace(input1) {
     const arr = input1.replace(/\"/g, '').split(' ');
-    const even = [];
-    const odd = [];
+    let evenCounter = 0;
+    let oddCounter = 0;
+    let evenIdx;
+    let oddIdx;
 
     for (let i = 0; i < arr.length; i++) {
         if (parseInt(arr[i]) % 2 === 0) {
-            even.push(i);
+            evenIdx = i;
+            evenCounter++;
         } else {
-            odd.push(i);
+            oddIdx = i;
+            oddCounter++;
         }
 
-        if (even.length === 1 && odd.length > 1) return even[0] + 1;
-        if (odd.length === 1 && even.length > 1) return odd[0] + 1;
+        if (evenCounter === 1 && oddCounter > 1) return evenIdx + 1;
+        if (oddCounter === 1 && evenCounter > 1) return oddIdx + 1;
     }
 }
 
