@@ -17,6 +17,10 @@ const counterReducer = (state = 0, action) => {
 };
 
 /**
+ * https://github.com/reduxjs/redux/issues/1676
+ */
+
+/**
  * Thunk middleware for Redux.
  *
  * With a plain basic Redux store, you can only do simple synchronous updates by dispatching an action.

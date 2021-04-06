@@ -5,6 +5,10 @@ import { userFetchFailed, userFetchSucceeded } from '../../actions';
 
 import { fetchUser } from './redux-saga';
 
+/**
+ * https://medium.com/@13gaurab/unit-testing-sagas-with-jest-29a8bcfca028
+ *
+ */
 describe('fetchUser', () => {
     it('should call api and dispatch success action', async () => {
         const dummyUser = { name: 'JK Rowling' };
