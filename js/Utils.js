@@ -26,10 +26,14 @@ function measurePerformance(fun) {
     let t0 = performance.now();
     fun();
     let t1 = performance.now();
+
     const took = t1 - t0;
+    const tookSec = Math.floor(took / 1000);
+    const tookMS = Math.round((took - tookSec * 1000) * 100) / 100;
     const used = process.memoryUsage().heapUsed / 1024 / 1024;
+
     console.log(
-        `Took ${Math.round(took * 100) / 100} ms, Used ${
+        `Took ${tookSec ? tookSec + ' s ' : ''}${tookMS} ms, Used ${
             Math.round(used * 100) / 100
         } MB`
     );
