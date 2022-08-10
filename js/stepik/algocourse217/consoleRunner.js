@@ -4,6 +4,6 @@ const run = (solutionFn) => {
         console.log(solutionFn(data));
         process.exit(0);
     });
-}
+};
 
 module.exports = { run };
