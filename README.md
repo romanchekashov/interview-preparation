@@ -22,7 +22,7 @@ Run command:
 ```
 node --max-old-space-size={memory limit}
 // Examples:
-node --max-old-space-size=1 index.js #increase to 1Mb
+node --max-old-space-size=3 index.js #increase to 3Mb - min to run programm
 node --max-old-space-size=64 index.js #increase to 64Mb
 node --max-old-space-size=1024 index.js #increase to 1gb
 ```
