@@ -1,7 +1,7 @@
 // put your javascript (node.js) code here
 const run = (solutionFn) => {
-    process.stdin.on('data', (data) => {
-        console.log(solutionFn(data));
+    process.stdin.on('data', (buffer) => {
+        console.log(solutionFn(buffer.toString('utf8')));
         process.exit(0);
     });
 };

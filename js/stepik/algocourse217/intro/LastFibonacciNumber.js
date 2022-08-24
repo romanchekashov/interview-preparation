@@ -1,5 +1,5 @@
-const { run } = require('./consoleRunner');
-const { assert, measurePerformance } = require('../../Utils');
+const { run } = require('../consoleRunner');
+const { assert, measurePerformance } = require('../../../Utils');
 
 /**
  * https://stepik.org/lesson/13228/step/7?unit=3414

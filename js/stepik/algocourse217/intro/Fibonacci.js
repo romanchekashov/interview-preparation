@@ -1,5 +1,5 @@
-const { run } = require('./consoleRunner');
-const { assert, measurePerformance } = require('../../Utils');
+const { run } = require('../consoleRunner');
+const { assert, measurePerformance } = require('../../../Utils');
 
 /**
  * Дано целое число 1 <= n <= 40, необходимо вычислить n-е число Фибоначчи

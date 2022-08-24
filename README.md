@@ -26,3 +26,7 @@ node --max-old-space-size=3 index.js #increase to 3Mb - min to run programm
 node --max-old-space-size=64 index.js #increase to 64Mb
 node --max-old-space-size=1024 index.js #increase to 1gb
 ```
+### Run command example:
+```
+node --expose-gc --max-old-space-size=64 index.js
+```
