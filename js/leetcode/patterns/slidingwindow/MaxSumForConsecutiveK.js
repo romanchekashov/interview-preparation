@@ -1,16 +1,10 @@
 const { assert, measurePerformance } = require('./../../../Utils');
 
 /**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
+ * We have an array [1,2,3,2,4] and k=2, we want to return the max sum of the array with size 2.
  */
 
 /**
- * We have an array [1,2,3,2,4] and k=2, we want to return the max sum of the array with size 2.
- *
  * Complexity analysis:
  * Time complexity : O(n).
  * Space complexity : O(1).
