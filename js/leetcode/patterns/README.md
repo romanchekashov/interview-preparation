@@ -9,6 +9,8 @@ The Sliding Window pattern is used to perform a required operation on a specific
 Sliding Windows start from the 1st element and keep shifting right by one element and adjust the length of the window according to the problem that you are solving. 
 In some cases, the window size remains constant and in other cases the sizes grows or shrinks.
 
+![alt Sliding Window](https://media.tproger.ru/uploads/2019/07/image8.jpg)
+
 Following are some ways you can identify that the given problem might require a sliding window:
 - The problem input is a linear data structure such as a linked list, array, or string
 - You’re asked to find the longest/shortest substring, subarray, or a desired value
