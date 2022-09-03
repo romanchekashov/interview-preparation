@@ -4,6 +4,12 @@ const process = require('process');
 const logError = (expected, actual) =>
     console.error(`Assertion Error: Expected: ${expected}, Actual: ${actual}`);
 
+/**
+ * Compare expected with actual result
+ *
+ * @param expected
+ * @param actual
+ */
 function assert(expected, actual) {
     if (Array.isArray(expected)) {
         for (let i = 0; i < expected.length; i++) {
@@ -35,7 +41,7 @@ function measurePerformance(fun) {
     console.log(
         `Took ${tookSec ? tookSec + ' s ' : ''}${tookMS} ms, Used ${
             Math.round(used * 100) / 100
-        } MB`
+        } MB\n`
     );
     // console.log(process.memoryUsage());
 }
