@@ -12,10 +12,23 @@ const logError = (expected, actual) =>
  */
 function assert(expected, actual) {
     if (Array.isArray(expected)) {
+        if (expected.length !== actual.length) {
+            logError(expected, actual);
+        }
+
         for (let i = 0; i < expected.length; i++) {
-            if (expected[i] !== actual[i]) {
-                logError(expected, actual);
-                break;
+            if (Array.isArray(expected[i]) && Array.isArray(actual[i])) {
+                for (let j = 0; j < expected[i].length; j++) {
+                    if (expected[i][j] !== actual[i][j]) {
+                        logError(expected, actual);
+                        return;
+                    }
+                }
+            } else {
+                if (expected[i] !== actual[i]) {
+                    logError(expected, actual);
+                    break;
+                }
             }
         }
     } else if (expected !== actual) {
