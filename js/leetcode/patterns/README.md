@@ -20,7 +20,7 @@ Common problems you use the sliding window pattern with:
 - String anagrams (hard)
 
 Examples in **/slidingwindow** directory:
-- MaxSumForConsecutiveK.js
+- **MaxSumForConsecutiveK.js**
 
 # Two Pointers or Iterators
 
@@ -60,5 +60,30 @@ Problems featuring the fast and slow pointers pattern:
 - Cycle in a Circular Array (hard)
 
 Examples in **/slidingwindow** directory:
-- RemoveDuplicatesFromSortedArray.js
+- **RemoveDuplicatesFromSortedArray.js**
 
+# Merge Intervals
+
+The Merge Intervals pattern is an efficient technique to deal with overlapping intervals. In a lot of problems involving intervals, you either need to find overlapping intervals or merge intervals if they overlap. The pattern works like this:
+
+Given two intervals (‘a’ and ‘b’), there will be six different ways the two intervals can relate to each other:
+- 'a' and 'b' don't overlap
+- 'a' and 'b' overlaps, 'b' ends after 'a'
+- 'a' overlap the whole 'b'
+- 'a' and 'b' overlaps, 'a' ends after 'b'
+- 'b' overlap the whole 'a'
+- 'b' and 'a' don't overlap
+
+![Merge Intervals](https://media.tproger.ru/uploads/2019/07/image12.jpg)
+Understanding and recognizing these six cases will help you help you solve a wide range of problems from inserting intervals to optimizing interval merges.
+
+How do you identify when to use the Merge Intervals pattern?
+- If you’re asked to produce a list with only mutually exclusive intervals
+- If you hear the term “overlapping intervals”.
+  
+Merge interval problem patterns:
+- Intervals Intersection (medium)
+- Maximum CPU Load (hard)
+
+Example:
+- **medium/MergeIntervals_leetcode56medium.js**
