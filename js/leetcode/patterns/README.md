@@ -2,6 +2,7 @@
 
 - https://hackernoon.com/14-patterns-to-ace-any-coding-interview-question-c5bb3357f6ed
 - https://dsarevision.com/
+- https://tproger.ru/translations/14-templates-to-answer-interview-questions/
 
 # Sliding Window
 
