@@ -3,6 +3,78 @@
 - https://hackernoon.com/14-patterns-to-ace-any-coding-interview-question-c5bb3357f6ed
 - https://dsarevision.com/
 - https://tproger.ru/translations/14-templates-to-answer-interview-questions/
+- https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-100-LeetCode-Questions-to-Save-Your-Time-OaM1orEU
+- https://www.educative.io/courses/grokking-the-coding-interview
+- https://seanprashad.com/leetcode-patterns/
+- https://github.com/SeanPrashad/leetcode-patterns
+- https://leetcode.com/problem-list/top-interview-questions/?sorting=W3sic29ydE9yZGVyIjoiQVNDRU5ESU5HIiwib3JkZXJCeSI6IkRJRkZJQ1VMVFkifV0%3D
+
+## Problems pattern frequency
+| Pattern         | Frequency | Difficulty |
+|-----------------|-----------|------------|
+| DFS      | 30        | Hard       |
+| Dynamic Programming | 21        | Hard       |
+| BFS      | 17        | Medium     |
+| Heap      | 17        | Medium     |
+| Backtracking      | 16        | Medium     |
+| Binary Search      | 14        | Medium     |
+| Arrays      | 13        | Medium     |
+| Two Pointers      | 11        | Medium     |
+| Fast & Slow Pointers      | 10        | Easy       |
+| Trie      | 10        | Easy     |
+| Sliding Window      | 10        | Easy     |
+| Graph      | 9         | Easy     |
+| Greedy      | 8         | Easy     |
+| In-place reversal of a linked list      | 6         | Easy     |
+| Intervals      | 6         | Easy     |
+| Topological Sort      | 6         | Easy     |
+| Bit Manipulation      | 3         | Easy     |
+| Union Find      | 3         | Easy     |
+| Design      | 2         | Easy     |
+| Sorting      | 1         | Easy     |
+| QuickSelect      | 1         | Easy     |
+| Bucket Sort      | 1         | Easy     |
+
+## Tips
+If input array is sorted then
+- Binary search
+- Two pointers
+
+If asked for all permutations/subsets then
+- Backtracking
+
+If given a tree then
+- DFS
+- BFS
+
+If given a graph then
+- DFS
+- BFS
+
+If given a linked list then
+- Two pointers
+
+If recursion is banned then
+- Stack
+
+If must solve in-place then
+- Swap corresponding values
+- Store one or more different values in the same pointer
+
+If asked for maximum/minimum subarray/subset/options then
+- Dynamic programming
+
+If asked for top/least K items then
+- Heap
+- QuickSelect
+
+If asked for common strings then
+- Map
+- Trie
+
+Else
+- Map/Set for O(1) time & O(n) space
+- Sort input for O(n*logn) time and O(1) space
 
 # Sliding Window
 
