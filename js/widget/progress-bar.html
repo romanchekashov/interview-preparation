@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Progress Bar</title>
+    <meta name='description' content='Implement progress bar.'>
+    <style>
+        body {
+            background-color: lightgrey;
+        }
+
+        .bar-container {
+            width: 200px;
+            height: 30px;
+            margin: 40px;
+            background-color: grey;
+        }
+
+        .bar {
+            background-color: green;
+            height: 100%;
+            width: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class='bar-container'>
+        <div class='bar'></div>
+    </div>
+    <button onclick='fillBar(2)'>Start</button>
+
+    <script>
+        // solution 1 - js way
+        // const fillBar = (seconds) => {
+        //     const bar = document.querySelector('.bar');
+        //     let atPercent = 0;
+        //     const interval = setInterval(() => {
+        //         bar.style.width = atPercent + '%';
+        //         atPercent++;
+        //         if (atPercent > 100) {
+        //             clearInterval(interval);
+        //         }
+        //     }, (seconds * 1000) / 100);
+        // }
+
+        // solution 2 - css way
+        const fillBar = (seconds) => {
+            const bar = document.querySelector('.bar');
+
+            bar.style.transition = '';
+            bar.style.width = '0%';
+
+            setTimeout(() => {
+                bar.style.transition = `${seconds}s linear width`;
+                bar.style.width = '100%';
+            }, 0);
+        }
+    </script>
+</body>
+</html>
