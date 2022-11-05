@@ -1,9 +1,11 @@
+const { Comparator } = require('./../Comparator');
+
 /**
  * https://www.youtube.com/watch?v=-Yn5DU0_-lw&t=0s&ab_channel=WilliamFiset
  *
  * Single Linked List:
  *      Pros: Uses less memory, Simpler implementation
- *      Cons: Cannot easile access previous elements
+ *      Cons: Cannot easily access previous elements
  *
  * Doubly Linked List:
  *      Pros: Can be traversed backwards
@@ -21,245 +23,286 @@
  */
 
 class LinkedListNode {
-    constructor(element, prev, next) {
-        this.element = element;
-        this.prev = prev;
+    constructor(value, next = null) {
+        this.value = value;
         this.next = next;
+    }
+
+    toString(callback) {
+        return callback ? callback(this.value) : `${this.value}`;
     }
 }
 
 /**
- * Doubly-linked list implementation
+ * Single-linked list implementation
  */
 class LinkedList {
-    size = 0;
-    first = null; // first list element
-    last = null; // last list element
+    /**
+     * @param {Function} [comparatorFunction]
+     */
+    constructor(comparatorFunction) {
+        /** @var LinkedListNode */
+        this.head = null;
 
-    // Empty this linked list, O(n)
-    clear() {
-        let trav = this.first;
-        while (trav !== null) {
-            const next = trav.next;
-            trav.prev = trav.next = null;
-            trav.element = null;
-            trav = next;
+        /** @var LinkedListNode */
+        this.tail = null;
+
+        this.compare = new Comparator(comparatorFunction);
+    }
+
+    /**
+     * @param {*} value
+     * @return {LinkedList}
+     */
+    prepend(value) {
+        // Make new node to be a head.
+        const newNode = new LinkedListNode(value, this.head);
+        this.head = newNode;
+
+        // If there is no tail yet let's make new node a tail.
+        if (!this.tail) {
+            this.tail = newNode;
         }
-        this.first = this.last = trav = null;
-        this.size = 0;
+
+        return this;
     }
 
-    isEmpty() {
-        return this.size === 0;
-    }
+    /**
+     * @param {*} value
+     * @return {LinkedList}
+     */
+    append(value) {
+        const newNode = new LinkedListNode(value);
 
-    // Add an element to the tail of the linked list, O(1)
-    add(elem) {
-        this.addLast(elem);
-    }
+        // If there is no head yet let's make new node a head.
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
 
-    // Add a node to the tail of the linked list, O(1)
-    addLast(elem) {
-        if (this.isEmpty()) {
-            this.first = this.last = new LinkedListNode(elem, null, null);
-        } else {
-            this.last.next = new LinkedListNode(elem, this.last, null);
-            this.last = this.last.next;
+            return this;
         }
-        this.size++;
+
+        // Attach new node to the end of linked list.
+        this.tail.next = newNode;
+        this.tail = newNode;
+
+        return this;
     }
 
-    // Add an element to the beginning of this linked list, O(1)
-    addFirst(elem) {
-        if (this.isEmpty()) {
-            this.first = this.last = new LinkedListNode(elem, null, null);
-        } else {
-            this.first.prev = new LinkedListNode(elem, null, this.first);
-            this.first = this.first.prev;
-        }
-        this.size++;
-    }
-
-    // Add an element at a specified index
-    addAt(index, data) {
-        if (index < 0) {
-            throw new Error('Illegal Index');
-        }
+    /**
+     * @param {*} value
+     * @param {number} rawIndex
+     * @return {LinkedList}
+     */
+    insert(value, rawIndex) {
+        const index = rawIndex < 0 ? 0 : rawIndex;
         if (index === 0) {
-            this.addFirst(data);
-            return;
-        }
-
-        if (index === size) {
-            this.addLast(data);
-            return;
-        }
-
-        let temp = this.first;
-        for (let i = 0; i < index - 1; i++) {
-            temp = temp.next;
-        }
-        const newNode = new LinkedListNode(data, temp, temp.next);
-        temp.next.prev = newNode;
-        temp.next = newNode;
-
-        this.size++;
-    }
-
-    // Check the value of the first node if it exists, O(1)
-    peekFirst() {
-        if (this.isEmpty()) throw new Error('Empty list');
-        return this.first.element;
-    }
-
-    // Check the value of the last node if it exists, O(1)
-    peekLast() {
-        if (this.isEmpty()) throw new Error('Empty list');
-        return this.last.element;
-    }
-
-    // Remove the first value at the head of the linked list, O(1)
-    removeFirst() {
-        // Can't remove data from an empty list
-        if (this.isEmpty()) throw new Error('Empty list');
-
-        // Extract the data at the head and move
-        // the head pointer forwards one node
-        const data = this.first.element;
-        this.first = this.first.next;
-        --this.size;
-
-        if (this.isEmpty()) {
-            this.last = null; // If the list is empty set the tail to null
+            this.prepend(value);
         } else {
-            this.first.prev = null; // Do a memory cleanup of the previous node
-        }
-
-        // Return the data that was at the first node we just removed
-        return data;
-    }
-
-    // Remove the last value at the tail of the linked list, O(1)
-    removeLast() {
-        // Can't remove data from an empty list
-        if (this.isEmpty()) throw new Error('Empty list');
-
-        // Extract the data at the tail and move
-        // the tail pointer backwards one node
-        const data = this.last.data;
-        this.last = this.last.prev;
-        --this.size;
-
-        if (this.isEmpty()) {
-            this.first = null; // If the list is now empty set the head to null
-        } else {
-            this.last.next = null; // Do a memory clean of the node that was just removed
-        }
-
-        // Return the data that was in the last node we just removed
-        return data;
-    }
-
-    // Remove an arbitrary node from the linked list, O(1)
-    #remove(node) {
-        // If the node to remove is somewhere either at the
-        // head or the tail handle those independently
-        if (node.prev === null) return this.removeFirst();
-        if (node.next === null) return this.removeLast();
-
-        // Make the pointers of adjacent nodes skip over 'node'
-        node.next.prev = node.prev;
-        node.prev.next = node.next;
-
-        // Temporarily store the data we want to return
-        const data = node.element;
-
-        // Memory cleanup
-        node.element = null;
-        node = node.prev = node.next = null;
-
-        --this.size;
-
-        // Return the data in the node we just removed
-        return data;
-    }
-
-    // Remove a node at a particular index, O(n)
-    removeAt(index) {
-        // Make sure the index provided is valid
-        if (index < 0 || index >= this.size) {
-            throw new Error('IllegalArgumentException');
-        }
-
-        let i;
-        let trav;
-
-        if (index < this.size / 2) {
-            // Search from the front of the list
-            for (i = 0, trav = this.first; i !== index; i++) {
-                trav = trav.next;
+            let count = 1;
+            let currentNode = this.head;
+            const newNode = new LinkedListNode(value);
+            while (currentNode) {
+                if (count === index) break;
+                currentNode = currentNode.next;
+                count += 1;
             }
-        } else {
-            // Search from the back of the list
-            for (i = size - 1, trav = this.last; i !== index; i--) {
-                trav = trav.prev;
-            }
-        }
-
-        return this.#remove(trav);
-    }
-
-    // Remove a particular value in the linked list, O(n)
-    remove(obj) {
-        let trav = this.first;
-
-        if (obj === null) {
-            // Support searching for null
-            for (trav = this.first; trav !== null; trav = trav.next) {
-                if (trav.data === null) {
-                    this.#remove(trav);
-                    return true;
-                }
-            }
-        } else {
-            // Search for non null object
-            for (trav = this.first; trav !== null; trav = trav.next) {
-                if (obj === trav.data) {
-                    this.#remove(trav);
-                    return true;
+            if (currentNode) {
+                newNode.next = currentNode.next;
+                currentNode.next = newNode;
+            } else {
+                if (this.tail) {
+                    this.tail.next = newNode;
+                    this.tail = newNode;
+                } else {
+                    this.head = newNode;
+                    this.tail = newNode;
                 }
             }
         }
-        return false;
+        return this;
     }
 
-    // Find the index of a particular value in the linked list, O(n)
-    indexOf(obj) {
-        let index = 0;
-        let trav = this.first;
+    /**
+     * @param {*} value
+     * @return {LinkedListNode}
+     */
+    delete(value) {
+        if (!this.head) {
+            return null;
+        }
 
-        if (obj === null) {
-            // Support searching for null
-            for (; trav !== null; trav = trav.next, index++) {
-                if (trav.data === null) {
-                    return index;
-                }
-            }
-        } else {
-            // Search for non null object
-            for (; trav !== null; trav = trav.next, index++) {
-                if (obj === trav.data) {
-                    return index;
+        let deletedNode = null;
+
+        // If the head must be deleted then make next node that is different
+        // from the head to be a new head.
+        while (this.head && this.compare.equal(this.head.value, value)) {
+            deletedNode = this.head;
+            this.head = this.head.next;
+        }
+
+        let currentNode = this.head;
+
+        if (currentNode !== null) {
+            // If next node must be deleted then make next node to be a next next one.
+            while (currentNode.next) {
+                if (this.compare.equal(currentNode.next.value, value)) {
+                    deletedNode = currentNode.next;
+                    currentNode.next = currentNode.next.next;
+                } else {
+                    currentNode = currentNode.next;
                 }
             }
         }
 
-        return -1;
+        // Check if tail must be deleted.
+        if (this.compare.equal(this.tail.value, value)) {
+            this.tail = currentNode;
+        }
+
+        return deletedNode;
     }
 
-    // Check is a value is contained within the linked list
-    contains(obj) {
-        return this.indexOf(obj) !== -1;
+    /**
+     * @param {Object} findParams
+     * @param {*} findParams.value
+     * @param {function} [findParams.callback]
+     * @return {LinkedListNode}
+     */
+    find({ value = undefined, callback = undefined }) {
+        if (!this.head) {
+            return null;
+        }
+
+        let currentNode = this.head;
+
+        while (currentNode) {
+            // If callback is specified then try to find node by callback.
+            if (callback && callback(currentNode.value)) {
+                return currentNode;
+            }
+
+            // If value is specified then try to compare by value..
+            if (value !== undefined && this.compare.equal(currentNode.value, value)) {
+                return currentNode;
+            }
+
+            currentNode = currentNode.next;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return {LinkedListNode}
+     */
+    deleteTail() {
+        const deletedTail = this.tail;
+
+        if (this.head === this.tail) {
+            // There is only one node in linked list.
+            this.head = null;
+            this.tail = null;
+
+            return deletedTail;
+        }
+
+        // If there are many nodes in linked list...
+
+        // Rewind to the last node and delete "next" link for the node before the last one.
+        let currentNode = this.head;
+        while (currentNode.next) {
+            if (!currentNode.next.next) {
+                currentNode.next = null;
+            } else {
+                currentNode = currentNode.next;
+            }
+        }
+
+        this.tail = currentNode;
+
+        return deletedTail;
+    }
+
+    /**
+     * @return {LinkedListNode}
+     */
+    deleteHead() {
+        if (!this.head) {
+            return null;
+        }
+
+        const deletedHead = this.head;
+
+        if (this.head.next) {
+            this.head = this.head.next;
+        } else {
+            this.head = null;
+            this.tail = null;
+        }
+
+        return deletedHead;
+    }
+
+    /**
+     * @param {*[]} values - Array of values that need to be converted to linked list.
+     * @return {LinkedList}
+     */
+    fromArray(values) {
+        values.forEach((value) => this.append(value));
+
+        return this;
+    }
+
+    /**
+     * @return {LinkedListNode[]}
+     */
+    toArray() {
+        const nodes = [];
+
+        let currentNode = this.head;
+        while (currentNode) {
+            nodes.push(currentNode);
+            currentNode = currentNode.next;
+        }
+
+        return nodes;
+    }
+
+    /**
+     * @param {function} [callback]
+     * @return {string}
+     */
+    toString(callback) {
+        return this.toArray().map((node) => node.toString(callback)).toString();
+    }
+
+    /**
+     * Reverse a linked list.
+     * @returns {LinkedList}
+     */
+    reverse() {
+        let currNode = this.head;
+        let prevNode = null;
+        let nextNode = null;
+
+        while (currNode) {
+            // Store next node.
+            nextNode = currNode.next;
+
+            // Change next node of the current node so it would link to previous node.
+            currNode.next = prevNode;
+
+            // Move prevNode and currNode nodes one step forward.
+            prevNode = currNode;
+            currNode = nextNode;
+        }
+
+        // Reset head and tail.
+        this.tail = this.head;
+        this.head = prevNode;
+
+        return this;
     }
 
     *[Symbol.iterator]() {
@@ -268,14 +311,14 @@ class LinkedList {
          * It starts out pointing to the head and is overwritten inside
          * of the loop below.
          */
-        let current = this.first;
+        let current = this.head;
 
         /*
          * As long as `current` is not `null`, there is a piece of data
          * to yield.
          */
         while (current) {
-            yield current.element;
+            yield current.value;
             current = current.next;
         }
     }

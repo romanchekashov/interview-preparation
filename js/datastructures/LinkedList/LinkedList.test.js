@@ -2,16 +2,16 @@ const { LinkedList } = require('./LinkedList');
 
 const linkedList = new LinkedList();
 
-linkedList.addFirst(1);
-linkedList.addFirst(2);
-linkedList.addFirst(3);
+linkedList.prepend(1);
+linkedList.prepend(2);
+linkedList.prepend(3);
 
-linkedList.add(4);
-linkedList.add(5);
-linkedList.add(6);
+linkedList.append(4);
+linkedList.append(5);
+linkedList.append(6);
 
 console.log([...linkedList]);
 
-linkedList.removeFirst();
-linkedList.removeLast();
+linkedList.deleteHead();
+linkedList.deleteTail();
 console.log([...linkedList]);
