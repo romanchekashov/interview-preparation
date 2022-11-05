@@ -59,3 +59,30 @@ O(n)
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Doubly_linked_list)
 - [YouTube](https://www.youtube.com/watch?v=JdQeNxWCguQ&t=7s&index=72&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+
+## Queue
+* First-In-First-Out (FIFO) data structure.
+* In a FIFO data structure, the first element added to the queue will be the first one to be removed.
+
+()->enqueue->(back)()()()()(front)->dequeue->()
+
+### References
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))
+- [YouTube](https://www.youtube.com/watch?v=wjI1WNcIntg&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=3&)
+
+## Stack
+In computer science, a stack is an abstract data type that serves as a collection of elements, with two principal operations:
+* push, which adds an element to the collection, and
+* pop, which removes the most recently added element that was not yet removed.
+* The order in which elements come off a stack gives rise to its alternative name, LIFO (last in, first out).
+
+```
+()->push->(top)->pop->()
+            ()
+         (bottom)
+```
+
+### References
+- [Wikipedia](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
+- [YouTube](https://www.youtube.com/watch?v=wjI1WNcIntg&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=3&)
