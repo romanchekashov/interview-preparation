@@ -1,4 +1,4 @@
-const { BinaryHeap } = require('./BinaryHeap');
+const { BinaryHeap } = require('../Heap/BinaryHeap');
 
 /**
  * A Priority Queue(PQ) is an Abstract Data Type(ADT) that operates similar to a normal queue

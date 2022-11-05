@@ -96,3 +96,28 @@ objects -> hashFunction(object) -> {hashCode1: ()->()->(), hashCode2: ()->()->()
 ### References
 - [Wikipedia](https://en.wikipedia.org/wiki/Hash_table)
 - [YouTube](https://www.youtube.com/watch?v=shs0KM3wKv8&index=4&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+
+## Heap
+* In computer science, a heap is a specialized tree-based data structure that satisfies the heap property described below.
+
+* In a **MIN HEAP**, if P is a parent node of C, then the key (the value) of P is less than or equal to the key of C.
+**The minimum element of the heap is always on top as a root of the heap.**
+* In a **MAX HEAP**, the key of P is greater than or equal to the key of C. 
+**The maximum element of the heap is always on top as a root of the heap.**
+```
+      8   <-- Root of tree -->   0
+  7       6                  2       3
+3   2   5                  4   5   6   4
+  Max Heap                    Min Heap
+```
+### Array representation of a heap
+* LeftChildIndex = 2 * ParentIndex + 1
+* RightChildIndex = 2 * ParentIndex + 2
+
+[100, 19, 36, 17, 3, 25, 1, 2, 7]
+
+* The node at the "top" of the heap with no parents is called the root node.
+
+### References
+- [Wikipedia](https://en.wikipedia.org/wiki/Heap_(data_structure))
+- [YouTube](https://www.youtube.com/watch?v=t0Cq6tVNRBA&index=5&t=0s&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
