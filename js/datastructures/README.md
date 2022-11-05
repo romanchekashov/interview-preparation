@@ -121,3 +121,12 @@ objects -> hashFunction(object) -> {hashCode1: ()->()->(), hashCode2: ()->()->()
 ### References
 - [Wikipedia](https://en.wikipedia.org/wiki/Heap_(data_structure))
 - [YouTube](https://www.youtube.com/watch?v=t0Cq6tVNRBA&index=5&t=0s&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+
+## Priority Queue
+* In computer science, a priority queue is an abstract data type which is like a regular queue or stack data structure, but where additionally each element has a "priority" associated with it. In a priority queue, an element with high priority is served before an element with low priority. If two elements have the same priority, they are served according to their order in the queue.
+* While priority queues are often implemented with heaps, they are conceptually distinct from heaps. A priority queue is an abstract concept like "a list" or "a map"; just as a list can be implemented with a linked list or an array, a priority queue can be implemented with a heap or a variety of other methods such as an unordered array.
+* It is the same as min heap except that when comparing two elements we take into account its priority instead of the element's value.
+
+### References
+- [Wikipedia](https://en.wikipedia.org/wiki/Priority_queue)
+- [YouTube](https://www.youtube.com/watch?v=wptevk0bshY&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=6)
