@@ -134,6 +134,9 @@ objects -> hashFunction(object) -> {hashCode1: ()->()->(), hashCode2: ()->()->()
 ## Trie
 * A Trie`/ˈtraɪ/` is a special data structure used **to store strings that can be visualized like a graph**. It consists of nodes and edges. Each node consists of at max 26 children and edges connect each parent node to its children. These 26 pointers are nothing but pointers for each of the 26 letters of the English alphabet A separate edge is maintained for every edge.
 
+### Intuition
+* As prefixes of strings are involved, this is usually a natural fit for a trie (a prefix tree.)
+
 ### References
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Trie)

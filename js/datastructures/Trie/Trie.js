@@ -55,17 +55,18 @@ class TrieNode {
 class Trie {
     root = new TrieNode();
 
-    add(input, node = this.root) {
-        if (input.length === 0) {
-            node.setEnd();
-            return;
+    add(input) {
+        let node = this.root
+
+        for (let i = 0; i < input.length; i++) {
+            if (!node.keys.has(input[i])) {
+                node.keys.set(input[i], new TrieNode());
+            }
+
+            node = node.keys.get(input[i])
         }
 
-        if (!node.keys.has(input[0])) {
-            node.keys.set(input[0], new TrieNode());
-        }
-
-        this.add(input.substr(1), node.keys.get(input[0]));
+        node.setEnd()
     }
 
     isWord(word) {
