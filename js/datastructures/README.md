@@ -130,3 +130,13 @@ objects -> hashFunction(object) -> {hashCode1: ()->()->(), hashCode2: ()->()->()
 ### References
 - [Wikipedia](https://en.wikipedia.org/wiki/Priority_queue)
 - [YouTube](https://www.youtube.com/watch?v=wptevk0bshY&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=6)
+
+## Trie
+* A Trie`/ˈtraɪ/` is a special data structure used **to store strings that can be visualized like a graph**. It consists of nodes and edges. Each node consists of at max 26 children and edges connect each parent node to its children. These 26 pointers are nothing but pointers for each of the 26 letters of the English alphabet A separate edge is maintained for every edge.
+
+### References
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Trie)
+- [YouTube](https://www.youtube.com/watch?v=zIjfhVPRZCg&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=7&t=0s)
+- [Trie Data Structure - Beau teaches JavaScript](https://youtu.be/7XmS8McW_1U)
+- https://www.hackerearth.com/practice/data-structures/advanced-data-structures/trie-keyword-tree/tutorial/
