@@ -1,4 +1,7 @@
-https://github.com/trekhleb/javascript-algorithms
+- https://github.com/trekhleb/javascript-algorithms
+- https://www.geeksforgeeks.org/top-10-algorithms-in-interview-questions/
+- https://www.geeksforgeeks.org/top-10-algorithms-in-interview-questions-set-2/
+
 # Data Structures
 
 * [Linked List](LinkedList)
@@ -143,3 +146,47 @@ objects -> hashFunction(object) -> {hashCode1: ()->()->(), hashCode2: ()->()->()
 - [YouTube](https://www.youtube.com/watch?v=zIjfhVPRZCg&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=7&t=0s)
 - [Trie Data Structure - Beau teaches JavaScript](https://youtu.be/7XmS8McW_1U)
 - https://www.hackerearth.com/practice/data-structures/advanced-data-structures/trie-keyword-tree/tutorial/
+
+## Tree
+* A tree data structure can be defined recursively (locally) as a collection of nodes (starting at a root node), where each node is a data structure consisting of a value, together with a list of references to nodes (the "children"), with the constraints that no reference is duplicated, and none points to the root.
+* A collection of nodes, where each node is a data structure consisting of a value, together with a list of references to nodes, with the constraints that:
+  * No reference is duplicated, 
+  * and none points to the root
+* There are many kinds of trees:
+  * Binary Search Tree
+  * AVL Tree
+  * Red-Black Tree
+  * Segment Tree - with min/max/sum range queries examples
+  * Fenwick Tree (Binary Indexed Tree)
+
+### References
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Tree_(data_structure))
+- [YouTube](https://www.youtube.com/watch?v=oSWTXtMglKE&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=8)
+
+## Binary Search Tree
+* Binary Search Trees keep their keys in sorted order, so that lookup and other operations can use the principle of binary search.
+* For any node in Binary Search Tree:
+  (B)<-(A)->(C), where B < A < C
+```
+       8   <-- Root of Binary Search Tree
+  3        10                
+1   6         14              
+  4   7    13          
+```
+### Time Complexity
+
+| Access    | Search    | Insertion | Deletion  |
+| :-------: | :-------: | :-------: | :-------: |
+| O(log(n)) | O(log(n)) | O(log(n)) | O(log(n)) |
+
+### Space Complexity
+
+O(n)
+
+### References
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Binary_search_tree)
+- [Inserting to BST on YouTube](https://www.youtube.com/watch?v=wcIRPqTR3Kc&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=9&t=0s)
+- [BST Interactive Visualisations](https://www.cs.usfca.edu/~galles/visualization/BST.html)
+
