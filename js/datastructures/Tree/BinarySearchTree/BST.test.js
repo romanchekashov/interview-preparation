@@ -1,3 +1,4 @@
+const { assert, measurePerformance } = require('./../../../Utils');
 const { BST } = require('./BST');
 
 const bst = new BST();
@@ -38,6 +39,10 @@ console.log(bst2.findMinHeight())
 console.log(bst2.findMaxHeight())
 console.log(bst2.isBalanced())
 console.log('inOrder: ' + bst2.inOrder())
+console.log('inOrderWithStack: ' + bst2.inOrderWithStack())
 console.log('preOrder: ' + bst2.preOrder())
 console.log('postOrder: ' + bst2.postOrder())
 console.log('levelOrder: ' + bst2.levelOrder())
+
+assert([3,4,5,6,7,9,10,17,20,22], bst2.inOrder());
+assert([3,4,5,6,7,9,10,17,20,22], bst2.inOrderWithStack());

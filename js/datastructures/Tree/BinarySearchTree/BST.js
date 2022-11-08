@@ -163,6 +163,24 @@ class BST {
         return result;
     }
 
+    inOrderWithStack() {
+        const result = [];
+        if (this.root !== null) {
+            const stack = [];
+            let cur = this.root;
+            while (cur !== null || stack.length > 0) {
+                while (cur !== null) {
+                    stack.push(cur);
+                    cur = cur.left;
+                }
+                cur = stack.pop();
+                result.push(cur.data);
+                cur = cur.right;
+            }
+        }
+        return result;
+    }
+
     preOrder() {
         const result = [];
         if (this.root !== null) {
