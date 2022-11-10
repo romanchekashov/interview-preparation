@@ -31,6 +31,9 @@ node --max-old-space-size=1024 index.js #increase to 1gb
 node --expose-gc --max-old-space-size=64 index.js
 ```
 
+### [Data Structures](js/datastructures/README.md)
+### [LeetCode Patterns](js/leetcode/patterns/README.md)
+
 ### How to prepare to tech interview
 - Solve more Medium problems on LeetCode: easy(20%) + medium(60%) + hard(20%)
 - There will be no multiple submits during the interview! 
