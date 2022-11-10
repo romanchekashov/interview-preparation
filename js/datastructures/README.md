@@ -15,6 +15,7 @@
 * [Tree](Tree)
   * [Binary Search Tree](Tree/BinarySearchTree)
 * [Graph](Graph) (both directed and undirected)
+* Disjoint Set
 
 ## Linked List
 * In computer science, a linked list is a linear collection of data elements, in which linear order is not given by their physical placement in memory. 
