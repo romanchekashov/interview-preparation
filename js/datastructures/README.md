@@ -1,6 +1,7 @@
 - https://github.com/trekhleb/javascript-algorithms
 - https://www.geeksforgeeks.org/top-10-algorithms-in-interview-questions/
 - https://www.geeksforgeeks.org/top-10-algorithms-in-interview-questions-set-2/
+- https://github.com/williamfiset/Algorithms
 
 # Data Structures
 
@@ -15,7 +16,7 @@
 * [Tree](Tree)
   * [Binary Search Tree](Tree/BinarySearchTree)
 * [Graph](Graph) (both directed and undirected)
-* Disjoint Set
+* [Disjoint Set](UnionFind)
 
 ## Linked List
 * In computer science, a linked list is a linear collection of data elements, in which linear order is not given by their physical placement in memory. 
@@ -192,4 +193,15 @@ O(n)
 - [BST Interactive Visualisations](https://www.cs.usfca.edu/~galles/visualization/BST.html)
 - https://www.youtube.com/watch?v=t2CEgPsws3U&t=1563s - easy explanation!
 
+## Union Find (Disjoint Set)
+* Union Find is a data structure that keeps track of elements which are
+  split into one or more disjoint sets.
+* Its has two primary operations: find and union.
+
+### References
+- [Wikipedia](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
+- [By Abdul Bari on YouTube](https://www.youtube.com/watch?v=wU6udHRIkcc&index=14&t=0s&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [Union Find Introduction By WilliamFiset](https://www.youtube.com/watch?v=ibjEGG7ylHk&list=PLDV1Zeh2NRsB6SWUrDFW2RmDotAfPbeHu&index=19&ab_channel=WilliamFiset)
+- https://github.com/williamfiset/Algorithms/blob/master/src/main/java/com/williamfiset/algorithms/datastructures/unionfind/UnionFind.java
+- https://habr.com/ru/post/104772/
 
