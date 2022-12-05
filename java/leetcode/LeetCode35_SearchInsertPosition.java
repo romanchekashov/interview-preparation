@@ -1,4 +1,4 @@
-package java.leetcode;
+package leetcode;
 
 public class LeetCode35_SearchInsertPosition extends AbsLeetCodeSolution {
 

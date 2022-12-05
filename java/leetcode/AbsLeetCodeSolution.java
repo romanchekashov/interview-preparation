@@ -1,4 +1,4 @@
-package java.leetcode;
+package leetcode;
 
 public abstract class AbsLeetCodeSolution {
 

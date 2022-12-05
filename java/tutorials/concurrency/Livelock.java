@@ -1,4 +1,4 @@
-package java.tutorials.concurrency;
+package tutorials.concurrency;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;

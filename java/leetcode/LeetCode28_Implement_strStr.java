@@ -1,4 +1,4 @@
-package java.leetcode;
+package leetcode;
 
 public class LeetCode28_Implement_strStr extends AbsLeetCodeSolution {
 

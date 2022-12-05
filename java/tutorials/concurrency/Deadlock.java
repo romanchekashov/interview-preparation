@@ -1,4 +1,4 @@
-package java.tutorials.concurrency;
+package tutorials.concurrency;
 
 public class Deadlock {
     static class Friend {

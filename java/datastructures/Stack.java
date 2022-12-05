@@ -1,4 +1,4 @@
-package java.datastructures;
+package datastructures;
 
 import java.util.EmptyStackException;
 
@@ -6,10 +6,10 @@ import java.util.EmptyStackException;
  * A stack uses LIFO (last-in first-out) ordering. That is, as in a stack of
  * dinner plates, the most recent item added to the stack is the first item to
  * be removed.
- * 
+ *
  * Note that a stack can also be implemented using a linked list, if items were
  * added and removed from the same side.
- * 
+ *
  * A stack can also be used to implement a recursive algorithm iteratively.
  */
 public class Stack<T> {

@@ -1,4 +1,4 @@
-package java.datastructures;
+package datastructures;
 
 class PriorityQueue {
     // array in sorted order, from max at 0 to min (size - 1)
@@ -33,7 +33,7 @@ class PriorityQueue {
 
     /**
      * remove minimum item
-     * 
+     *
      * @return
      */
     public long remove() {
@@ -42,7 +42,7 @@ class PriorityQueue {
 
     /**
      * peek at minimum item
-     * 
+     *
      * @return
      */
     public long peekMin() {
@@ -51,7 +51,7 @@ class PriorityQueue {
 
     /**
      * true if queue is empty
-     * 
+     *
      * @return
      */
     public boolean isEmpty() {
@@ -60,7 +60,7 @@ class PriorityQueue {
 
     /**
      * true if queue is full
-     * 
+     *
      * @return
      */
     public boolean isFull() {
