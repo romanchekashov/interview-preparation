@@ -1,5 +1,6 @@
 const { performance } = require('perf_hooks');
 const process = require('process');
+const { TreeNode } = require('./datastructures/Tree/BinarySearchTree/BinarySearchTree');
 
 const logError = (expected, actual) =>
     console.error(`Assertion Error: Expected: ${expected}, Actual: ${actual}`);
@@ -59,4 +60,32 @@ function measurePerformance(fun) {
     // console.log(process.memoryUsage());
 }
 
-module.exports = { assert, measurePerformance };
+const createTreeNode = (treeAsArray) => {
+    if (treeAsArray.length === 0) return null;
+
+    const root = new TreeNode(treeAsArray[0]);
+    const queue = [root];
+    let index = 1;
+
+    while (index < treeAsArray.length) {
+        for (let i = 0, len = queue.length; i < len; i++) {
+            const node = queue.shift();
+
+            let val = treeAsArray[index++];
+            if (val !== null) {
+                node.left = new TreeNode(val);
+                queue.push(node.left);
+            }
+
+            val = treeAsArray[index++];
+            if (val !== null) {
+                node.right = new TreeNode(val);
+                queue.push(node.right);
+            }
+        }
+    }
+
+    return root;
+};
+
+module.exports = { assert, measurePerformance, createTreeNode };

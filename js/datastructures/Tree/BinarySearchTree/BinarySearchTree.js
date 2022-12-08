@@ -30,9 +30,9 @@
  * Levelorder traversal
  *
  */
-class Node {
-    constructor(left, right, elem) {
-        this.data = elem;
+class TreeNode {
+    constructor(val, left = null, right = null) {
+        this.val = val;
         this.left = left;
         this.right = right;
     }
@@ -114,12 +114,12 @@ class BinarySearchTree {
 
         // Dig into left subtree, the value we're looking
         // for is smaller than the current value
-        if (elem < node.data) {
+        if (elem < node.val) {
             node.left = this.#remove(node.left, elem);
 
             // Dig into right subtree, the value we're looking
             // for is greater than the current value
-        } else if (elem > node.data) {
+        } else if (elem > node.val) {
             node.right = this.#remove(node.right, elem);
 
             // Found the node we wish to remove
@@ -147,19 +147,19 @@ class BinarySearchTree {
                 const tmp = this.#findMin(node.right);
 
                 // Swap the data
-                node.data = tmp.data;
+                node.val = tmp.val;
 
                 // Go into the right subtree and remove the leftmost node we
                 // found and swapped data with. This prevents us from having
                 // two nodes in our tree with the same value.
-                node.right = this.#remove(node.right, tmp.data);
+                node.right = this.#remove(node.right, tmp.val);
 
                 // If instead we wanted to find the largest node in the left
                 // subtree as opposed to smallest node in the right subtree
                 // here is what we would do:
                 // Node tmp = findMax(node.left);
-                // node.data = tmp.data;
-                // node.left = remove(node.left, tmp.data);
+                // node.val = tmp.val;
+                // node.left = remove(node.left, tmp.val);
             }
         }
 
@@ -192,10 +192,10 @@ class BinarySearchTree {
     #add(node, elem) {
         // Base case: found a leaf node
         if (node === null) {
-            node = new Node(null, null, elem);
+            node = new TreeNode(elem);
         } else {
             // Pick a subtree to insert element
-            if (elem <= node.data) {
+            if (elem <= node.val) {
                 node.left = this.#add(node.left, elem);
             } else {
                 node.right = this.#add(node.right, elem);
@@ -216,11 +216,11 @@ class BinarySearchTree {
 
         // Dig into the left subtree because the value we're
         // looking for is smaller than the current value
-        if (elem < node.data) return this.#contains(node.left, elem);
+        if (elem < node.val) return this.#contains(node.left, elem);
 
         // Dig into the right subtree because the value we're
         // looking for is greater than the current value
-        if (elem > node.data) return this.#contains(node.right, elem);
+        if (elem > node.val) return this.#contains(node.right, elem);
 
         // We found the value we were looking for
         return true;
@@ -262,7 +262,7 @@ class BinarySearchTree {
                 }
 
                 // emit the value
-                yield node.data;
+                yield node.val;
 
                 //traverse the right subtree
                 if (node.right !== null) {
@@ -284,7 +284,7 @@ class BinarySearchTree {
             // special case: there is no node
             if (node) {
                 // emit the value
-                yield node.data;
+                yield node.val;
 
                 //traverse the left subtree
                 if (node.left !== null) {
@@ -321,7 +321,7 @@ class BinarySearchTree {
                 }
 
                 // emit the value
-                yield node.data;
+                yield node.val;
             }
         }
 
@@ -345,7 +345,7 @@ class BinarySearchTree {
             tail: null,
             push(el) {
                 const node = {
-                    data: el,
+                    val: el,
                     next: null,
                 };
 
@@ -356,11 +356,11 @@ class BinarySearchTree {
             poll() {
                 if (!this.head) return undefined;
 
-                const data = this.head.data;
+                const val = this.head.val;
                 this.head = this.head.next;
                 if (!this.head) this.tail = null;
 
-                return data;
+                return val;
             },
             isNotEmpty() {
                 return !!this.head;
@@ -371,11 +371,11 @@ class BinarySearchTree {
 
         while (queue.isNotEmpty()) {
             const node = queue.poll();
-            if (node.left !== null) queue.push(node.left);
-            if (node.right !== null) queue.push(node.right);
-            yield node.data;
+                if (node.left !== null) queue.push(node.left);
+                if (node.right !== null) queue.push(node.right);
+                yield node.val;
         }
     }
 }
 
-module.exports = { BinarySearchTree };
+module.exports = { BinarySearchTree, TreeNode };
