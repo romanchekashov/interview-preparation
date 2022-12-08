@@ -1,14 +1,22 @@
-const { assert, measurePerformance } = require('./../../../Utils');
+const { measurePerformance } = require('./../../../Utils');
 const { createTreeNode } = require('../../../Utils');
 
 /**
- * https://leetcode.com/problems/minimum-depth-of-binary-tree/
- * 111. Minimum Depth of Binary Tree
+ * https://leetcode.com/problems/invert-binary-tree/
+ * 226. Invert Binary Tree
  *
- * Given a binary tree, find its minimum depth.
- * The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+ * Given the 'root' of a binary tree, invert the tree, and return its root.
  *
- * Note: A leaf is a node with no children.
+ * Testcases:
+ * 1 *
+ * Input: root = [4,2,7,1,3,6,9]
+ * Output: [4,7,2,9,6,3,1]
+ * 2 *
+ * Input: root = [2,1,3]
+ * Output: [2,3,1]
+ * 3 *
+ * Input: root = []
+ * Output: []
  */
 
 /**
@@ -21,11 +29,33 @@ const { createTreeNode } = require('../../../Utils');
  */
 
 /**
+ * Graph traversal: Depth first: Stack
+ *
+ * Time complexity : O(n/2)
+ * Space complexity : O(1), space for Stack
+ *
  * @param {TreeNode} root
  * @return {TreeNode}
  */
 var invertTree = function(root) {
+    if (root === null) {
+        return null;
+    }
 
+    const stack = [root];
+
+    while (stack.length > 0) {
+        const node = stack.pop();
+
+        const temp = node.left;
+        node.left = node.right;
+        node.right = temp;
+
+        node.left && stack.push(node.left);
+        node.right && stack.push(node.right);
+    }
+
+    return root;
 };
 
 const solutions = [
@@ -35,13 +65,19 @@ const solutions = [
 solutions.forEach((solution) => {
     console.log(`Run tests for: ${solution.name}`);
     measurePerformance(() => {
-        let treeNode = createTreeNode([3,9,20,null,null,15,7]);
-        assert(2, solution(treeNode));
+        let treeNode = createTreeNode([4,2,7,1,3,6,9]);
+        console.log(treeNode);
+        solution(treeNode);
+        console.log('Inverted: ', treeNode);
 
-        treeNode = createTreeNode([2,null,3,null,4,null,5,null,6]);
-        assert(5, solution(treeNode));
+        treeNode = createTreeNode([2,1,3]);
+        console.log(treeNode);
+        solution(treeNode);
+        console.log('Inverted: ', treeNode);
 
-        treeNode = createTreeNode([1,2,3,4,null,null,5]);
-        assert(3, solution(treeNode));
+        treeNode = createTreeNode([]);
+        console.log(treeNode);
+        solution(treeNode);
+        console.log('Inverted: ', treeNode);
     });
 });
