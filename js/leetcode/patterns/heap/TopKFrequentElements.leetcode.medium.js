@@ -1,4 +1,5 @@
 const { assert, measurePerformance } = require('./../../../Utils');
+const { PriorityQueue } = require('../../../datastructures/Heap/PriorityQueue');
 
 /**
  * https://leetcode.com/problems/top-k-frequent-elements/
@@ -63,8 +64,31 @@ var topKFrequent = function(nums, k) {
    }, new Array(k).fill(Number.NEGATIVE_INFINITY));
 };
 
+var topKFrequent2 = function(nums, k) {
+    const map = new Map();
+
+    for(const n of nums){
+        map.set(n, (map.get(n) ?? 0) + 1);
+    }
+
+    const maxHeap = new PriorityQueue((a, b) => ((b ? b.value : 0) - (a ? a.value : 0)));
+
+    for(const [key, value] of map){
+        maxHeap.add({key, value});
+    }
+
+    const res = [];
+
+    while(res.length < k) {
+        res.push(maxHeap.remove().key);
+    }
+
+    return res;
+};
+
 const solutions = [
-    topKFrequent
+    topKFrequent,
+    topKFrequent2
 ];
 
 solutions.forEach((solution) => {
