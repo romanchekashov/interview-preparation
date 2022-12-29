@@ -64,19 +64,34 @@ var topKFrequent = function(nums, k) {
    }, new Array(k).fill(Number.NEGATIVE_INFINITY));
 };
 
+/**
+ *
+ * Time complexity : O(n + m * log(m) + k * log(m)), where (n >= m), 'n' - nums.length, 'm' - number of unique numbers in nums
+ * Space complexity : O(2n + k), where 'n' is Map.size and 'k' is result for top K Frequent Elements
+ *
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
 var topKFrequent2 = function(nums, k) {
+    // save frequency of each number appearing in array to map(TC: O(n), SC: O(map.size() < n))
     const map = new Map();
 
     for(const n of nums){
         map.set(n, (map.get(n) ?? 0) + 1);
     }
 
+    // save numbers from map using frequency of each number as a priority to store in PriorityQueue
+    // (based on MIN/MAX BinaryTree called as BinaryHeap(parent node value should be less or equal to child node value))
+    // (TC: O(n * log(n)), SC: O(n)), where n is map.size()
     const maxHeap = new PriorityQueue((a, b) => ((b ? b.value : 0) - (a ? a.value : 0)));
 
     for(const [key, value] of map){
         maxHeap.add({key, value});
     }
 
+    // save result array by removing k elements from PriorityQueue
+    // (TC: O(k * log(n)), SC: O(k))
     const res = [];
 
     while(res.length < k) {
