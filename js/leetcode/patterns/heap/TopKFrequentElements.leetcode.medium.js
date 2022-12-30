@@ -101,16 +101,58 @@ var topKFrequent2 = function(nums, k) {
     return res;
 };
 
+/**
+ *
+ * Time complexity : O(n + m + k), where (n >= m), 'n' - nums.length, 'm' - number of unique numbers in nums
+ * Space complexity : O(2n + k), where 'n' is Map.size and 'k' is result for top K Frequent Elements
+ *
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var topKFrequent3 = function(nums, k) {
+    // save frequency of each number appearing in array to map(TC: O(n), SC: O(map.size() < n))
+    const frequencyMap = new Map();
+
+    for(const n of nums){
+        frequencyMap.set(n, (frequencyMap.get(n) ?? 0) + 1);
+    }
+
+    // (TC: O(n), SC: O(n)), where n is frequencyMap.size()
+    const bucket = new Array(nums.length + 1);
+
+    for(const [key, frequency] of frequencyMap){
+        if (bucket[frequency] === undefined) {
+            bucket[frequency] = [];
+        }
+        bucket[frequency].push(key);
+    }
+
+    // (TC: O(k), SC: O(k))
+    const res = [];
+
+    for (let pos = bucket.length - 1; pos >= 0 && res.length < k; pos--) {
+        if (bucket[pos]) {
+            for (let i = 0; res.length < k && i < bucket[pos].length; i++) {
+                res.push(bucket[pos][i]);
+            }
+        }
+    }
+
+    return res;
+};
+
 const solutions = [
     topKFrequent,
-    topKFrequent2
+    topKFrequent2,
+    topKFrequent3
 ];
 
 solutions.forEach((solution) => {
     console.log(`Run tests for: ${solution.name}`);
     measurePerformance(() => {
-        assert([1,2], solution([1,1,1,2,2,3], 2));
-        assert([1], solution([1], 1));
-        assert([-3,-4,0,1,4,9], solution([6,0,1,4,9,7,-3,1,-4,-8,4,-7,-3,3,2,-3,9,5,-4,0], 6));
+        assert([1,2].sort(), solution([1,1,1,2,2,3], 2).sort());
+        assert([1].sort(), solution([1], 1).sort());
+        assert([-3,-4,0,1,4,9].sort(), solution([6,0,1,4,9,7,-3,1,-4,-8,4,-7,-3,3,2,-3,9,5,-4,0], 6).sort());
     });
 });
