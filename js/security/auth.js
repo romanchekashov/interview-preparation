@@ -114,7 +114,7 @@ class AuthServer {
                 "access_token": JwtTokenCreator.newToken(username, EXPIRES_AT_SHORT_TIME_15_MIN),
                 "token_type": "Bearer",
                 "expires_in": EXPIRES_AT_SHORT_TIME_15_MIN,
-                [HEADER_KEY_APP_TYPE_ID]: this.#userSessionAppTypeId(username, request)
+                [HEADER_KEY_APP_TYPE_ID]: this.#userSessionAppTypeId(username, refreshToken, request)
             })
             .setStatusCode(200);
     }
@@ -123,9 +123,10 @@ class AuthServer {
      * Identify user app
      * support login for multiple devices and browsers
      * @param username {string}
+     * @param refreshToken {string}
      * @param request {Request}
      */
-    #userSessionAppTypeId = (username, request) => {
+    #userSessionAppTypeId = (username, refreshToken, request) => {
         let appTypeId = request.headersMap.get(HEADER_KEY_APP_TYPE_ID);
 
         if (!Repository.usernameToUserSessionsMap.has(username)) {
