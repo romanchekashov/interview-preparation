@@ -1,6 +1,7 @@
 const { performance } = require('perf_hooks');
 const process = require('process');
 const { TreeNode } = require('./datastructures/Tree/BinarySearchTree/BinarySearchTree');
+const { ListNode } = require('./datastructures/LinkedList/LinkedList');
 
 const logError = (expected, actual) =>
     console.error(`Assertion Error: Expected: ${expected}, Actual: ${actual}`);
@@ -88,4 +89,28 @@ const createTreeNode = (treeAsArray) => {
     return root;
 };
 
-module.exports = { assert, measurePerformance, createTreeNode };
+const createSinglyLinkedList = (arr, pos = -1) => {
+    let head = null, temp = null, cycle = null;
+
+    for (let i = 0; i < arr.length; i++) {
+        if (temp) {
+            temp.next = new ListNode(arr[i]);
+            temp = temp.next;
+        } else {
+            head = new ListNode(arr[i]);
+            temp = head;
+        }
+
+        if (i === pos) {
+            cycle = temp;
+        }
+    }
+
+    if (temp && cycle) {
+        temp.next = cycle;
+    }
+
+    return head;
+}
+
+module.exports = { assert, measurePerformance, createTreeNode, createSinglyLinkedList };

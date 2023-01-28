@@ -22,14 +22,21 @@ const { Comparator } = require('./../Comparator');
  *
  */
 
-class LinkedListNode {
-    constructor(value, next = null) {
-        this.value = value;
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+class ListNode {
+    constructor(val, next = null) {
+        this.val = val;
         this.next = next;
     }
 
     toString(callback) {
-        return callback ? callback(this.value) : `${this.value}`;
+        return callback ? callback(this.val) : `${this.val}`;
     }
 }
 
@@ -41,22 +48,22 @@ class LinkedList {
      * @param {Function} [comparatorFunction]
      */
     constructor(comparatorFunction) {
-        /** @var LinkedListNode */
+        /** @var ListNode */
         this.head = null;
 
-        /** @var LinkedListNode */
+        /** @var ListNode */
         this.tail = null;
 
         this.compare = new Comparator(comparatorFunction);
     }
 
     /**
-     * @param {*} value
+     * @param {*} val
      * @return {LinkedList}
      */
-    prepend(value) {
+    prepend(val) {
         // Make new node to be a head.
-        const newNode = new LinkedListNode(value, this.head);
+        const newNode = new ListNode(val, this.head);
         this.head = newNode;
 
         // If there is no tail yet let's make new node a tail.
@@ -68,11 +75,11 @@ class LinkedList {
     }
 
     /**
-     * @param {*} value
+     * @param {*} val
      * @return {LinkedList}
      */
-    append(value) {
-        const newNode = new LinkedListNode(value);
+    append(val) {
+        const newNode = new ListNode(val);
 
         // If there is no head yet let's make new node a head.
         if (!this.head) {
@@ -90,18 +97,18 @@ class LinkedList {
     }
 
     /**
-     * @param {*} value
+     * @param {*} val
      * @param {number} rawIndex
      * @return {LinkedList}
      */
-    insert(value, rawIndex) {
+    insert(val, rawIndex) {
         const index = rawIndex < 0 ? 0 : rawIndex;
         if (index === 0) {
-            this.prepend(value);
+            this.prepend(val);
         } else {
             let count = 1;
             let currentNode = this.head;
-            const newNode = new LinkedListNode(value);
+            const newNode = new ListNode(val);
             while (currentNode) {
                 if (count === index) break;
                 currentNode = currentNode.next;
@@ -124,10 +131,10 @@ class LinkedList {
     }
 
     /**
-     * @param {*} value
-     * @return {LinkedListNode}
+     * @param {*} val
+     * @return {ListNode}
      */
-    delete(value) {
+    delete(val) {
         if (!this.head) {
             return null;
         }
@@ -136,7 +143,7 @@ class LinkedList {
 
         // If the head must be deleted then make next node that is different
         // from the head to be a new head.
-        while (this.head && this.compare.equal(this.head.value, value)) {
+        while (this.head && this.compare.equal(this.head.val, val)) {
             deletedNode = this.head;
             this.head = this.head.next;
         }
@@ -146,7 +153,7 @@ class LinkedList {
         if (currentNode !== null) {
             // If next node must be deleted then make next node to be a next next one.
             while (currentNode.next) {
-                if (this.compare.equal(currentNode.next.value, value)) {
+                if (this.compare.equal(currentNode.next.val, val)) {
                     deletedNode = currentNode.next;
                     currentNode.next = currentNode.next.next;
                 } else {
@@ -156,7 +163,7 @@ class LinkedList {
         }
 
         // Check if tail must be deleted.
-        if (this.compare.equal(this.tail.value, value)) {
+        if (this.compare.equal(this.tail.val, val)) {
             this.tail = currentNode;
         }
 
@@ -165,11 +172,11 @@ class LinkedList {
 
     /**
      * @param {Object} findParams
-     * @param {*} findParams.value
+     * @param {*} findParams.val
      * @param {function} [findParams.callback]
-     * @return {LinkedListNode}
+     * @return {ListNode}
      */
-    find({ value = undefined, callback = undefined }) {
+    find({ val = undefined, callback = undefined }) {
         if (!this.head) {
             return null;
         }
@@ -178,12 +185,12 @@ class LinkedList {
 
         while (currentNode) {
             // If callback is specified then try to find node by callback.
-            if (callback && callback(currentNode.value)) {
+            if (callback && callback(currentNode.val)) {
                 return currentNode;
             }
 
-            // If value is specified then try to compare by value..
-            if (value !== undefined && this.compare.equal(currentNode.value, value)) {
+            // If val is specified then try to compare by val..
+            if (val !== undefined && this.compare.equal(currentNode.val, val)) {
                 return currentNode;
             }
 
@@ -194,7 +201,7 @@ class LinkedList {
     }
 
     /**
-     * @return {LinkedListNode}
+     * @return {ListNode}
      */
     deleteTail() {
         const deletedTail = this.tail;
@@ -225,7 +232,7 @@ class LinkedList {
     }
 
     /**
-     * @return {LinkedListNode}
+     * @return {ListNode}
      */
     deleteHead() {
         if (!this.head) {
@@ -245,17 +252,17 @@ class LinkedList {
     }
 
     /**
-     * @param {*[]} values - Array of values that need to be converted to linked list.
+     * @param {*[]} vals - Array of vals that need to be converted to linked list.
      * @return {LinkedList}
      */
-    fromArray(values) {
-        values.forEach((value) => this.append(value));
+    fromArray(vals) {
+        vals.forEach((val) => this.append(val));
 
         return this;
     }
 
     /**
-     * @return {LinkedListNode[]}
+     * @return {ListNode[]}
      */
     toArray() {
         const nodes = [];
@@ -318,10 +325,10 @@ class LinkedList {
          * to yield.
          */
         while (current) {
-            yield current.value;
+            yield current.val;
             current = current.next;
         }
     }
 }
 
-module.exports = { LinkedList };
+module.exports = { LinkedList, ListNode };
