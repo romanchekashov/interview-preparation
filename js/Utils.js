@@ -4,7 +4,7 @@ const { TreeNode } = require('./datastructures/Tree/BinarySearchTree/BinarySearc
 const { ListNode } = require('./datastructures/LinkedList/LinkedList');
 
 const logError = (expected, actual) =>
-    console.error(`Assertion Error: Expected: ${expected}, Actual: ${actual}`);
+    console.error('Assertion Error: Expected: ', expected, 'Actual: ', actual);
 
 /**
  * Compare expected with actual result
