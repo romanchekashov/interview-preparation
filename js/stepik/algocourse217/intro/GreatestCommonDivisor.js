@@ -1,4 +1,4 @@
-const { run } = require('../consoleRunner');
+const { run } = require('../../consoleRunner');
 const { assert, measurePerformance } = require('../../../Utils');
 
 /**
