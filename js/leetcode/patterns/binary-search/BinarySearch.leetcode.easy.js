@@ -48,8 +48,44 @@ var search = function(nums, target) {
     return -1;
 };
 
+/**
+ *
+ * Time complexity : O(log(n)), where 'n' - nums.length
+ * Space complexity : O(1)
+ *
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var searchRecursive = function(nums, target) {
+    /**
+     *
+     * @param {number[]} a
+     * @param {number} x
+     * @param {number} low
+     * @param {number} high
+     * @return {number}
+     */
+    const binarySearchRecursive = (a, x, low, high) => {
+        if (low > high) return -1;// Error
+
+        let mid = Math.floor((low + high) / 2);
+
+        if (a[mid] < x) {
+            return binarySearchRecursive(a, x, mid+ 1, high);
+        } else if (a[mid] > x) {
+            return binarySearchRecursive(a, x, low, mid - 1);
+        } else {
+            return mid;
+        }
+    }
+
+    return binarySearchRecursive(nums, target, 0, nums.length - 1)
+}
+
 const solutions = [
-    search
+    search,
+    searchRecursive
 ];
 
 solutions.forEach((solution) => {
