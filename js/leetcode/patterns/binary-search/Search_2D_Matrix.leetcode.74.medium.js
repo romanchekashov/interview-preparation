@@ -38,19 +38,20 @@ const { assert, measurePerformance } = require('./../../../Utils');
  * @return {boolean}
  */
 var searchMatrix = function(matrix, target) {
+    // find row
     let rowStart = 0, rowEnd = matrix.length - 1, rowIndex = 0;
 
-    // find row
     while (rowStart <= rowEnd) {
-        rowIndex = rowStart + Math.floor((rowEnd - rowStart) / 2)
-        if (target >= matrix[rowIndex][0] && target <= matrix[rowIndex][matrix[rowIndex].length - 1]) break
+        rowIndex = Math.floor((rowStart + rowEnd) / 2)
 
         // console.log(rowIndex, matrix[rowIndex], rowEnd, rowStart)
 
         if (target < matrix[rowIndex][0]) {
             rowEnd = rowIndex - 1
-        } else {
+        } else if (target > matrix[rowIndex][matrix[rowIndex].length - 1]) {
             rowStart = rowIndex + 1
+        } else {
+            break
         }
     }
 
@@ -58,13 +59,16 @@ var searchMatrix = function(matrix, target) {
     // console.log('searchMatrix', row, rowIndex)
     // find target
     let start = 0, end = row.length - 1;
+
     while(start <= end) {
-        let k = start + Math.floor((end - start) / 2)
-        if (row[k] === target) return true;
+        let k = Math.floor((start + end) / 2)
+
         if (target > row[k]) {
             start = k + 1
-        } else {
+        } else if (target < row[k]) {
             end = k - 1
+        } else {
+            return true
         }
     }
 
