@@ -30,20 +30,22 @@ const { assert, measurePerformance } = require('./../../../Utils');
  * @return {number}
  */
 var search = function(nums, target) {
-    let lo = 0;
-    let hi = nums.length - 1;
+    let left = 0;
+    let right = nums.length - 1;
 
-    while (lo < hi) {
-        let mid = lo + Math.floor((hi - lo + 1) / 2);
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
 
-        if (target < nums[mid]) {
-            hi = mid - 1
+        if (target > nums[mid]) {
+            left = mid + 1;
+        } else if (target < nums[mid]) {
+            right = mid - 1
         } else {
-            lo = mid;
+            return mid;
         }
     }
 
-    return nums[lo] === target ? lo : -1;
+    return -1;
 };
 
 const solutions = [
