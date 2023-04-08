@@ -6,7 +6,7 @@
 # Data Structures
 
 * [Linked List](LinkedList)
-* [Doubly Linked List](DoublyLinkedList)
+* [Doubly Linked List](linear/DoublyLinkedList)
 * [Queue](Queue)
 * [Stack](Stack)
 * [Hash Table](HashTable)
