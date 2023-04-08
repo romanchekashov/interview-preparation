@@ -1,6 +1,25 @@
 const { assert, measurePerformance } = require('../../Utils');
 
 /**
+ * Adjacency list - https://en.wikipedia.org/wiki/Adjacency_list
+ * In graph theory and computer science, an adjacency list is
+ * a collection of unordered lists used to represent a finite graph.
+ *
+ * Undirected Graph: (1)-(2)-(3) - 3 - nodes, 2 - edges
+ */
+const adjacencyMatrix = [
+  // 1  2  3
+    [0, 1, 0], // 1
+    [1, 0, 1], // 2
+    [0, 1, 0], // 3
+];
+const adjacencyList = {
+    1: [2],
+    2: [1, 3],
+    3: [2]
+};
+
+/**
  * Graph traversal:
  *
  * Depth first: Stack
