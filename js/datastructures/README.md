@@ -7,7 +7,7 @@
 
 * [Linked List](linear/LinkedList)
 * [Doubly Linked List](linear/DoublyLinkedList)
-* [Queue](Queue)
+* [Queue](linear/Queue)
 * [Stack](linear/Stack)
 * [Hash Table](HashTable)
 * [Heap](Heap) - max and min heap versions
