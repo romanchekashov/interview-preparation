@@ -5,10 +5,10 @@
 
 # Data Structures
 
-* [Linked List](LinkedList)
+* [Linked List](linear/LinkedList)
 * [Doubly Linked List](linear/DoublyLinkedList)
 * [Queue](Queue)
-* [Stack](Stack)
+* [Stack](linear/Stack)
 * [Hash Table](HashTable)
 * [Heap](Heap) - max and min heap versions
 * [Priority Queue](PriorityQueue)

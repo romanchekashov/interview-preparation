@@ -1,4 +1,4 @@
-const { Comparator } = require('./../Comparator');
+const { Comparator } = require('../../Comparator');
 
 /**
  * https://www.youtube.com/watch?v=-Yn5DU0_-lw&t=0s&ab_channel=WilliamFiset
