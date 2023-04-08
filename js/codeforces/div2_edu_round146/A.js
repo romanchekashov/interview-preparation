@@ -1,14 +1,21 @@
-const { CodeforcesTester } = require('../lib/codeforces-tester');
+const { CodeforcesTester } = require('../../lib/codeforces-tester');
 
 // test input/output data
 const tester = new CodeforcesTester()
     .inputData(`
-2
-1 2
-3 5
+5
+5 3
+6 1
+7 4
+8 8
+7 3
+
 `).outputData(`
-3
-8
+YES
+YES
+NO
+YES
+YES
 
 `)
 
@@ -62,16 +69,40 @@ class CodeforcesIO {
     }
 }
 
-// your solution starts here. Good luck!
-const solution = (a, b) => {
-    return a + b
+/**
+ * We have:
+ * 2 * x + k * y = n, where x, y, k, n - integer non-negative numbers
+ * Intuition from reverse-engineering of Um_nik solution:
+ * We can divide left and right sides to 2:
+ * x + (k / 2) * y = n / 2
+ * So we should know to lemmas from school:
+ * 1. Sum of two integers always equals to integer
+ * 2. Sum of integer and non-integer always equals to non-integer
+ * According to that and knowing that x, y is integers we should check two variants:
+ * 1. if n / 2 is integer and x is integer, then it means (k / 2) * y is also integer
+ * n / 2 is integer if (n % 2 === 0)
+ * 2. if n / 2 is non-integer and x is integer, then it means (k / 2) * y is non-integer
+ * (k / 2) * y is non-integer only if (k / 2) is non-integer
+ * (k / 2) is non-integer if (k % 2 === 1)
+ *
+ * @param {string} str_n
+ * @param {string} str_k
+ * @return {'YES' | 'NO'}
+ */
+const solution = (str_n, str_k) => {
+    // 2*x + k * y = n
+    const n = BigInt(str_n)
+    if (n % 2n === 0n) return 'YES'
+    const k = BigInt(str_k)
+    if (k % 2n === 1n) return 'YES'
+    return 'NO'
 }
 
 new CodeforcesIO((readline, print) => {
-    const t = readline() // first line of input usually gives the no. of test cases,i.e, the no. of lines ahead.
+    const t = readline()
 
     for (let i = 0; i < t; i++) {
-        const lineArgs = readline().split(' ')
-        print(solution(+lineArgs[0], +lineArgs[1]))
+        const [n, k] = readline().split(' ');
+        print(solution(n, k));
     }
 })

@@ -1,21 +1,50 @@
-const { CodeforcesTester } = require('../lib/codeforces-tester');
+const { CodeforcesTester } = require('../../lib/codeforces-tester');
 
 // test input/output data
 const tester = new CodeforcesTester()
     .inputData(`
-2
-1 2
-3 5
-`).outputData(`
-3
-8
+11
+5 4
+76543
+1 0
+1
+2 5
+44
+3 6
+666
+5 6
+13579
+5 8
+97531
+19 4
+9876543210123456789
+5 7
+73737
+8 1
+20000000
+7 0
+7058959
+12 1
+828127127732
+
+`)
+.outputData(`
+765443
+10
+544
+6666
+613579
+987531
+98765443210123456789
+773737
+210000000
+70589590
+8281271277321
 
 `)
 
-// execute script: node Template.js
-// This template can run code in both envs: JavaScript V8 4.8.0, Node.js 12.16.3
-// NOTE: Always use Node.js 12.16.3 because it supports ES6 features and BigInt which sometimes really important
-// copy and send code with solution to https://codeforces.com/ from HERE below (for engine JavaScript V8 4.8.0 IMPORTANT to add at start of script: "use strict";)
+// execute script: node ./solution.js
+// solution to copy and send below (for JS IMPORTANT to add at start of script: "use strict";)
 "use strict";
 
 class CodeforcesIO {
@@ -62,16 +91,24 @@ class CodeforcesIO {
     }
 }
 
-// your solution starts here. Good luck!
-const solution = (a, b) => {
-    return a + b
-}
+const solution = (n, d, sNum) => {
+    let i = 0
+
+    while (i < n) {
+        if (d > +sNum[i]) break
+        i++
+    }
+
+    if (i === 0) return d + sNum
+
+    return sNum.substring(0, i) + d + sNum.substring(i)
+};
 
 new CodeforcesIO((readline, print) => {
-    const t = readline() // first line of input usually gives the no. of test cases,i.e, the no. of lines ahead.
+    const t = readline()
 
     for (let i = 0; i < t; i++) {
-        const lineArgs = readline().split(' ')
-        print(solution(+lineArgs[0], +lineArgs[1]))
+        const lineArgs = readline().split(' '); // destruction
+        print(solution(+lineArgs[0], +lineArgs[1], readline()))
     }
 })
