@@ -1,7 +1,7 @@
 /**
  * https://github.com/williamfiset/Algorithms/blob/master/src/main/java/com/williamfiset/algorithms/datastructures/unionfind/UnionFind.java
  *
- * Union Find is a data structure that keeps track of elements which are
+ * Disjoint-set (Union-find) is a data structure that keeps track of elements which are
  * split into one or more disjoint sets.
  * Its has two primary operations: find and union.
  */

@@ -12,11 +12,11 @@
 * [Hash Table](HashTable)
 * [Heap](Heap) - max and min heap versions
 * [Priority Queue](PriorityQueue)
-* [Trie](Trie)
+* [Trie](trees/Trie)
 * [Tree](Tree)
   * [Binary Search Tree](trees/BinarySearchTree)
 * [Graph](Graph) (both directed and undirected)
-* [Disjoint Set](UnionFind)
+* [Disjoint Set](trees/UnionFind)
 
 ## Linked List
 * In computer science, a linked list is a linear collection of data elements, in which linear order is not given by their physical placement in memory. 
