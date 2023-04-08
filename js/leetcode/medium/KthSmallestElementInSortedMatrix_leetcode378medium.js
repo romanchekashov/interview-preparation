@@ -1,5 +1,5 @@
 const { assert, measurePerformance } = require('./../../Utils');
-const { MaxHeap } = require('./../../datastructures/Heap/Heap');
+const { MaxHeap } = require('../../datastructures/trees/Heap/Heap');
 
 /**
  * 378. Kth Smallest Element in a Sorted Matrix

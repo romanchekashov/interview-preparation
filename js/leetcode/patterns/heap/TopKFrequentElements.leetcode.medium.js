@@ -1,5 +1,5 @@
 const { assert, measurePerformance } = require('./../../../Utils');
-const { PriorityQueue } = require('../../../datastructures/Heap/PriorityQueue');
+const { PriorityQueue } = require('../../../datastructures/trees/Heap/PriorityQueue');
 
 /**
  * https://leetcode.com/problems/top-k-frequent-elements/

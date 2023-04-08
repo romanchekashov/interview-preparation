@@ -1,5 +1,5 @@
 const { PriorityQueue } = require('./PriorityQueue');
-const { assert, measurePerformance } = require('../../Utils');
+const { assert, measurePerformance } = require('../../../Utils');
 
 const pq = new PriorityQueue();
 

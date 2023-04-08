@@ -1,5 +1,5 @@
 const { BinaryHeap } = require('./BinaryHeap');
-const { assert, measurePerformance } = require('../../Utils');
+const { assert, measurePerformance } = require('../../../Utils');
 
 const pq = new BinaryHeap();
 

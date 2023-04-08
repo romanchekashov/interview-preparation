@@ -10,8 +10,8 @@
 * [Queue](linear/Queue)
 * [Stack](linear/Stack)
 * [Hash Table](HashTable)
-* [Heap](Heap) - max and min heap versions
-* [Priority Queue](PriorityQueue)
+* [Heap](trees/Heap) - max and min heap versions
+* [Priority Queue](trees/PriorityQueue)
 * [Trie](trees/Trie)
 * [Tree](Tree)
   * [Binary Search Tree](trees/BinarySearchTree)
