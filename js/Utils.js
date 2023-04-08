@@ -1,6 +1,6 @@
 const { performance } = require('perf_hooks');
 const process = require('process');
-const { TreeNode } = require('./datastructures/Tree/BinarySearchTree/BinarySearchTree');
+const { TreeNode } = require('./datastructures/trees/BinarySearchTree/BinarySearchTree');
 const { ListNode } = require('./datastructures/linear/LinkedList/LinkedList');
 
 const logError = (expected, actual) =>

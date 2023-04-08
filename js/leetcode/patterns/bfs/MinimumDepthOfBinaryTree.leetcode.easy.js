@@ -1,5 +1,5 @@
 const { assert, measurePerformance } = require('./../../../Utils');
-const { TreeNode } = require('../../../datastructures/Tree/BinarySearchTree/BinarySearchTree');
+const { TreeNode } = require('../../../datastructures/trees/BinarySearchTree/BinarySearchTree');
 const { createTreeNode } = require('../../../Utils');
 
 /**

@@ -14,7 +14,7 @@
 * [Priority Queue](PriorityQueue)
 * [Trie](Trie)
 * [Tree](Tree)
-  * [Binary Search Tree](Tree/BinarySearchTree)
+  * [Binary Search Tree](trees/BinarySearchTree)
 * [Graph](Graph) (both directed and undirected)
 * [Disjoint Set](UnionFind)
 

@@ -1,4 +1,4 @@
-const { assert, measurePerformance } = require('./../../../Utils');
+const { assert, measurePerformance } = require('../../../Utils');
 const { BST } = require('./BST');
 
 const bst = new BST();
