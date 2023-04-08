@@ -15,7 +15,7 @@
 * [Trie](trees/Trie)
 * [Tree](Tree)
   * [Binary Search Tree](trees/BinarySearchTree)
-* [Graph](Graph) (both directed and undirected)
+* [Graph](graphs) (both directed and undirected)
 * [Disjoint Set](trees/UnionFind)
 
 ## Linked List
