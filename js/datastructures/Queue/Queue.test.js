@@ -1,27 +1,16 @@
-const { Queue } = require('./Queue');
+// const { Queue } = require('./Queue');
+const { QueueArray } = require('./QueueArray');
+const { QueueCircularBuffer } = require('./QueueCircularBuffer');
+const { QueueLinkedList } = require('./QueueLinkedList');
 
-const q = new Queue();
-
-q.offer(1);
-q.offer(2);
-q.offer(3);
-q.offer(4);
-q.offer(5);
-
-console.log(q.poll()); // 1
-console.log(q.poll()); // 2
-console.log(q.poll()); // 3
-console.log(q.poll()); // 4
-
-console.log(q.isEmpty()); // false
-
-q.offer(1);
-q.offer(2);
-q.offer(3);
-
-console.log(q.poll()); // 5
-console.log(q.poll()); // 1
-console.log(q.poll()); // 2
-console.log(q.poll()); // 3
-
-console.log(q.isEmpty()); // true
+[QueueArray, QueueCircularBuffer, QueueLinkedList].forEach(queue => {
+    const q = new queue(3);
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    console.log(q.size()); // 3
+    console.log(q.dequeue()); // 1
+    console.log(q.size()); // 2
+    q.clear();
+    console.log(q.isEmpty()); // true
+})

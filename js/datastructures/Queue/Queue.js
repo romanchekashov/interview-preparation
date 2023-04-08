@@ -20,52 +20,12 @@
  *
  */
 
-class QueueNode {
-    constructor(data) {
-        this.data = data;
-        this.next = null;
-    }
-}
-
 class Queue {
-    first = null;
-    last = null;
-    size = 0;
-
-    // Add an element to the back of the queue
-    offer(elem) {
-        let t = new QueueNode(elem);
-        if (this.last) {
-            this.last.next = t;
-        }
-        this.last = t;
-        if (!this.first) {
-            this.first = this.last;
-        }
-        this.size++;
-    }
-
-    // Poll an element from the front of the queue
-    // The method throws an error is the queue is empty
-    poll() {
-        if (this.isEmpty()) throw new Error('NoSuchElementException');
-        const data = this.first.data;
-        this.first = this.first.next;
-        if (!this.first) {
-            this.last = null;
-        }
-        this.size--;
-        return data;
-    }
-
-    peek() {
-        if (this.isEmpty()) throw new Error('NoSuchElementException');
-        return this.first.data;
-    }
-
-    isEmpty() {
-        return this.size === 0;
-    }
+    enqueue(item){};
+    dequeue(){};
+    size(){};
+    clear(){};
+    isEmpty(){};
 }
 
 module.exports = { Queue };
