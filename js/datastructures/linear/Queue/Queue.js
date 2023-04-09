@@ -21,10 +21,20 @@
  */
 
 class Queue {
+    /**
+     * @param item adding an element to the end | O(1) time
+     */
     enqueue(item){};
+
+    /**
+     * @return removing the first element | O(1) time
+     */
     dequeue(){};
+
     size(){};
+
     clear(){};
+
     isEmpty(){};
 }
 
