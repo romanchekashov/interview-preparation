@@ -10,7 +10,7 @@
  * Complexity Analysis:
  *                  Queue
  * Insert(Enqueue)   O(1)
- * Remove(Dequeue)   O(1)
+ * Remove(Deque)   O(1)
  * Peeking           O(1)
  * Is Empty          O(1)
  * Search            O(n)
