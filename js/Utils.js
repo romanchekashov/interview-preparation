@@ -12,24 +12,34 @@ const logError = (expected, actual) =>
  * @param expected
  * @param actual
  */
-function assert(expected, actual) {
+function assert(expected, actual, checkOrder = true) {
     if (Array.isArray(expected)) {
         if (expected.length !== actual.length) {
             logError(expected, actual);
         }
 
-        for (let i = 0; i < expected.length; i++) {
-            if (Array.isArray(expected[i]) && Array.isArray(actual[i])) {
-                for (let j = 0; j < expected[i].length; j++) {
-                    if (expected[i][j] !== actual[i][j]) {
+        if (checkOrder) {
+            for (let i = 0; i < expected.length; i++) {
+                if (Array.isArray(expected[i]) && Array.isArray(actual[i])) {
+                    for (let j = 0; j < expected[i].length; j++) {
+                        if (expected[i][j] !== actual[i][j]) {
+                            logError(expected, actual);
+                            return;
+                        }
+                    }
+                } else {
+                    if (expected[i] !== actual[i]) {
                         logError(expected, actual);
-                        return;
+                        break;
                     }
                 }
-            } else {
-                if (expected[i] !== actual[i]) {
+            }
+        } else {
+            const expectedSet = new Set(expected)
+            for (const v of actual) {
+                if (!expectedSet.has(v)) {
                     logError(expected, actual);
-                    break;
+                    return;
                 }
             }
         }
