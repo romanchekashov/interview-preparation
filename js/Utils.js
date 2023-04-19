@@ -11,6 +11,7 @@ const logError = (expected, actual) =>
  *
  * @param expected
  * @param actual
+ * @param {boolean} checkOrder
  */
 function assert(expected, actual, checkOrder = true) {
     if (Array.isArray(expected)) {
@@ -123,4 +124,22 @@ const createSinglyLinkedList = (arr, pos = -1) => {
     return head;
 }
 
-module.exports = { assert, measurePerformance, createTreeNode, createSinglyLinkedList };
+/**
+ * console.log(getMaxCallStackSize());
+ *
+ * @return {number} max call stack size
+ */
+const getMaxCallStackSize = () => {
+    const _getMaxCallStackSize = i => {
+        try {
+            return _getMaxCallStackSize(++i);
+        } catch (e) {
+            console.log(e);
+            return i;
+        }
+    }
+
+    return _getMaxCallStackSize(1);
+}
+
+module.exports = { assert, measurePerformance, createTreeNode, createSinglyLinkedList, getMaxCallStackSize };
