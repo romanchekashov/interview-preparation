@@ -6,6 +6,17 @@ const { ListNode } = require('./datastructures/linear/LinkedList/LinkedList');
 const logError = (expected, actual) =>
     console.error('Assertion Error: Expected: ', expected, 'Actual: ', actual);
 
+const isEqual = (expected, actual) => {
+    if (typeof expected === 'object' && typeof actual === 'object') {
+        if (JSON.stringify(expected) !== JSON.stringify(actual)) {
+            throw new Error()
+        }
+    } else {
+        if (expected !== actual) {
+            throw new Error();
+        }
+    }
+}
 /**
  * Compare expected with actual result
  *
@@ -20,20 +31,18 @@ function assert(expected, actual, checkOrder = true) {
         }
 
         if (checkOrder) {
-            for (let i = 0; i < expected.length; i++) {
-                if (Array.isArray(expected[i]) && Array.isArray(actual[i])) {
-                    for (let j = 0; j < expected[i].length; j++) {
-                        if (expected[i][j] !== actual[i][j]) {
-                            logError(expected, actual);
-                            return;
+            try {
+                for (let i = 0; i < expected.length; i++) {
+                    if (Array.isArray(expected[i]) && Array.isArray(actual[i])) {
+                        for (let j = 0; j < expected[i].length; j++) {
+                            isEqual(expected[i][j], expected[i][j])
                         }
-                    }
-                } else {
-                    if (expected[i] !== actual[i]) {
-                        logError(expected, actual);
-                        break;
+                    } else {
+                        isEqual(expected[i], actual[i])
                     }
                 }
+            } catch (err) {
+                logError(expected, actual);
             }
         } else {
             const expectedSet = new Set(expected)
