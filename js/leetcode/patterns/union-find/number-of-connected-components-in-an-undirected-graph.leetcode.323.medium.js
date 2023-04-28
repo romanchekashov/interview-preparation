@@ -13,6 +13,8 @@ const { assert, measurePerformance } = require('./../../../Utils');
  */
 
 /**
+ * Implementation with Union-Find
+ *
  * Time complexity : O(n), there 'n' is number of nodes
  * Space complexity : O(n), space for 2 arrays of parents and rank
  *
@@ -21,21 +23,22 @@ const { assert, measurePerformance } = require('./../../../Utils');
  * @return: the number of connected components in the graph
  */
 var countComponents = function(n, edges) {
-    // index in array is a node, value is index of parent node. Initially each node connected to itself.
+    // index in array is a node, value is index of root parent node. Initially each node connected to itself.
     const parents = Array.from(Array(n).keys()); // [0, 1, 2, .., n - 1]
     // index in rank is a node, value is a number of connected nodes to it including itself.
     // Initially as each node connected to itself then number equal to 1.
     const rank = new Array(n).fill(1); // [1, 1, .., 1]
 
     const find = (node) => {
-        let res = node;
+        let root = node;
 
-        while (res !== parents[res]) {
-            parents[res] = parents[parents[res]];
-            res = parents[res];
+        while (root !== parents[root]) {
+            // compress path for O(1) lookup: (0) <- (1) <- (2) => (2) -> (0) <- (1)
+            parents[root] = parents[parents[root]];
+            root = parents[root];
         }
 
-        return res;
+        return root;
     }
 
     const union = (n1, n2) => {
@@ -57,17 +60,63 @@ var countComponents = function(n, edges) {
         return 1;
     }
 
-    let res = n;
+    // initially number of components equals to number of nodes because they did not union yet
+    let numComponents = n;
 
     for (const [n1, n2] of edges) {
-        res -= union(n1, n2);
+        numComponents -= union(n1, n2);
     }
 
-    return res;
+    return numComponents;
+};
+
+/**
+ * Implementation with Depth-First Search
+ *
+ * Time: O(n + m), there n - number of nodes, m - number of edges
+ * Space: O(n), space for adjacencyList and visited array
+ *
+ * @param n: An integer
+ * @param edges: a list of undirected edges
+ * @return: the number of connected components in the graph
+ */
+var countComponentsDFS = function(n, edges) {
+    const adjacencyList = new Array(n);
+    const visited = new Array(n);
+    let count = 0;
+
+    for (let i = 0; i < n; i++) {
+        adjacencyList[i] = [];
+        visited[i] = false;
+    }
+
+    for (const [v1, v2] of edges) {
+        adjacencyList[v1].push(v2);
+        adjacencyList[v2].push(v1);
+    }
+
+    // O(n + m)
+    const dfs = (v) => {
+        if (visited[v]) return;
+        visited[v] = true;
+
+        for (const v2 of adjacencyList[v]) {
+            dfs(v2);
+        }
+    }
+
+    for (let i = 0; i < n; i++) {
+        if (!visited[i]) {
+            dfs(i);
+            count++;
+        }
+    }
+
+    return count;
 };
 
 const solutions = [
-    countComponents
+    countComponents, countComponentsDFS
 ];
 
 solutions.forEach((solution) => {
