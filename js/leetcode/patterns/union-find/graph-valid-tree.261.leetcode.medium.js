@@ -2,7 +2,7 @@ const { assert, measurePerformance } = require('./../../../Utils');
 
 /**
  * https://leetcode.com/problems/graph-valid-tree/
- * Graph Valid Tree
+ * 261. Graph Valid Tree
  *
  * Given 'n' nodes labeled from '0' to 'n - 1' and a list of 'undirected' edges (each edge is a pair of nodes),
  * write a function to check whether these edges make up a valid tree.
@@ -79,8 +79,66 @@ class UnionFind{
     }
 }
 
+
+/**
+ * Made directly with the most basic template of Union Find.
+ * This question is a two-step process:
+ * 1. Judging that the number of edges must be equal to n-1
+ * 2. The total number of connected graphs is 1.
+ * This ensures that all points in the graph are connected and acyclic.
+ *
+ * @param n: An integer
+ * @param edges: a list of undirected edges
+ * @return: true if it's a valid tree, or false
+ */
+var validTreeUnionFind = function(n, edges) {
+    // A tree is a connected acyclic graph that consists of n nodes and n − 1 edges.
+    if (edges.length !== n - 1) return false;
+
+    const parents = Array.from(Array(n).keys());
+    const ranks = new Array(n).fill(1);
+
+    const findParent = (i) => {
+        let root = i;
+
+        while (parents[root] !== root) {
+            // compress path for O(1) lookup: (0) <- (1) <- (2) => (2) -> (0) <- (1)
+            parents[root] = parents[parents[root]];
+            root = parents[root];
+        }
+
+        return root;
+    }
+
+    const union = (n1, n2) => {
+        const p1 = findParent(n1);
+        const p2 = findParent(n2);
+
+        if (p1 === p2) return 0;
+
+        if (ranks[p1] > ranks[p2]) {
+            ranks[p1] += ranks[p2];
+            parents[p2] = p1;
+        } else {
+            ranks[p2] += ranks[p1];
+            parents[p1] = p2;
+        }
+
+        return 1;
+    }
+
+    // initially number of components equals to number of nodes because they did not union yet
+    let numComponents = n;
+
+    for (const [n1, n2] of edges) {
+        numComponents -= union(n1, n2);
+    }
+
+    return numComponents === 1;
+};
+
 const solutions = [
-    validTree
+    validTree, validTreeUnionFind
 ];
 
 solutions.forEach((solution) => {
