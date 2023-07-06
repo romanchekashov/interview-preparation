@@ -1,4 +1,4 @@
-package codeforces.div2_edu_round146;
+package codeforces.div2edu.round146;
 
 import java.io.BufferedReader;
 import java.io.IOException;

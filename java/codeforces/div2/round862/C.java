@@ -1,4 +1,4 @@
-package codeforces.div2round862;
+package codeforces.div2.round862;
 
 import java.io.BufferedReader;
 import java.io.IOException;
