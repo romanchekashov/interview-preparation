@@ -28,6 +28,24 @@ public class B {
         return Math.max(ans, 1);
     }
 
+    static int solution2(int n, int[] powers) {
+        int cur = powers[0];
+        int part = 1;
+
+        for(int i = 0; i < n; i++){
+            cur &= powers[i];
+            if (cur == 0) {
+                if(i == n-1) break;
+                part++;
+                cur = powers[i + 1];
+            }
+        }
+
+        if(cur != 0) part--;
+
+        return Math.max(part, 1);
+    }
+
     static int nextInt(StringTokenizer token) {
         return Integer.parseInt(token.nextToken());
     }
