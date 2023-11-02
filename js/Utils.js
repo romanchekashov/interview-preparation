@@ -61,11 +61,15 @@ function assert(expected, actual, checkOrder = true) {
 class TimeMeasure {
     /**
      * script should be run as: node --expose-gc <script.js>
-     * @param {*} fun
+     * @param {*} func
      */
-    measurePerformance(fun) {
+    async measurePerformance(func) {
         this.start();
-        fun();
+        if (this.#isAsync(func)) {
+            await func();
+        } else {
+            func();
+        }
         this.stop();
     }
 
@@ -91,6 +95,8 @@ class TimeMeasure {
           } MB\n`
         );
     }
+    
+    #isAsync = (func) => func.constructor.name === "AsyncFunction";
 }
 
 const createTreeNode = (treeAsArray) => {
