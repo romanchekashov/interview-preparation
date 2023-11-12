@@ -1,58 +1,83 @@
 package codeforces;
 
+// copy code from here
 import java.util.*;
 import java.io.*;
 
 public class Template {
-    FastScanner in;
-    PrintWriter out;
+    public static class InputReader {
+        public BufferedReader reader;
+        private StringTokenizer tokenizer;
 
-    public void solve() throws IOException {
-
-    }
-
-    public void run() {
-        try {
-            in = new FastScanner(new File(".in"));
-            out = new PrintWriter(new File(".out"));
-
-            solve();
-
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        public InputReader(InputStreamReader stream) {
+            reader = new BufferedReader(stream, 32768);
+            tokenizer = null;
         }
-    }
-
-    class FastScanner {
-        BufferedReader br;
-        StringTokenizer st;
-
-        FastScanner(File f) {
-            try {
-                br = new BufferedReader(new FileReader(f));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-
-        String next() {
-            while (st == null || !st.hasMoreTokens()) {
+        public String next() { // reads in the next string
+            while (tokenizer == null || !tokenizer.hasMoreTokens()) {
                 try {
-                    st = new StringTokenizer(br.readLine());
+                    tokenizer = new StringTokenizer(reader.readLine());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
             }
-            return st.nextToken();
+            return tokenizer.nextToken();
         }
 
-        int nextInt() {
+        public int nextInt() { // reads in the next int
             return Integer.parseInt(next());
         }
+
+        public long nextLong() { // reads in the next long
+            return Long.parseLong(next());
+        }
+
+        public double nextDouble() { // reads in the next double
+            return Double.parseDouble(next());
+        }
     }
 
-    public static void main(String[] arg) {
-        new Template().run();
+    public static class ConsoleScanner implements Closeable {
+        public InputReader reader;
+        public PrintWriter writer;
+
+        public ConsoleScanner() {
+            reader = new InputReader(new InputStreamReader(System.in));
+            writer = new PrintWriter(System.out);
+        }
+
+        @Override
+        public void close() throws IOException {
+            reader.reader.close();
+            writer.close();
+        }
     }
+
+    public static class FileScanner implements Closeable {
+        public InputReader reader;
+        public PrintWriter writer;
+
+        public FileScanner(String inputFileName, String outputFileName) {
+            try {
+                reader = new InputReader(new FileReader(inputFileName));
+            } catch (FileNotFoundException e) {
+                throw new IllegalArgumentException(String.format("Input file %s not found.", inputFileName));
+            }
+
+            try {
+                writer = new PrintWriter(new BufferedWriter(new FileWriter(outputFileName)));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        @Override
+        public void close() throws IOException {
+            reader.reader.close();
+            writer.close();
+        }
+    }
+
+    // insert your code here
+
 }
