@@ -1,42 +1,46 @@
-const { assert, measurePerformance, complexityMeasure } = require('./../Utils');
+const { assert, measurePerformance, complexityMeasure } = require('./../../Utils');
 
-function levenshteinDistance(str1, str2) {
-    for (let i = 0; i < str1.length; i++) {
-        let temp1 = str1.substring(0, str1.length - i);
-        let temp2 = str1.substring(str1.length - i);
-
-        str2 = str2.replace(temp1, '');
-        str2 = str2.replace(temp2, '');
-    console.log(temp1, temp2, str2)
-    }
-
-    return str2.length;
-}
-
-function minNumberOfCoinsForChange_DP(n, denoms) {
-    const complexity = complexityMeasure(n, denoms.length);
-
-    const numOfCoins = new Array(n + 1).fill(Number.POSITIVE_INFINITY);
-    numOfCoins[0] = 0;
-
-    for (const denom of denoms) {
-        for (const amount in numOfCoins) {
-            if (denom <= amount) {
-                numOfCoins[amount] = Math.min(numOfCoins[amount], 1 + numOfCoins[amount - denom]);
+function flatten(value) {
+    // Write your code here.
+    const resAr = [], resOb = {};
+    
+    const que = (val) => {
+        if (isAr(val)) {
+            for (const v of val) {
+                if (isAr(v) || isOb(v)) {
+                    que(v);
+                } else {
+                    resAr.push(v);
+                }
             }
-            complexity.increment();
+        } else if (isOb(val)) {
+            for (const key in val) {
+                const v = val[key];
+                if (isAr(v) || isOb(v)) {
+                    que(v);
+                } else {
+                    resOb[key] = v;
+                }
+            }
         }
     }
-    complexity.printIncrement();
-
-    return numOfCoins[n] !== Number.POSITIVE_INFINITY ? numOfCoins[n] : -1;
+    
+    if ((isAr(value) && value.length) || (isOb(value) && Object.keys(value).length)) {
+        que(value);
+        return resAr.length ? resAr : resOb;
+    }
+    return value;
 }
 
-const solutions = [levenshteinDistance];
+const isAr = v => Array.isArray(v);
+const isOb = v => v && typeof v === 'object';
+
+const solutions = [flatten];
 
 solutions.forEach((solution) => {
     console.log(`Run tests for: ${solution.name}`);
     measurePerformance(() => {
-        assert(1, solution('algoexpert', 'algozexpert'));
+        console.log(solution({a:{}, b:{}}));
+        // assert(1, solution('algoexpert', 'algozexpert'));
     });
 });

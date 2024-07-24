@@ -12,7 +12,7 @@
 /**
  * A BINARY SEARCH TREE is a BT that satisfies the BST invariant:
  * left subtree has smaller elements and right subtree has larger elements.
- * (all left descendents <= n < all right descendents)
+ * (all left descendents <= n <= all right descendents)
  *
  * BST elements must be COMPARABLE so that we can order them inside the tree.
  *

@@ -1,21 +1,22 @@
-package codeforces.div3.round883;
+package codeforces.div4.round952;
 
 import codeforces.Template.ConsoleScanner;
 
 import java.io.IOException;
 
 /**
- * A. Rudolph and Cut the Rope
- * https://codeforces.com/contest/1846/problem/A
+ * A. Creating Words
+ * https://codeforces.com/contest/1985/problem/A
  */
 public class A {
 
-    static int solution(int n, int[] a_nails_heights, int[] b_ropes_lengths) {
-        int min_ropes_to_cut = 0;
-        for (int i = 0; i < n; i++) {
-            if (a_nails_heights[i] > b_ropes_lengths[i]) min_ropes_to_cut++;
-        }
-        return min_ropes_to_cut;
+    static String solution(String words) {
+        if (words.charAt(0) == words.charAt(4)) return words;
+        char[] chars = words.toCharArray();
+        var t = chars[0];
+        chars[0] = chars[4];
+        chars[4] = t;
+        return new String(chars);
     }
 
     public static void main(String[] args) throws IOException {
@@ -23,17 +24,8 @@ public class A {
             int t = console.reader.nextInt();
 
             while (t-- > 0) {
-                int n = console.reader.nextInt();
-
-                int[] a_nails_heights = new int[n];
-                int[] b_ropes_lengths = new int[n];
-
-                for (int i = 0; i < n; i++) {
-                    a_nails_heights[i] = console.reader.nextInt();
-                    b_ropes_lengths[i] = console.reader.nextInt();
-                }
-
-                console.writer.println(solution(n, a_nails_heights, b_ropes_lengths));
+                var words = console.reader.reader.readLine();
+                console.writer.println(solution(words));
             }
         }
     }

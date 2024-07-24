@@ -1,5 +1,6 @@
 package core;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -57,5 +58,9 @@ public class Bitwise {
         w.printf("%s[%s] changeCharCase: %s[%s]%n", ch, Integer.toBinaryString(ch), changeCharCase(ch), Integer.toBinaryString(changeCharCase(ch)));
         ch = changeCharCase(ch);
         w.printf("%s[%s] changeCharCase: %s[%s]%n", ch, Integer.toBinaryString(ch), changeCharCase(ch), Integer.toBinaryString(changeCharCase(ch)));
+
+        String binStr = "101";
+        w.printf("%s[%s]%n", binStr, Integer.parseInt(binStr, 2));
+        w.printf("%s[%s]%n", binStr, Long.parseLong(binStr, 2));
     }
 }

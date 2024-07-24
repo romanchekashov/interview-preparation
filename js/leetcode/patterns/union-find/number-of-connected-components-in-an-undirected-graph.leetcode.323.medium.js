@@ -22,22 +22,22 @@ const { assert, measurePerformance } = require('./../../../Utils');
  * @param edges: a list of undirected edges
  * @return: the number of connected components in the graph
  */
+// O(n) time | O(n) space
 var countComponents = function(n, edges) {
-    // index in array is a node, value is index of root parent node. Initially each node connected to itself.
+// index in array is a node, value is index of root parent node.
+// Initially each node connected to itself.
     const parents = Array.from(Array(n).keys()); // [0, 1, 2, .., n - 1]
-    // index in rank is a node, value is a number of connected nodes to it including itself.
-    // Initially as each node connected to itself then number equal to 1.
+// index in rank is node, value is num of connected nodes to it including itself.
+// Initially as each node connected to itself then num equal to 1.
     const rank = new Array(n).fill(1); // [1, 1, .., 1]
 
     const find = (node) => {
         let root = node;
-
         while (root !== parents[root]) {
-            // compress path for O(1) lookup: (0) <- (1) <- (2) => (2) -> (0) <- (1)
+// compress path for O(1) lookup: (0) <- (1) <- (2) => (2) -> (0) <- (1)
             parents[root] = parents[parents[root]];
             root = parents[root];
         }
-
         return root;
     }
 
@@ -45,9 +45,7 @@ var countComponents = function(n, edges) {
         let p1 = find(n1);
         let p2 = find(n2);
 
-        if (p1 === p2) {
-            return 0;
-        }
+        if (p1 === p2) return 0;
 
         if (rank[p2] > rank[p1]) {
             parents[p1] = p2;
@@ -56,11 +54,9 @@ var countComponents = function(n, edges) {
             parents[p2] = p1;
             rank[p1] += rank[p2];
         }
-
         return 1;
     }
-
-    // initially number of components equals to number of nodes because they did not union yet
+// initially num of components = to num of nodes because they did not union yet
     let numComponents = n;
 
     for (const [n1, n2] of edges) {

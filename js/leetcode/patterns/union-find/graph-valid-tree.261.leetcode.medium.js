@@ -92,7 +92,7 @@ class UnionFind{
  * @return: true if it's a valid tree, or false
  */
 var validTreeUnionFind = function(n, edges) {
-    // A tree is a connected acyclic graph that consists of n nodes and n − 1 edges.
+// A tree is a connected acyclic graph that consists of n nodes and n − 1 edges.
     if (edges.length !== n - 1) return false;
 
     const parents = Array.from(Array(n).keys());
@@ -100,13 +100,11 @@ var validTreeUnionFind = function(n, edges) {
 
     const findParent = (i) => {
         let root = i;
-
         while (parents[root] !== root) {
-            // compress path for O(1) lookup: (0) <- (1) <- (2) => (2) -> (0) <- (1)
+// compress path for O(1) lookup: (0) <- (1) <- (2) => (2) -> (0) <- (1)
             parents[root] = parents[parents[root]];
             root = parents[root];
         }
-
         return root;
     }
 
@@ -123,17 +121,14 @@ var validTreeUnionFind = function(n, edges) {
             ranks[p2] += ranks[p1];
             parents[p1] = p2;
         }
-
         return 1;
     }
-
-    // initially number of components equals to number of nodes because they did not union yet
+// initially num of components = to num of nodes because they did not union yet
     let numComponents = n;
 
     for (const [n1, n2] of edges) {
         numComponents -= union(n1, n2);
     }
-
     return numComponents === 1;
 };
 

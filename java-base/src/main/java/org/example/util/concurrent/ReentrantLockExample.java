@@ -1,4 +1,4 @@
-package hard.classes;
+package org.example.util.concurrent;
 
 import java.util.concurrent.locks.ReentrantLock;
 

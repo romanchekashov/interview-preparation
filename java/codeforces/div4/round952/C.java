@@ -3,24 +3,28 @@ package codeforces.div4.round952;
 import codeforces.Template.ConsoleScanner;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
- * B. Maximum Multiple Sum
- * https://codeforces.com/contest/1985/problem/B
+ * C. Good Prefixes
+ * https://codeforces.com/contest/1985/problem/C
  */
-public class B {
+public class C {
 
-    static int solution(int n) {
-        int maxSum = 0, x = 2;
-        for (; x <= n; x++) {
-            int sum = 0;
-            for (int j = 1; j * x <= n; j++) {
-                sum += j * x;
-            }
-            if (maxSum != 0 && sum < maxSum) return x - 1;
-            if (sum > maxSum) maxSum = sum;
+    static int solution(int[] items) {
+        int goodPrefixes = 0;
+        int maxSoFar = Integer.MIN_VALUE;
+        long sum = 0;
+
+        for (int item : items) {
+            sum += item;
+            if (item > maxSoFar) maxSoFar = item;
+            if (sum == 2L * maxSoFar) goodPrefixes++;
         }
-        return x - 1;
+        return goodPrefixes;
     }
 
     public static void main(String[] args) throws IOException {
@@ -29,7 +33,11 @@ public class B {
 
             while (t-- > 0) {
                 var n = console.reader.nextInt();
-                console.writer.println(solution(n));
+                int[] items = new int[n];
+                for (int i = 0; i < n; i++) {
+                    items[i] = console.reader.nextInt();
+                }
+                console.writer.println(solution(items));
             }
         }
     }

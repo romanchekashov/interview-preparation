@@ -1,5 +1,4 @@
-const { performance } = require('perf_hooks');
-const process = require('process');
+const PerformanceUtils = require('./PerformanceUtils');
 const { TreeNode } = require('./datastructures/trees/BinarySearchTree/BinarySearchTree');
 const { ListNode } = require('./datastructures/linear/LinkedList/LinkedList');
 
@@ -58,47 +57,6 @@ function assert(expected, actual, checkOrder = true) {
     }
 }
 
-class TimeMeasure {
-    /**
-     * script should be run as: node --expose-gc <script.js>
-     * @param {*} func
-     */
-    async measurePerformance(func) {
-        this.start();
-        if (this.#isAsync(func)) {
-            await func();
-        } else {
-            func();
-        }
-        this.stop();
-    }
-
-    start() {
-        gc();
-        this.t0 = performance.now();
-    }
-
-    stop() {
-        this.t1 = performance.now();
-        this.#log();
-    }
-
-    #log() {
-        const took = this.t1 - this.t0;
-        const tookSec = Math.floor(took / 1000);
-        const tookMS = Math.round((took - tookSec * 1000) * 100) / 100;
-        const used = process.memoryUsage().heapUsed / 1024 / 1024;
-
-        console.log(
-          `Took ${tookSec ? tookSec + ' s ' : ''}${tookMS} ms, Used ${
-            Math.round(used * 100) / 100
-          } MB\n`
-        );
-    }
-    
-    #isAsync = (func) => func.constructor.name === "AsyncFunction";
-}
-
 const createTreeNode = (treeAsArray) => {
     if (treeAsArray.length === 0) return null;
 
@@ -151,47 +109,12 @@ const createSinglyLinkedList = (arr, pos = -1) => {
     return head;
 }
 
-/**
- * console.log(getMaxCallStackSize());
- *
- * @return {number} max call stack size
- */
-const getMaxCallStackSize = () => {
-    const _getMaxCallStackSize = i => {
-        try {
-            return _getMaxCallStackSize(++i);
-        } catch (e) {
-            console.log(e);
-            return i;
-        }
-    }
-
-    return _getMaxCallStackSize(1);
-}
-
-const complexityMeasure = function(...sizes) {
-    const product = sizes.reduce((acc, cur) => acc * cur, 1);
-    const sum = sizes.reduce((acc, cur) => acc + cur, 0);
-
-    console.log(`Input: sizes = ${sizes}: Product(sizes) = ${product}, Sum(sizes) = ${sum}`)
-
-    let counter = 0;
-
-    return {
-        increment: (steps = 1) => {counter += steps;},
-        printIncrement: () => {
-            let min = Math.abs(counter - sum) < Math.abs(counter - product) ? sum : product;
-            console.log(`Iterations: ${counter}, Time complexity close to O(${min === sum ? 'Sum' : 'Product'})\n`);
-        }
-    }
-}
-
 module.exports = {
   assert,
-  measurePerformance: (func) => new TimeMeasure().measurePerformance(func),
-  TimeMeasure,
   createTreeNode,
   createSinglyLinkedList,
-  getMaxCallStackSize,
-  complexityMeasure
+  measurePerformance: PerformanceUtils.measurePerformance,
+  TimeMeasure: PerformanceUtils.TimeMeasure,
+  getMaxCallStackSize: PerformanceUtils.getMaxCallStackSize,
+  complexityMeasure: PerformanceUtils.complexityMeasure
 };

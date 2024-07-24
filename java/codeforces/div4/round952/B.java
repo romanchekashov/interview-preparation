@@ -5,17 +5,22 @@ import codeforces.Template.ConsoleScanner;
 import java.io.IOException;
 
 /**
- * A. Creating Words
- * https://codeforces.com/contest/1985/problem/A
+ * B. Maximum Multiple Sum
+ * https://codeforces.com/contest/1985/problem/B
  */
-public class A {
+public class B {
 
-    static String solution(char[] words) {
-        if (words[0] == words[4]) return new String(words);
-        var t = words[0];
-        words[0] = words[4];
-        words[4] = t;
-        return new String(words);
+    static int solution(int n) {
+        int maxSum = 0, x = 2;
+        for (; x <= n; x++) {
+            int sum = 0;
+            for (int j = 1; j * x <= n; j++) {
+                sum += j * x;
+            }
+            if (maxSum != 0 && sum < maxSum) return x - 1;
+            if (sum > maxSum) maxSum = sum;
+        }
+        return x - 1;
     }
 
     public static void main(String[] args) throws IOException {
@@ -23,8 +28,8 @@ public class A {
             int t = console.reader.nextInt();
 
             while (t-- > 0) {
-                var words = console.reader.reader.readLine().toCharArray();
-                console.writer.println(solution(words));
+                var n = console.reader.nextInt();
+                console.writer.println(solution(n));
             }
         }
     }

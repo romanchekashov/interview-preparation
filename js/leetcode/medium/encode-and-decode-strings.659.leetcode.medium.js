@@ -36,13 +36,13 @@ var encode = function(strs) {
  */
 var decode = function(str) {
     const result = [];
-    let left = 0, right = 0;
+    let l = 0, r = 0;
 
-    while (left < str.length) {
-        while (str[right++] !== '#');
-        const subStrLen = parseInt(str.substring(left, right - 1));
-        left = right + subStrLen; // next substring start index
-        result.push(str.substring(right, left));
+    while (l < str.length) {
+        while (str[r++] !== '#');
+        const subStrLen = parseInt(str.substring(l, r - 1));
+        l = r + subStrLen; // next substring start index
+        result.push(str.substring(r, l));
     }
 
     return result;

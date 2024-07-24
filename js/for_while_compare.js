@@ -1,48 +1,47 @@
-// const { TimeMeasure } = typeof require !== 'undefined' ? require('./PerformanceUtils') : PerformanceUtils;
+const { TimeMeasure } = typeof require !== 'undefined' ? require('./PerformanceUtils') : PerformanceUtils;
 // var fs = require('fs');
 
-function filter_map(arr) {
-    return arr.filter(o => o.id % 2 === 0).map(o => ({...o}));
-}
-
-function map_filter(arr) {
-    return arr.map(o => ({...o})).filter(o => o.id % 2 === 0);
-}
-
-function reduce(arr) {
-    return arr.reduce((acc, o) => {
-        if (o.id % 2 === 0) acc.push({...o});
-        return acc;
-    }, []);
-}
-
 function for_loop(arr) {
-    const res = [];
-    for (const o of arr) {
-        if (o.id % 2 === 0) res.push({...o});
+    let count = 0;
+    for (let i = 0; i < arr.length; i++){
+        count += arr[i];
     }
-    return res;
+    return count;
+}
+
+function while_loop(arr) {
+    let i = 0, count = 0;
+    while (i < arr.length){
+        count += arr[i++];
+    }
+    return count;
+}
+
+function for_each(arr) {
+    let count = 0;
+    arr.forEach(v => {
+        count += v;
+    });
+    return count;
 }
 
 const solutions = [
-    filter_map,
-    map_filter,
-    reduce,
+    while_loop,
     for_loop,
+    for_each
 ];
-
-const SIZES = [100, 1000, 10000, 100000, 1000000];
 
 getResults = () => solutions.reduce((acc, solution) => {
     const res = {name: solution.name, times: []};
     console.log(`\nRun tests for: ${solution.name}`);
-    for (const length of SIZES) {
-        console.log(`length: ${length}`);
-        const arr = Array.from({length}, (_, i) => ({id: i + 1}));
+    for (let i = 1; i <= 4; i++) {
+        const length = Math.pow(100, i);
+        const arr = Array.from({length}, (_, i) => i + 1); //=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        console.log(`length: ${length.toLocaleString()}`);
         const measure = new TimeMeasure();
         
         measure.start();
-        solution(arr);
+        console.log(solution(arr));
         const measureResult = measure.stop();
         measure.log(measureResult);
         res.times.push({size: length, timeInMS: measureResult.tookMS, usedMb: measureResult.usedMb});
@@ -50,6 +49,7 @@ getResults = () => solutions.reduce((acc, solution) => {
     acc.push(res);
     return acc;
 }, []);
+getResults();
 
 // fs.writeFile('filter_map_reduce_compare.json', JSON.stringify(getResults()), function (err) {
 //     if (err) throw err;

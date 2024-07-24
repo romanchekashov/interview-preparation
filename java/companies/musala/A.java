@@ -1,4 +1,4 @@
-package companies;
+package companies.musala;
 
 import leetcode.AbsLeetCodeSolution;
 
@@ -7,18 +7,12 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Write java function which calculates number of pairs in array. Pair is when two numbers added together, result is zero.
  *
- * https://websparrow.org/java/java-count-number-of-pairs-in-the-array-whose-sum-is-zero
- * Solution:
- * 1. Remove all duplicate elements from the array.
- * 2. Iterate the elements and check whether it’s positive/negative elements available in the array.
- * 3. If available, remove that element from the array and increment the counter value by 1.
  */
-public class NumberOfPairsWithSumZeroInArray extends AbsLeetCodeSolution {
+public class A extends AbsLeetCodeSolution {
 
     public static void main(String[] args) {
-        new NumberOfPairsWithSumZeroInArray().executeTests();
+        new A().executeTests();
     }
 
     @Override

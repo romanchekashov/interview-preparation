@@ -1,4 +1,4 @@
-package hard.classes;
+package org.example.util.concurrent;
 
 public class SynchronizedExample {
     private int count = 0;
