@@ -1,4 +1,4 @@
-package companies.musala;
+package companies;
 
 import leetcode.AbsLeetCodeSolution;
 

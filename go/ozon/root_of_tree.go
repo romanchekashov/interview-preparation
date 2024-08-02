@@ -14,33 +14,38 @@ func main() {
 	defer out.Flush()
 	// defer fmt.Println("Time took:", time.Since(time.Now()))
 
-	/*
-		Первая строка содержит целое число t (1 ≤ t ≤ 10^5) — количество наборов входных данных.
-		Далее следует описание наборов входных данных.
-		Первая строка каждого набора входных данных содержит два целых числа n и p
-		Следующие n строк каждого набора содержат по одному целому числу a[i]
-	*/
 	var t int
 	fmt.Fscan(in, &t)
 
 	for i := 0; i < t; i++ {
-		var n, p int
-		fmt.Fscan(in, &n, &p)
-		
+		var n int
+		fmt.Fscan(in, &n)
+
 		a := make([]int, n)
 		for j := 0; j < n; j++ {
 			fmt.Fscan(in, &a[j])
 		}
 
-		fmt.Fprintf(out, "%.2f\n", solve(a, p))
+		fmt.Fprintf(out, "%d\n", solve(a))
 	}
 }
 
-func solve(a []int, p int) float32 {
-	commission := int(0)
+func solve(a []int) int {
+	frequencyMap := make(map[int]int)
 	for i := 0; i < len(a); i++ {
-		commission += (a[i] * p) % 100
-		// fmt.Printf("price: %d, commission: %d\n", a[i], commission)
+		frequencyMap[a[i]]++
+		i++
+		n := a[i]
+		for ; n > 0; n-- {
+			i++
+			frequencyMap[a[i]]++
+		}
 	}
-	return float32(commission) / 100
+
+	for k, v := range frequencyMap {
+		if v == 1 {
+			return k
+		}
+	}
+	return 0
 }

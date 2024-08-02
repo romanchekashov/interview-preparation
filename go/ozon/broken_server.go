@@ -31,21 +31,28 @@ func main() {
 }
 
 func solve(a []int) int {
-	frequencyMap := make(map[int]int)
-	for i := 0; i < len(a); i++ {
-		frequencyMap[a[i]]++
-		i++
-		n := a[i]
-		for ; n > 0; n-- {
-			i++
-			frequencyMap[a[i]]++
-		}
-	}
+	maxReqSequence := 0
+	left := 0
+	m := make(map[int]int)
 
-	for k, v := range frequencyMap {
-		if v == 1 {
-			return k
+	for right := 0; right < len(a); right++ {
+		m[a[right]]++
+		for ; len(m) > 2 ; {
+			m[a[left]]--
+			if m[a[left]] == 0 {
+				delete(m, a[left])
+			}
+			left++
 		}
+
+		maxReqSequence = maxInt(maxReqSequence, right - left + 1)
 	}
-	return 0
+	return maxReqSequence
+}
+
+func maxInt(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
