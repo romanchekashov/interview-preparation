@@ -1,8 +1,10 @@
 package com.example.jpalocks;
 
 import com.example.jpalocks.flights.DbService;
+import com.example.jpalocks.flights.LockingDbService;
 import org.apache.commons.lang3.function.FailableRunnable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +16,10 @@ import java.util.concurrent.Executors;
 public class JpalocksApplication implements CommandLineRunner {
 
 	@Autowired
-	private DbService dbService;
+//	@Qualifier("dbService")
+//	@Qualifier("pessimisticLockingDbService")
+	@Qualifier("pessimisticLockingDeadlockDbService")
+	private LockingDbService dbService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(JpalocksApplication.class, args);
