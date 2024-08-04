@@ -33,16 +33,32 @@ public class DbService {
 
   @Transactional
   public void changeFlight1() throws Exception {
-    var flight = flightRepository.findById(1L).get();
+//    var flight = flightRepository.findById(1L).get();
+    var flight = flightRepository.findWithLockingById(1L).get();
     saveNewTicket("Robert", "Smith", flight);
     Thread.sleep(1_000);
   }
 
   @Transactional
   public void changeFlight2() throws Exception {
-    var flight = flightRepository.findById(1L).get();
+//    var flight = flightRepository.findById(1L).get();
+    var flight = flightRepository.findWithLockingById(1L).get();
     saveNewTicket("Kate", "Brown", flight);
     Thread.sleep(1_000);
   }
+
+//  @Transactional
+//  public void changeFlight1() throws Exception {
+//    var flight = flightRepository.findById(1L).get();
+//    flight.setCapacity(10);
+//    Thread.sleep(1_000);
+//  }
+//
+//  @Transactional
+//  public void changeFlight2() throws Exception {
+//    var flight = flightRepository.findById(1L).get();
+//    flight.setCapacity(20);
+//    Thread.sleep(1_000);
+//  }
 
 }

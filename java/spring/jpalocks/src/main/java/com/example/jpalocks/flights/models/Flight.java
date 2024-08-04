@@ -10,7 +10,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "flights")
-@EqualsAndHashCode(of = {"id", "number", "departureTime", "capacity"})
+@EqualsAndHashCode(of = {"id", "number", "departureTime", "capacity", "version"})
 public class Flight {
 
   @Id
@@ -25,6 +25,9 @@ public class Flight {
 
   @OneToMany(mappedBy = "flight")
   private Set<Ticket> tickets;
+
+  @Version
+  private Long version;
 
   public void addTicket(Ticket ticket) {
     ticket.setFlight(this);

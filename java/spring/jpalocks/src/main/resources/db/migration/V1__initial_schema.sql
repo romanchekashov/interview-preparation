@@ -2,7 +2,8 @@ CREATE TABLE flights (
     id BIGINT PRIMARY KEY,
     number VARCHAR(255),
     departure_time TIMESTAMP,
-    capacity INTEGER
+    capacity INTEGER,
+    version BIGINT DEFAULT 0
 );
 
 CREATE SEQUENCE ticket_id_seq START 1 INCREMENT 1;
