@@ -1,7 +1,7 @@
 package companies;
 
 import leetcode.AbsLeetCodeSolution;
-import yandex.jobofferserbia.A;
+import problems.yandex.jobofferserbia.A;
 
 import java.util.ArrayList;
 import java.util.HashSet;

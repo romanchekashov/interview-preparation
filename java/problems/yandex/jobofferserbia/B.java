@@ -1,4 +1,4 @@
-package yandex.jobofferserbia;
+package problems.yandex.jobofferserbia;
 
 import java.io.BufferedReader;
 import java.io.IOException;
