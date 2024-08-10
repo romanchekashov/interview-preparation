@@ -1,22 +1,29 @@
+#EXTERNAL_SERVICE_URL: http://example.com/api/resource
+EXTERNAL_SERVICE_URL: https://api.example.com/data
+
 server:
     port: 3000
 spring:
     application:
         name: circuitbreaker
-resilience4j.circuitbreaker:
-    instances:
-        externalServiceCircuitBreaker:
-            registerHealthIndicator: true
-            slidingWindowSize: 10
-            failureRateThreshold: 50
-            waitDurationInOpenState: 10000
-            permittedNumberOfCallsInHalfOpenState: 3
-            slidingWindowType: COUNT_BASED
-            minimumNumberOfCalls: 5
-            automaticTransitionFromOpenToHalfOpenEnabled: true
+resilience4j:
+    circuitbreaker:
+        instances:
+            externalServiceCircuitBreaker:
+                registerHealthIndicator: true
+                slidingWindowSize: 10
+                failureRateThreshold: 50
+                waitDurationInOpenState: 10000
+                permittedNumberOfCallsInHalfOpenState: 3
+                slidingWindowType: COUNT_BASED
+                minimumNumberOfCalls: 5
+                automaticTransitionFromOpenToHalfOpenEnabled: true
+    bulkhead:
+        instances:
+            externalServiceBulkhead:
+                maxConcurrentCalls: 5 # The maximum number of concurrent calls that can be made to the external service. If this limit is reached, subsequent calls will be rejected.
+                maxWaitDuration: 0 # The maximum time (in milliseconds) that a call should wait before being rejected when the bulkhead is full. If set to 0, calls will be rejected immediately when the bulkhead is full.
 logging:
     level:
-        io:
-            github:
-                resilience4j:
-                    circuitbreaker: DEBUG
+        io.github.resilience4j:
+            circuitbreaker: DEBUG
