@@ -1,0 +1,22 @@
+server:
+    port: 3000
+spring:
+    application:
+        name: circuitbreaker
+resilience4j.circuitbreaker:
+    instances:
+        externalServiceCircuitBreaker:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            failureRateThreshold: 50
+            waitDurationInOpenState: 10000
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: COUNT_BASED
+            minimumNumberOfCalls: 5
+            automaticTransitionFromOpenToHalfOpenEnabled: true
+logging:
+    level:
+        io:
+            github:
+                resilience4j:
+                    circuitbreaker: DEBUG
