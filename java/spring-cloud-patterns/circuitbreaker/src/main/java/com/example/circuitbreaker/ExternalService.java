@@ -3,6 +3,7 @@ package com.example.circuitbreaker;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,12 @@ public class ExternalService {
   public String callExternalServiceWithRateLimiter() {
     return "Success";
 //    return restTemplate.getForObject(externalServiceUrl, String.class);
+  }
+
+  @Retry(name = "externalServiceRetry", fallbackMethod = "fallback")
+  public String callExternalServiceWithRetry() {
+    log.info("Calling external service with retry {}", Thread.currentThread().getName());
+    return restTemplate.getForObject(externalServiceUrl, String.class);
   }
 
   // Fallback method

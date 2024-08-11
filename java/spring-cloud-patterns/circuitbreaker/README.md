@@ -41,6 +41,23 @@ mvn test -Dtest=ExternalServiceIntegrationTest#testRateLimiter
 - https://learn.microsoft.com/en-us/azure/architecture/patterns/rate-limiting-pattern
 - https://learn.microsoft.com/ru-ru/azure/architecture/patterns/rate-limiting-pattern
 
+### Retry Pattern
+
+#### Description
+The Retry pattern is a design pattern used in modern software development. It is used to automatically retry a failed operation. The Retry pattern is used to automatically retry a failed operation.
+
+REST-api: http://localhost:3000/api/data?reliabilityPattern=retry
+
+```shell
+mvn test -Dtest=ExternalServiceIntegrationTest#testRetry
+```
+
+#### Reference Documentation
+- https://resilience4j.readme.io/docs/getting-started-3
+- https://habr.com/ru/articles/793550/
+- https://learn.microsoft.com/en-us/azure/architecture/patterns/retry
+- https://learn.microsoft.com/ru-ru/azure/architecture/patterns/retry
+
 ### Bulkhead Pattern
 
 #### Description

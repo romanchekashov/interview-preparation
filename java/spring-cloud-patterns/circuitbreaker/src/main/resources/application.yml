@@ -29,6 +29,16 @@ resilience4j:
                 limitForPeriod: 5  # Number of calls allowed during a time period
                 limitRefreshPeriod: 1s  # The time period after which the rate limit is refreshed
                 timeoutDuration: 0  # Duration to wait for a permission if limit is reached
+    retry:
+        instances:
+            externalServiceRetry:
+                maxAttempts: 3
+                waitDuration: 1s
+#                retryExceptions:
+#                    - java.net.ConnectException
+#                    - java.net.SocketTimeoutException
+#                    - java.net.UnknownHostException
+#                    - org.springframework.web.client.ResourceAccessException
 logging:
     level:
         io.github.resilience4j:

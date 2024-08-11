@@ -6,6 +6,8 @@ import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import io.github.resilience4j.ratelimiter.RateLimiter;
 import io.github.resilience4j.ratelimiter.RateLimiterRegistry;
+import io.github.resilience4j.retry.Retry;
+import io.github.resilience4j.retry.RetryRegistry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.example.circuitbreaker.ExternalService.FALLBACK_RATE_LIMIT_RESPONSE;
 import static com.example.circuitbreaker.ExternalService.FALLBACK_RESPONSE;
@@ -45,6 +48,9 @@ public class ExternalServiceIntegrationTest {
 
   @Autowired
   private RateLimiterRegistry rateLimiterRegistry;
+
+  @Autowired
+  private RetryRegistry retryRegistry;
 
   @Value("${EXTERNAL_SERVICE_URL}")
   private String externalServiceUrl;
@@ -156,5 +162,28 @@ public class ExternalServiceIntegrationTest {
 
       executor.shutdown();
       executor.awaitTermination(10, TimeUnit.SECONDS);
+  }
+
+  @Test
+  public void testRetry() {
+    Retry retry = retryRegistry.retry("externalServiceRetry");
+    AtomicInteger maxAttempts = new AtomicInteger(retry.getRetryConfig().getMaxAttempts());
+    assertEquals(3, maxAttempts.get());
+
+    // Simulate intermittent failure
+    MockRestServiceServer mockServer = MockRestServiceServer.createServer(restTemplate);
+    mockServer.expect(manyTimes(), requestTo(externalServiceUrl))
+            .andRespond(request -> {
+              System.out.println("attempt: " + (4 - maxAttempts.get()) + " for request: " + request.getMethod());
+              if (maxAttempts.getAndDecrement() > 1) {
+                System.out.println("Simulated connection error");
+                return withServerError().createResponse(request);
+              }
+              return withSuccess("Success", null).createResponse(request);
+            });
+
+    String response = externalService.callExternalServiceWithRetry();
+    assertEquals("Success", response);
+    System.out.println("Response: " + response);
   }
 }
