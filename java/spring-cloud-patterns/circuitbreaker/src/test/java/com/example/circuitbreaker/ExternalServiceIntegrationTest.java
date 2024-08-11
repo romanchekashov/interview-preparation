@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -185,5 +186,11 @@ public class ExternalServiceIntegrationTest {
     String response = externalService.callExternalServiceWithRetry();
     assertEquals("Success", response);
     System.out.println("Response: " + response);
+  }
+
+  @Test
+  public void testTimeLimiter() throws ExecutionException, InterruptedException {
+    String response = externalService.callExternalServiceWithTimeLimiter().get();
+    assertEquals("Service timed out. Please try again later.", response);
   }
 }

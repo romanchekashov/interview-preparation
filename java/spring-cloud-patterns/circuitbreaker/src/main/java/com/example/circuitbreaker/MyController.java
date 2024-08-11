@@ -22,6 +22,7 @@ public class MyController {
         case "bulkhead" -> externalService.callExternalServiceWithBulkhead();
         case "rate-limiter" -> externalService.callExternalServiceWithRateLimiter();
         case "retry" -> externalService.callExternalServiceWithRetry();
+        case "time-limiter" -> externalService.callExternalServiceWithTimeLimiter().join();
         default -> throw new IllegalArgumentException("Invalid reliability pattern: " + reliabilityPattern);
     };
   }

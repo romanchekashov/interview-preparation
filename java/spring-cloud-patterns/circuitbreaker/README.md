@@ -78,3 +78,18 @@ mvn test -Dtest=ExternalServiceIntegrationTest#testBulkhead
 - https://learn.microsoft.com/ru-ru/azure/architecture/patterns/bulkhead
 - https://mvnrepository.com/artifact/io.github.resilience4j
 - https://docs.spring.io/spring-cloud-circuitbreaker/reference/spring-cloud-circuitbreaker-resilience4j/bulkhead-pattern-supporting.html
+
+### TimeLimiter Pattern
+
+#### Description
+The TimeLimiter pattern is a design pattern used in modern software development. It is used to limit the time taken to execute an operation.
+
+REST-api: http://localhost:3000/api/data?reliabilityPattern=time-limiter
+
+```shell
+mvn test -Dtest=ExternalServiceIntegrationTest#testTimeLimiter
+```
+
+#### Reference Documentation
+- https://resilience4j.readme.io/docs/getting-started-3
+- https://habr.com/ru/articles/793550/
