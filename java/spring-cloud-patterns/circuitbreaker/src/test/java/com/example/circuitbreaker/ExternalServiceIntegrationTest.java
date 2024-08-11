@@ -4,6 +4,8 @@ import io.github.resilience4j.bulkhead.Bulkhead;
 import io.github.resilience4j.bulkhead.BulkheadRegistry;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
+import io.github.resilience4j.ratelimiter.RateLimiter;
+import io.github.resilience4j.ratelimiter.RateLimiterRegistry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import static com.example.circuitbreaker.ExternalService.FALLBACK_RATE_LIMIT_RESPONSE;
 import static com.example.circuitbreaker.ExternalService.FALLBACK_RESPONSE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -39,6 +42,9 @@ public class ExternalServiceIntegrationTest {
 
   @Autowired
   private BulkheadRegistry bulkheadRegistry;
+
+  @Autowired
+  private RateLimiterRegistry rateLimiterRegistry;
 
   @Value("${EXTERNAL_SERVICE_URL}")
   private String externalServiceUrl;
@@ -128,5 +134,27 @@ public class ExternalServiceIntegrationTest {
 
     executor.shutdown();
     executor.awaitTermination(10, TimeUnit.SECONDS);
+  }
+
+  @Test
+  public void testRateLimiter() throws InterruptedException {
+    RateLimiter rateLimiter = rateLimiterRegistry.rateLimiter("externalServiceRateLimiter");
+    assertEquals(5, rateLimiter.getRateLimiterConfig().getLimitForPeriod());
+
+    MockRestServiceServer mockServer = MockRestServiceServer.createServer(restTemplate);
+    mockServer.expect(manyTimes(), requestTo(externalServiceUrl))
+            .andRespond(withSuccess("Success", null));
+
+      ExecutorService executor = Executors.newFixedThreadPool(10);
+
+        for (int i = 0; i < 10; i++) {
+            String response = externalService.callExternalServiceWithRateLimiter();
+            assertTrue(response.equals(FALLBACK_RATE_LIMIT_RESPONSE) ||
+                    response.equals("Success"));
+            System.out.println("Response: " + response);
+        }
+
+      executor.shutdown();
+      executor.awaitTermination(10, TimeUnit.SECONDS);
   }
 }

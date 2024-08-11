@@ -23,6 +23,12 @@ resilience4j:
             externalServiceBulkhead:
                 maxConcurrentCalls: 5 # The maximum number of concurrent calls that can be made to the external service. If this limit is reached, subsequent calls will be rejected.
                 maxWaitDuration: 0 # The maximum time (in milliseconds) that a call should wait before being rejected when the bulkhead is full. If set to 0, calls will be rejected immediately when the bulkhead is full.
+    ratelimiter:
+        instances:
+            externalServiceRateLimiter:
+                limitForPeriod: 5  # Number of calls allowed during a time period
+                limitRefreshPeriod: 1s  # The time period after which the rate limit is refreshed
+                timeoutDuration: 0  # Duration to wait for a permission if limit is reached
 logging:
     level:
         io.github.resilience4j:

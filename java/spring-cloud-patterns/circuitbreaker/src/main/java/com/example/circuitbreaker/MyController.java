@@ -20,6 +20,7 @@ public class MyController {
     return switch (reliabilityPattern) {
         case "circuit-breaker" -> externalService.callExternalServiceWithCircuitBreaker();
         case "bulkhead" -> externalService.callExternalServiceWithBulkhead();
+        case "rate-limiter" -> externalService.callExternalServiceWithRateLimiter();
         default -> throw new IllegalArgumentException("Invalid reliability pattern: " + reliabilityPattern);
     };
   }

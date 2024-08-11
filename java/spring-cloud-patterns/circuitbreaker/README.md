@@ -24,6 +24,22 @@ mvn test -Dtest=ExternalServiceIntegrationTest#testCircuitBreakerWithFallbackOpe
 - https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker
 - https://learn.microsoft.com/ru-ru/azure/architecture/patterns/circuit-breaker
 
+### Rate Limiter Pattern
+
+#### Description
+The Rate Limiter pattern is a design pattern used in modern software development. It is used to control the rate of requests sent to a service. The Rate Limiter pattern is used to prevent a service from being overwhelmed by too many requests. The Rate Limiter pattern is used to control the rate of requests sent to a service.
+
+REST-api: http://localhost:3000/api/data?reliabilityPattern=rate-limiter
+
+```shell
+mvn test -Dtest=ExternalServiceIntegrationTest#testRateLimiter
+```
+
+#### Reference Documentation
+- https://resilience4j.readme.io/docs/getting-started-3
+- https://habr.com/ru/articles/793550/
+- https://learn.microsoft.com/en-us/azure/architecture/patterns/rate-limiting-pattern
+- https://learn.microsoft.com/ru-ru/azure/architecture/patterns/rate-limiting-pattern
 
 ### Bulkhead Pattern
 
