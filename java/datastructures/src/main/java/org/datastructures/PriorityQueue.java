@@ -1,4 +1,4 @@
-package datastructures;
+package org.datastructures;
 
 class PriorityQueue {
     // array in sorted order, from max at 0 to min (size - 1)
