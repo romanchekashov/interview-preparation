@@ -1,0 +1,105 @@
+version: '3.3'
+
+networks:
+  cqrs-network:
+    driver: bridge
+
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - "2181:2181"
+    networks:
+      - cqrs-network
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    networks:
+      - cqrs-network
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+  db_write:
+    image: postgres:16.1
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres123
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=user_write_db
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+    ports:
+      - ${POSTGRES_PORT:-5439}:5432
+    networks:
+      - cqrs-network
+  db_read:
+    image: postgres:16.1
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres123
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=user_read_db
+    ports:
+      - ${POSTGRES_PORT:-5440}:5432
+    networks:
+      - cqrs-network
+
+  cqrs-ms-user-command-service:
+    platform: linux/amd64 #Required for Mac M1 PRO
+    build: ./cqrs-ms-user-command-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SERVER_PORT=8081
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_write:5432/user_write_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      - HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+    depends_on:
+      - kafka
+      - db_write
+      - debezium
+    networks:
+      - cqrs-network
+  cqrs-ms-user-query-service:
+    platform: linux/amd64 #Required for Mac M1 PRO
+    build: ./cqrs-ms-user-query-service
+    ports:
+      - '8080:8080'
+    environment:
+      - KAFKA_TOPIC_NAME=dbserver1.public.cqrs_user
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_read:5432/user_read_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      - HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+    depends_on:
+      - kafka
+      - db_read
+      - debezium
+    networks:
+      - cqrs-network
+  debezium:
+    image: debezium/connect:2.7.1.Final
+    ports:
+      - '8083:8083'
+    environment:
+      - GROUP_ID=debz_1
+      - BOOTSTRAP_SERVERS=kafka:9092
+      - CONFIG_STORAGE_TOPIC=cqrs_connect_configs
+      - OFFSET_STORAGE_TOPIC=cqrs_connect_offsets
+      - STATUS_STORAGE_TOPIC=cqrs_connect_statuses
+    depends_on:
+      - kafka
+    networks:
+      - cqrs-network
