@@ -1,6 +1,5 @@
-Developing Microservices with CQRS and Event Sourcing Patterns using GraphQL + Spring Boot + Kafka + Debezium + PostgreSQL
+Developing Microservices with CQRS and Event Sourcing Patterns using GraphQL + Spring Boot + Kafka + Debezium (Changelog Data Capture) + PostgreSQL
 ================================
-
 
 <p align="center">
   <img src="./cqrs-and-event-sourcing-cdc-debezium.png">
@@ -55,3 +54,10 @@ By default, topic name is `dbserver1.public.cqrs_user`
 - [Developing Microservices with CQRS and Event Sourcing Patterns using GraphQL + Spring Boot + Kafka](https://shazinsadakath.medium.com/developing-microservices-with-cqrs-and-event-sourcing-patterns-using-graphql-spring-boot-kafka-19f259a7aaa5)
 - https://habr.com/ru/articles/779620/
 - https://debezium.io/documentation/reference/2.7/connectors/postgresql.html#postgresql-deployment
+- https://en.wikipedia.org/wiki/Change_data_capture
+- https://habr.com/ru/companies/yandex_cloud_and_infra/articles/754802/
+- https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/table/formats/debezium/#debezium-format
+- https://habr.com/ru/companies/neoflex/articles/567930/
+- https://learn.microsoft.com/en-us/azure/hdinsight-aks/flink/monitor-changes-postgres-table-flink
+- https://clickhouse.com/blog/clickhouse-postgresql-change-data-capture-cdc-part-1
+- https://www.astera.com/type/blog/change-data-capture-postgresql/
