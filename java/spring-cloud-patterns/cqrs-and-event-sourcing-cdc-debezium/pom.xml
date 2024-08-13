@@ -10,7 +10,6 @@
     <modules>
         <module>cqrs-ms-user-command-service</module>
         <module>cqrs-ms-user-query-service</module>
-<!--        <module>cqrs-ms-user-domain</module>-->
     </modules>
     <packaging>pom</packaging>
 
