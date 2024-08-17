@@ -1,4 +1,4 @@
-package core;
+package com.problems;
 
 /**
  * @see <a href="https://www.vogella.com/tutorials/JavaPerformance/article.html">Java Performance - Memory and Runtime Analysis - Tutorial</a>

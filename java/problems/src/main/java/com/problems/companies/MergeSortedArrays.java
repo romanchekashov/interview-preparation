@@ -1,12 +1,9 @@
 package com.problems.companies;
 
-import leetcode.AbsLeetCodeSolution;
-import problems.yandex.jobofferserbia.A;
+import com.problems.AbsLeetCodeSolution;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Having two separate sorted arrays, write java function merging these arrays in single sorted array without sorting it

@@ -1,5 +1,7 @@
 package com.problems.leetcode;
 
+import com.problems.AbsLeetCodeSolution;
+
 public class LeetCode35_SearchInsertPosition extends AbsLeetCodeSolution {
 
     public static void main(String[] args) {

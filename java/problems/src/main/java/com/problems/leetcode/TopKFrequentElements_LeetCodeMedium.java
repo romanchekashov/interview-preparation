@@ -1,5 +1,7 @@
 package com.problems.leetcode;
 
+import com.problems.AbsLeetCodeSolution;
+
 import java.util.*;
 
 public class TopKFrequentElements_LeetCodeMedium extends AbsLeetCodeSolution {

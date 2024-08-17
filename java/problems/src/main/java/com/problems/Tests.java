@@ -1,4 +1,4 @@
-package core;
+package com.problems;
 
 @FunctionalInterface
 public interface Tests {

@@ -1,6 +1,6 @@
-package com.problems.skilltest.neetcode.arrays_hashing;
+package com.problems.patterns.arrays_hashing;
 
-import leetcode.AbsLeetCodeSolution;
+import com.problems.AbsLeetCodeSolution;
 
 import java.util.HashSet;
 import java.util.Set;

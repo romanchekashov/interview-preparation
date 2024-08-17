@@ -1,6 +1,6 @@
 package com.problems.companies;
 
-import leetcode.AbsLeetCodeSolution;
+import com.problems.AbsLeetCodeSolution;
 
 import java.util.*;
 

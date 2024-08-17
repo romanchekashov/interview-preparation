@@ -1,5 +1,7 @@
 package com.problems.leetcode;
 
+import com.problems.AbsLeetCodeSolution;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;

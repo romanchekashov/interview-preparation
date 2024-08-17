@@ -1,7 +1,4 @@
-package com.problems.leetcode;
-
-import core.MeasurePerformance;
-import core.Tests;
+package com.problems;
 
 public abstract class AbsLeetCodeSolution implements Tests {
 

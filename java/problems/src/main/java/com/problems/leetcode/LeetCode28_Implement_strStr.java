@@ -1,5 +1,7 @@
 package com.problems.leetcode;
 
+import com.problems.AbsLeetCodeSolution;
+
 public class LeetCode28_Implement_strStr extends AbsLeetCodeSolution {
 
     public static void main(String[] args) {
