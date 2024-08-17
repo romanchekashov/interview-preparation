@@ -42,3 +42,5 @@ secret.properties
 test.secret.properties
 backups/
 .env*.local
+
+*.log
