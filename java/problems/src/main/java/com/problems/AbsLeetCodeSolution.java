@@ -20,6 +20,11 @@ public abstract class AbsLeetCodeSolution implements Tests {
         }
 
         if (!check)
-            throw new IllegalArgumentException("Fail!");
+            throw new IllegalArgumentException(String.format("Fail! Expected: %s, but got: %s", expected, actual));
+    }
+
+    public <T> void doAssert(T actual, T expected) {
+        if (!actual.equals(expected))
+            throw new IllegalArgumentException(String.format("Fail! Expected: %s, but got: %s", expected, actual));
     }
 }
