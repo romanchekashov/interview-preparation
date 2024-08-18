@@ -50,8 +50,8 @@ public class AverageOfLevelsInBinaryTree_leetCode_easy_637 extends AbsLeetCodeSo
 
     @Override
     public void tests() {
-        doAssert(averageOfLevels(TreeNode.fromArray(new Integer[]{3, 9, 20, null, null, 15, 7})), List.of(3.00000,14.50000,11.00000));
-        doAssert(averageOfLevels(TreeNode.fromArray(new Integer[]{3,9,20,15,7})), List.of(3.00000,14.50000,11.00000));
+        doAssert(averageOfLevels(TreeNode.fromArray(3, 9, 20, null, null, 15, 7)), List.of(3.00000,14.50000,11.00000));
+        doAssert(averageOfLevels(TreeNode.fromArray(3,9,20,15,7)), List.of(3.00000,14.50000,11.00000));
     }
 
     public static void main(String[] args) {

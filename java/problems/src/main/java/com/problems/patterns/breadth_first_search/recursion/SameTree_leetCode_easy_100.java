@@ -40,16 +40,16 @@ public class SameTree_leetCode_easy_100 extends AbsLeetCodeSolution {
     @Override
     public void tests() {
         doAssert(isSameTree(
-                TreeNode.fromArray(new Integer[]{1,2,3}),
-                TreeNode.fromArray(new Integer[]{1,2,3})
+                TreeNode.fromArray(1,2,3),
+                TreeNode.fromArray(1,2,3)
         ), true);
         doAssert(isSameTree(
-                TreeNode.fromArray(new Integer[]{1,2}),
-                TreeNode.fromArray(new Integer[]{1,null,2})
+                TreeNode.fromArray(1,2),
+                TreeNode.fromArray(1,null,2)
         ), false);
         doAssert(isSameTree(
-                TreeNode.fromArray(new Integer[]{1,2,1}),
-                TreeNode.fromArray(new Integer[]{1,1,2})
+                TreeNode.fromArray(1,2,1),
+                TreeNode.fromArray(1,1,2)
         ), false);
     }
 

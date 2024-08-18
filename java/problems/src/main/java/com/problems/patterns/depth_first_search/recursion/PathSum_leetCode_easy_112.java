@@ -38,15 +38,15 @@ public class PathSum_leetCode_easy_112 extends AbsLeetCodeSolution {
   @Override
   public void tests() {
     doAssert(hasPathSum(
-            TreeNode.fromArray(new Integer[]{5,4,8,11,null,13,4,7,2,null,null,null,1}),
+            TreeNode.fromArray(5,4,8,11,null,13,4,7,2,null,null,null,1),
             22
     ), true);
     doAssert(hasPathSum(
-            TreeNode.fromArray(new Integer[]{1,2,3}),
+            TreeNode.fromArray(1,2,3),
             5
     ), false);
     doAssert(hasPathSum(
-            TreeNode.fromArray(new Integer[]{}),
+            TreeNode.fromArray(),
             0
     ), false);
   }

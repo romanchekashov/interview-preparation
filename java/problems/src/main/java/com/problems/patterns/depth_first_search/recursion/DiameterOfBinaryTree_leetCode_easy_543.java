@@ -44,10 +44,10 @@ public class DiameterOfBinaryTree_leetCode_easy_543 extends AbsLeetCodeSolution 
   @Override
   public void tests() {
     doAssert(diameterOfBinaryTree(
-            TreeNode.fromArray(new Integer[]{1,2,3,4,5})
+            TreeNode.fromArray(1,2,3,4,5)
     ), 3);
     doAssert(diameterOfBinaryTree(
-            TreeNode.fromArray(new Integer[]{1,2})
+            TreeNode.fromArray(1,2)
     ), 1);
   }
 

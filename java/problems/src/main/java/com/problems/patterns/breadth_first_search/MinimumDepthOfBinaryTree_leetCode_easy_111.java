@@ -55,8 +55,8 @@ public class MinimumDepthOfBinaryTree_leetCode_easy_111 extends AbsLeetCodeSolut
 
     @Override
     public void tests() {
-        doAssert(minDepth(TreeNode.fromArray(new Integer[]{3,9,20,null,null,15,7})), 2);
-        doAssert(minDepth(TreeNode.fromArray(new Integer[]{2,null,3,null,4,null,5,null,6})), 5);
+        doAssert(minDepth(TreeNode.fromArray(3,9,20,null,null,15,7)), 2);
+        doAssert(minDepth(TreeNode.fromArray(2,null,3,null,4,null,5,null,6)), 5);
     }
 
     public static void main(String[] args) {
