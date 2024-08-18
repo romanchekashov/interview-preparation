@@ -1,6 +1,7 @@
 package com.problems;
 
 import java.util.List;
+import java.util.Objects;
 
 public abstract class AbsLeetCodeSolution implements Tests {
 
@@ -16,7 +17,7 @@ public abstract class AbsLeetCodeSolution implements Tests {
     public <T> void doAssert(List<T> actual, List<T> expected) {
         boolean check = actual.size() == expected.size();
         for (int i = 0; i < actual.size(); i++) {
-            check = check && actual.get(i).equals(expected.get(i));
+            check = check && Objects.equals(actual.get(i), expected.get(i));
         }
 
         if (!check)
@@ -24,7 +25,7 @@ public abstract class AbsLeetCodeSolution implements Tests {
     }
 
     public <T> void doAssert(T actual, T expected) {
-        if (!actual.equals(expected))
+        if (!Objects.equals(actual, expected))
             throw new IllegalArgumentException(String.format("Fail! Expected: %s, but got: %s", expected, actual));
     }
 }

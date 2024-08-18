@@ -2,6 +2,8 @@ package com.problems.patterns;
 
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -22,7 +24,7 @@ public class TreeNode {
     this.right = right;
   }
 
-  public static TreeNode fromArray(Integer[] arr) {
+  public static TreeNode fromArray(Integer... arr) {
     if (arr == null || arr.length == 0) return null;
 
     TreeNode root = new TreeNode(arr[0]);
@@ -42,5 +44,33 @@ public class TreeNode {
     }
 
     return root;
+  }
+
+  private boolean isNull;
+
+  public List<Integer> toList() {
+    var list = new java.util.ArrayList<Integer>();
+    Queue<TreeNode> q = new ArrayDeque<>();
+    q.add(this);
+    while (!q.isEmpty()) {
+      TreeNode node = q.poll();
+      if (node.isNull) {
+        list.add(null);
+        continue;
+      }
+
+      list.add(node.val);
+
+      if (node.left != null) {
+        q.add(node.left);
+      } else if (node.right != null) {
+        var nullTreeNode = new TreeNode();
+        nullTreeNode.isNull = true;
+        q.add(nullTreeNode);
+      }
+
+      if (node.right != null) q.add(node.right);
+    }
+    return list;
   }
 }
