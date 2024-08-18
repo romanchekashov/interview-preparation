@@ -14,6 +14,10 @@ import com.problems.patterns.TreeNode;
 public class LowestCommonAncestorOfBinarySearchTree_leetCode_medium_235 extends AbsLeetCodeSolution {
 
   /**
+   * Intuition:
+   * In Binary Search Tree by its name tell us that the root is a middle of sorted elements and left branch contain smaller elements while right branch contains larger elements.
+   * So the closest ancestor will be the node at which p and q branches are split.
+   *
    * Approach: Iterative
    * 1. Traverse the tree until we find the node where p and q are on the left and right side of the node.
    * 2. If p and q are less than the node, then move to the left node.
