@@ -32,7 +32,9 @@ public class LargestPositiveIntegerThatExistsWithItsNegative_leetCode_easy_2441 
   public int findMaxK(int[] nums) {
     int res = -1;
     boolean[] negatives = new boolean[1001];
+
     for (int n : nums) if (n < 0) negatives[-n] = true;
+
     for (int n : nums) {
       if (n < 0 || !negatives[n]) continue;
       if (n > res) res = n;
