@@ -1,38 +1,9 @@
-# interview-preparation
+Interview preparation
+---
 
-# JS
-
-Run JS files:
-node --expose-gc ./SpotStoreImpl.js
-
-Transpile TS -> JS files:
-tsc --lib es2015,dom ./SpotStoreImpl.ts
-
-Run TS
-1: creates JS file:
-tsc greet.ts | node greet.js
-
-2:
-ts-node -O '{"lib": [ "es2015", "dom" ]}' ./SpotStoreImpl.ts
-
-### Started course to lear algo: https://stepik.org/course/217/info
-https://stepik.org/lesson/9173/step/3
-JavaScript (Node.js v10.13.0)
-Run command: 
-```
-node --max-old-space-size={memory limit}
-// Examples:
-node --max-old-space-size=3 index.js #increase to 3Mb - min to run programm
-node --max-old-space-size=64 index.js #increase to 64Mb
-node --max-old-space-size=1024 index.js #increase to 1gb
-```
-### Run command example:
-```
-node --expose-gc --max-old-space-size=64 index.js
-```
-
-### [Data Structures](js/datastructures/README.md)
-### [LeetCode Patterns](js/leetcode/patterns/README.md)
+### JavaScript
+- [Data Structures](js/datastructures/README.md)
+- [LeetCode Patterns](js/leetcode/patterns/README.md)
 
 ### How to prepare to tech interview
 - Solve more Medium problems on LeetCode: easy(20%) + medium(60%) + hard(20%)
@@ -77,3 +48,19 @@ Understand solution and code it(NOT just read)!
   - It's not enough
 - https://youtu.be/s2mYsPWzLjg
 
+### References
+- [This is a self-learning guide to computer science, and a memento of my three years of self-learning at university.](https://csdiy.wiki/en/)
+- https://github.com/pkuflyingpig/cs-self-learning/
+- [MIT 6.006 | Spring 2020 | Undergraduate: Introduction to Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/)
+- [YouTube Playlist: MIT 6.006 Introduction to Algorithms, Spring 2020](https://www.youtube.com/playlist?list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY)
+- [MIT 6.006 | Fall 2011 | Undergraduate: Introduction to Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)
+- [YouTube Playlist: MIT 6.006 Introduction to Algorithms, Fall 2011](https://www.youtube.com/playlist?list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb)
+- [MIT Notes on 6.006: Introduction to Algorithms](https://courses.csail.mit.edu/6.006/fall11/notes.shtml)
+
+---
+## System Design
+
+### References
+- [GitHub: open source training courses about distributed database and distributed systems](https://github.com/pingcap/talent-plan)
+- [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/)
+- [YouTube Playlist: MIT 6.824 Distributed Systems (Spring 2020)](https://youtube.com/playlist?list=PLrw6a1wE39_tb2fErI4-WkMbsvGQk9_UB&si=2VpNvwkuN4LNxGno)
