@@ -1,9 +1,13 @@
 Interview preparation
 ---
 
-### JavaScript
-- [Data Structures](js/datastructures/README.md)
-- [LeetCode Patterns](js/leetcode/patterns/README.md)
+- [JavaScript](./js/README.md)
+
+---
+## Algorithms and Data Structures
+
+- [Data Structures](./js/datastructures/README.md)
+- [LeetCode Patterns](./js/leetcode/patterns/README.md)
 
 ### How to prepare to tech interview
 - Solve more Medium problems on LeetCode: easy(20%) + medium(60%) + hard(20%)
@@ -61,6 +65,8 @@ Understand solution and code it(NOT just read)!
 ## System Design
 
 ### References
+- [hello interview: Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
+- [GitHub: System Design Primer](https://github.com/donnemartin/system-design-primer)
 - [GitHub: open source training courses about distributed database and distributed systems](https://github.com/pingcap/talent-plan)
 - [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/)
 - [YouTube Playlist: MIT 6.824 Distributed Systems (Spring 2020)](https://youtube.com/playlist?list=PLrw6a1wE39_tb2fErI4-WkMbsvGQk9_UB&si=2VpNvwkuN4LNxGno)
