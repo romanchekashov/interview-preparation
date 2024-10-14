@@ -98,4 +98,21 @@ public class ConcurrencyTests {
         // 4
         CompletableFuture.runAsync(() -> System.out.println(4));
     }
+
+    @RepeatedTest(100)
+    @Execution(CONCURRENT)
+    public void happensBeforeForFinal() throws InterruptedException {
+        final HappensBeforeAndFinalTest[] var = {null};
+        Thread checkThread = new Thread(() -> {
+            if (var[0] != null) {
+                assert var[0].nonFinalVar == 1;
+                assert var[0].finalVar == 1;
+            }
+        });
+        checkThread.start();
+
+        new Thread(() -> var[0] = new HappensBeforeAndFinalTest(1, 1)).start();
+
+        checkThread.join();
+    }
 }
