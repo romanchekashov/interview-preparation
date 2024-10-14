@@ -1,4 +1,4 @@
-package org.example.util.concurrent;
+package org.example.util.concurrent.liveness_failures;
 
 import java.util.concurrent.locks.ReentrantLock;
 

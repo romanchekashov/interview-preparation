@@ -1,5 +1,8 @@
 package org.example.util.concurrent;
 
+import org.example.util.concurrent.liveness_failures.DeadlockExample;
+import org.example.util.concurrent.liveness_failures.NestedLocksExample;
+import org.example.util.concurrent.liveness_failures.TryLockExample;
 import org.junit.jupiter.api.Test;
 
 /**
