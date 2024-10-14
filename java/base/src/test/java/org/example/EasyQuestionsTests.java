@@ -420,7 +420,7 @@ public class EasyQuestionsTests {
             // Perform any necessary cleanup here
             System.out.println("Finally block");
         }
-        System.out.println("After finally block");
+//        System.out.println("After finally block"); // unreachable statement
     }
 
     @Test
