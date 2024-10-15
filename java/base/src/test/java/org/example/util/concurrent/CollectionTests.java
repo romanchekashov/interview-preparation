@@ -9,16 +9,42 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.PriorityBlockingQueue;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
 public class CollectionTests {
+
+  @Test
+  public void copyOnWriteArrayList() {
+    List<Integer> list = new CopyOnWriteArrayList<>(); // min heap thread safe
+
+  }
+
+  @Test
+  public void copyOnWriteArraySet() {
+    Set<Integer> set = new CopyOnWriteArraySet<>(); // min heap thread safe
+
+  }
+
+  @Test
+  public void concurrentSkipListSet() {
+    NavigableSet<Integer> set = new ConcurrentSkipListSet<>(); // min heap thread safe
+
+  }
+
+  @Test
+  public void concurrentHashMap() {
+    Map<Integer, Integer> map = new ConcurrentHashMap<>(); // min heap thread safe
+
+  }
+
+  @Test
+  public void concurrentSkipListMap() {
+    NavigableMap<Integer, Integer> map = new ConcurrentSkipListMap<>(); // min heap thread safe
+
+  }
+
   /**
    * Read more: https://www.baeldung.com/java-collections
    */
