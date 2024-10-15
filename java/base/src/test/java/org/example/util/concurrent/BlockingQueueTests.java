@@ -56,9 +56,47 @@ public class BlockingQueueTests {
   }
 
   @Test
-  public void arrayBlockingQueue() {
-    Queue<Integer> q = new ArrayBlockingQueue<>(1); // min heap thread safe
+  public void arrayBlockingQueue_deadlock() {
+    assertThrows(TimeoutException.class, () -> {
+      try {
+        CompletableFuture
+                .supplyAsync(() -> {
+                  // Create a ArrayBlockingQueue with a capacity of 1
+                  BlockingQueue<String> queue = new ArrayBlockingQueue<>(1);
 
+                  // Add elements to the queue
+                  try {
+                    queue.put("Element1");
+                    queue.put("Element2"); // Element2 is never added while Element1 is still in the queue
+                  } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                  }
+
+                  System.out.println("Never reached because the queue is full");
+                  return null;
+                })
+                .orTimeout(2, TimeUnit.SECONDS)
+                .get();
+      } catch (ExecutionException e) {
+        if (e.getCause() instanceof TimeoutException) throw e.getCause();
+      }
+    });
+  }
+
+  @Test
+  @Timeout(2)
+  public void arrayBlockingQueue() throws InterruptedException {
+    // Create a ArrayBlockingQueue with a capacity of 1
+    BlockingQueue<String> queue = new ArrayBlockingQueue<>(1);
+
+    // Add element to the queue and retrieve and remove elements from the queue
+    queue.put("Element1");
+    System.out.println("Taken: " + queue.take());
+    queue.put("Element2");
+    System.out.println("Taken: " + queue.take());
+
+    // Check if the queue is empty
+    System.out.println("Is the queue empty? " + queue.isEmpty());
   }
 
   @Test
