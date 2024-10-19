@@ -3,7 +3,7 @@ package com.problems;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class AbsLeetCodeSolution implements Tests {
+public abstract class AbsLeetCodeSolution implements MeasurePerformance.Tests {
 
     public void executeTests() {
         MeasurePerformance.measure(this);

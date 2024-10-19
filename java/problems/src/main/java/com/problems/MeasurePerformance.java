@@ -6,7 +6,12 @@ package com.problems;
 public class MeasurePerformance {
   private static final long MEGABYTE = 1024L * 1024L;
 
-  public static void measure(Tests tests) {
+  @FunctionalInterface
+  public interface Tests {
+    void tests();
+  }
+
+  public static void measure(MeasurePerformance.Tests tests) {
     long startTime = System.nanoTime();
     tests.tests();
     long stopTime = System.nanoTime();
