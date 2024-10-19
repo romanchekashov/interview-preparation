@@ -13,3 +13,5 @@ Java
 - [YouTube: How to write fast Java code – thinking about memory by Anders Peterson](https://www.youtube.com/watch?v=SovDuQefCys)
 - [oj! Algorithms](https://github.com/optimatika/ojAlgo)
 - [oj! Algorithms: concurrent](https://github.com/optimatika/ojAlgo/tree/develop/src/main/java/org/ojalgo/concurrent)
+- [YouTube: Java memory optimization](https://www.youtube.com/watch?v=-vOdhtyHZb0)
+- [YouTube: Java MultiThreading - Optimizing Concurrency](https://www.youtube.com/watch?v=zJNEWmh7Tcw)

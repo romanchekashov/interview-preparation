@@ -1,6 +1,7 @@
 Interview preparation
 ---
 
+- [Java](./java/README.md)
 - [JavaScript](./js/README.md)
 
 ---
