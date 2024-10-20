@@ -8,7 +8,7 @@ Interview preparation
 ## Algorithms and Data Structures
 
 - [Data Structures](./js/datastructures/README.md)
-- [LeetCode Patterns](./js/leetcode/patterns/README.md)
+- [LeetCode Patterns](js/problems/patterns/README.md)
 
 ### How to prepare to tech interview
 - Solve more Medium problems on LeetCode: easy(20%) + medium(60%) + hard(20%)
