@@ -5,7 +5,7 @@ Java
 1. Basics: primitives and arrays
 2. Efficient CPU Cache Utilization [MatrixMultiplication.java](./problems/src/main/java/com/problems/MatrixMultiplication.java)
    - Access elements in a row-major order (sequentially in memory) instead of in column-major order (non-sequentially in memory)
-4. Efficient multithreading
+3. Efficient multithreading
 4. Vectorised instructions
 
 ### References
