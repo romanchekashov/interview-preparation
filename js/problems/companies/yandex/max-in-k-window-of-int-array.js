@@ -1,4 +1,4 @@
-const { assert, measurePerformance } = require('./../../Utils');
+const { assert, measurePerformance } = require('../../../Utils');
 
 const showArrayWithWindow = (array, left, right) => {
     return `window = [${array.map((v, idx) => left === idx ? '[' + v : right === idx ?  v + ']' : v)}]`

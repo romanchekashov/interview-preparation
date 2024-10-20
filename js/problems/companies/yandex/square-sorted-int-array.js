@@ -1,4 +1,4 @@
-const { assert, measurePerformance } = require('./../../Utils');
+const { assert, measurePerformance } = require('../../../Utils');
 
 /**
  * O(n) time | O(n) space

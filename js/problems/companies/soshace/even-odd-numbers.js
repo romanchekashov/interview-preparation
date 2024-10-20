@@ -1,4 +1,4 @@
-const { assert, measurePerformance } = require('./../../Utils');
+const { assert, measurePerformance } = require('../../../Utils');
 
 function differentEvenness_replace(input1) {
     const arr = input1.replace(/\"/g, '').split(' ');

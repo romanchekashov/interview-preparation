@@ -1,4 +1,4 @@
-const { assert, measurePerformance } = require('../../../Utils');
+const { assert, measurePerformance } = require('../../../../Utils');
 
 /**
  * У вас есть набор перемешанных билетов. Нужно расположить билеты так, чтобы получился один маршрут.

@@ -1,4 +1,4 @@
-const { assert, measurePerformance } = require('./../../Utils');
+const { assert, measurePerformance } = require('../../../Utils');
 
 function add(a, b) {
   return (BigInt(a) + BigInt(b)).toString();

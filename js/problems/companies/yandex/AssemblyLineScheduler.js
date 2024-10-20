@@ -1,5 +1,5 @@
 const { clear } = require('console');
-const { assert, measurePerformance, TimeMeasure } = require('./../../Utils');
+const { assert, measurePerformance, TimeMeasure } = require('../../../Utils');
 
 /*
  * B. Сборочная линия
@@ -315,7 +315,7 @@ output:
         [1,1,["2","5"],162]
     ]
 ]
- * 
+ *
  */
 
 /**

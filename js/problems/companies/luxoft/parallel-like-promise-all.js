@@ -1,4 +1,4 @@
-const { TimeMeasure } = require('./../../Utils');
+const { TimeMeasure } = require('../../../Utils');
 
 function done(text) {
     return text;

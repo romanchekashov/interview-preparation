@@ -1,4 +1,4 @@
-const { assert, measurePerformance } = require('./../../Utils');
+const { assert, measurePerformance } = require('../../../Utils');
 
 //Напишите функцию, которая принимает в себя две строки и определяет
 //Есть ли биекционная связь между ними (Зависимость одного значения от другого)

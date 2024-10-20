@@ -1,4 +1,4 @@
-const { assert, measurePerformance, complexityMeasure } = require('./../../Utils');
+const { assert, measurePerformance, complexityMeasure } = require('../../../Utils');
 
 /**
  * https://www.fivetran.com/blog/software-engineering-interview
