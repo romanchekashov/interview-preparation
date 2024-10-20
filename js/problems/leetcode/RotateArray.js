@@ -1,4 +1,4 @@
-const { assert, measurePerformance } = require('./../Utils');
+const { assert, measurePerformance } = require('../../Utils');
 
 /**
  * Rotate Array
