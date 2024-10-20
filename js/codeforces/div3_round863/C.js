@@ -1,5 +1,5 @@
 "use strict";
-const { inputData, outputData, readline, print } = require('../../lib/codeforces-tester');
+const { inputData, outputData, readline, print } = require('../lib/codeforces-tester');
 
 // test input/output data
 inputData(`

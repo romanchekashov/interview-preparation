@@ -1,4 +1,4 @@
-const { CodeforcesTester } = require('../../../lib/codeforces-tester');
+const { CodeforcesTester } = require('../../lib/codeforces-tester');
 
 // https://codeforces.com/gym/302977/problem/A
 // test input/output data

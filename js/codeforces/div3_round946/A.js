@@ -1,4 +1,4 @@
-const { CodeforcesTester } = require('../../lib/codeforces-tester');
+const { CodeforcesTester } = require('../lib/codeforces-tester');
 
 // test input/output data
 const tester = new CodeforcesTester().inputData(`
