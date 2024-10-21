@@ -8,6 +8,12 @@ Interview preparation
 ---
 ## Algorithms and Data Structures
 
+> Из вопроса про нехватку математики и логики следует логичный совет идти на литкод, потому что там этого добра навалом, и компьютер сайнс это именно алгоритмы, структуры данных и основы операционок (память, диски, проц вот это все), вот и весь CS.
+> А, ну и распределенка, но это уже не совсем фронт)
+> Если нужно качать именно продвижение как разработчика, то нужно искать популярные курсы по паттернам проектирования для фронта если это фронт, популярным подходам современным, и поднимать это все на домашнем компе и работать вживую.
+> **Реальный опыт в любом случае идет только из реальных кейсов, то есть из рабочих когда осознаешь ответственность перед командой.**
+> А чтобы такие были нужно показывать что можешь не только маленькие задачки делать и знаешь технологии.
+
 - [Data Structures](./js/datastructures/README.md)
 - [LeetCode Patterns](js/problems/patterns/README.md)
 
@@ -66,9 +72,27 @@ Understand solution and code it(NOT just read)!
 ---
 ## System Design
 
+> **Back of the envelope** нужен, что бы оценить решаема ли задача и примерно оценить где будет затык - **compute**, **network**, **storage**. И второе - если ты его сделал, то надо его где то применить. Иначе зря потраченное время!
+
 ### References
 - [hello interview: Learn System Design in a Hurry](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
 - [GitHub: System Design Primer](https://github.com/donnemartin/system-design-primer)
 - [GitHub: open source training courses about distributed database and distributed systems](https://github.com/pingcap/talent-plan)
+- [Designing a Comprehensive Course in Distributed Systems: Reading List](https://backendology.com/2018/09/10/distributed-systems-course-reading-list/)
+- https://news.ycombinator.com/item?id=5192650
+- [Papers: Distributed Systems Reading Group](https://dsrg.pdos.csail.mit.edu/papers/)
 - [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/)
+- [GitHub: mit-6.824 labs solutions](https://github.com/doongz/mit-6.824)
 - [YouTube Playlist: MIT 6.824 Distributed Systems (Spring 2020)](https://youtube.com/playlist?list=PLrw6a1wE39_tb2fErI4-WkMbsvGQk9_UB&si=2VpNvwkuN4LNxGno)
+- [Introducing Non-Abstract Large System Design](https://sre.google/workbook/non-abstract-design/)
+- [Online book: Site Reliability Engineering](https://sre.google/workbook/table-of-contents/)
+- [Distributed systems for fun and profit](https://book.mixu.net/distsys/single-page.html)
+
+---
+## Tech blogs
+- [Stephen Holiday: Distributed Systems Notes](https://stephenholiday.com/notes/)
+- [GitHub: Stephen Holiday: Academic papers and articles that I have read or plan to read](https://github.com/sholiday/papers)
+- [Evan Wallace (creator of Figma)](https://madebyevan.com/)
+- [Coding Horror: programming and human factors](https://blog.codinghorror.com/)
+- [Иван Пономарёв](https://fiddlededee.github.io/courselinks/#_%D0%BF%D0%BE_%D0%B4%D1%80%D1%83%D0%B3%D0%B8%D0%BC_%D1%82%D0%B5%D0%BC%D0%B0%D0%BC)
+  - [Core Java: Lecture course for MIPT (Moscow)/ Mainor (Tallinn)](https://inponomarev.ru/corejava)
