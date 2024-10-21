@@ -6,6 +6,7 @@ import com.problems.MeasurePerformance;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Stack;
+import java.util.stream.IntStream;
 
 /**
  * https://leetcode.com/problems/valid-parentheses/
@@ -32,7 +33,7 @@ public class ValidParentheses_leetCode_easy_20 extends AbsLeetCodeSolution {
    * @param s
    * @return
    */
-  // Took 0.022 ms, Used 2.23 mb (fastest)
+  // Took 0.022 ms, Used 2.23 mb (fastest on first invocation)
   public boolean isValid(String s) {
     var stack = new char[s.length()];
     var stackPtr = -1;
@@ -63,7 +64,7 @@ public class ValidParentheses_leetCode_easy_20 extends AbsLeetCodeSolution {
   }
 
   // O(n) time | O(n) space
-  // Took 0.050 ms, Used 1.53 mb (optimal)
+  // Took 0.050 ms, Used 1.53 mb (optimal on first invocation)
   public boolean isValid2(String s) {
     var closeToOpen = Map.of(')', '(', ']', '[', '}', '{');
     var stack = new ArrayList<Character>();
@@ -83,7 +84,7 @@ public class ValidParentheses_leetCode_easy_20 extends AbsLeetCodeSolution {
     return stack.isEmpty();
   }
 
-  // Took 0.275 ms, Used 1.53 mb (worst)
+  // Took 0.275 ms, Used 1.53 mb (worst on first invocation)
   public boolean isValid3(String s) {
     var stack = new Stack<Character>();
     for (char c : s.toCharArray()) {
@@ -105,28 +106,55 @@ public class ValidParentheses_leetCode_easy_20 extends AbsLeetCodeSolution {
   }
 
   public static void main(String[] args) {
-    MeasurePerformance.measure(() -> {
-      var obj = new ValidParentheses_leetCode_easy_20();
-      doAssert(obj.isValid("()"), true);
-      doAssert(obj.isValid("()[]{}"), true);
-      doAssert(obj.isValid("(]"), false);
-      doAssert(obj.isValid("([])"), true);
-    });
+//    Stream.of("isValid", "isValid2", "isValid3").forEach(methodName -> {
+//      try {
+//        System.out.println("Method: " + methodName);
+//        Method method = ValidParentheses_leetCode_easy_20.class
+//                .getDeclaredMethod(methodName, String.class);
+//        MeasurePerformance.measure(() -> {
+//          var instance = new ValidParentheses_leetCode_easy_20();
+//          try {
+//            doAssert(method.invoke(instance, "()"), true);
+//            doAssert(method.invoke(instance, "()[]{}"), true);
+//            doAssert(method.invoke(instance, "(]"), false);
+//            doAssert(method.invoke(instance, "([])"), true);
+//          } catch (IllegalAccessException | InvocationTargetException e) {
+//            throw new RuntimeException(e);
+//          }
+//        });
+//      } catch (NoSuchMethodException e) {
+//        throw new RuntimeException(e);
+//      }
+//    });
 
-    MeasurePerformance.measure(() -> {
-      var obj = new ValidParentheses_leetCode_easy_20();
-      doAssert(obj.isValid2("()"), true);
-      doAssert(obj.isValid2("()[]{}"), true);
-      doAssert(obj.isValid2("(]"), false);
-      doAssert(obj.isValid2("([])"), true);
-    });
+    for (int i: IntStream.range(0, 100).toArray()) {
+      System.out.println(i);
+      MeasurePerformance.measure(() -> {
+        System.out.println("Method: isValid");
+        var obj = new ValidParentheses_leetCode_easy_20();
+        doAssert(obj.isValid("()"), true);
+        doAssert(obj.isValid("()[]{}"), true);
+        doAssert(obj.isValid("(]"), false);
+        doAssert(obj.isValid("([])"), true);
+      });
 
-    MeasurePerformance.measure(() -> {
-      var obj = new ValidParentheses_leetCode_easy_20();
-      doAssert(obj.isValid3("()"), true);
-      doAssert(obj.isValid3("()[]{}"), true);
-      doAssert(obj.isValid3("(]"), false);
-      doAssert(obj.isValid3("([])"), true);
-    });
+      MeasurePerformance.measure(() -> {
+        System.out.println("Method: isValid2");
+        var obj = new ValidParentheses_leetCode_easy_20();
+        doAssert(obj.isValid2("()"), true);
+        doAssert(obj.isValid2("()[]{}"), true);
+        doAssert(obj.isValid2("(]"), false);
+        doAssert(obj.isValid2("([])"), true);
+      });
+
+      MeasurePerformance.measure(() -> {
+        System.out.println("Method: isValid3");
+        var obj = new ValidParentheses_leetCode_easy_20();
+        doAssert(obj.isValid3("()"), true);
+        doAssert(obj.isValid3("()[]{}"), true);
+        doAssert(obj.isValid3("(]"), false);
+        doAssert(obj.isValid3("([])"), true);
+      });
+    }
   }
 }
