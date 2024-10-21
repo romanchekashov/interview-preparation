@@ -9,12 +9,12 @@ public abstract class AbsLeetCodeSolution implements MeasurePerformance.Tests {
         MeasurePerformance.measure(this);
     }
 
-    public void doAssert(boolean check) {
+    public static void doAssert(boolean check) {
         if (!check)
             throw new IllegalArgumentException("Fail!");
     }
 
-    public <T> void doAssert(List<T> actual, List<T> expected) {
+    public static <T> void doAssert(List<T> actual, List<T> expected) {
         boolean check = actual.size() == expected.size();
         for (int i = 0; i < actual.size(); i++) {
             check = check && Objects.equals(actual.get(i), expected.get(i));
@@ -24,7 +24,7 @@ public abstract class AbsLeetCodeSolution implements MeasurePerformance.Tests {
             throw new IllegalArgumentException(String.format("Fail! Expected: %s, but got: %s", expected, actual));
     }
 
-    public <T> void doAssert(T actual, T expected) {
+    public static <T> void doAssert(T actual, T expected) {
         if (!Objects.equals(actual, expected))
             throw new IllegalArgumentException(String.format("Fail! Expected: %s, but got: %s", expected, actual));
     }

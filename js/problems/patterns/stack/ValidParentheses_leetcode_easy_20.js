@@ -18,6 +18,7 @@ const { assert, measurePerformance } = require('../../../Utils');
  * @param {string} s
  * @return {boolean}
  */
+// O(n) time | O(n) space
 var isValid = function(s) {
     const stack = [];
     const closeToOpen = { ')': '(', ']': '[', '}': '{' };
@@ -33,7 +34,6 @@ var isValid = function(s) {
             stack.push(c);
         }
     }
-    
     return stack.length === 0;
 };
 
