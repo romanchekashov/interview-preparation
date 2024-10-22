@@ -1,0 +1,58 @@
+server:
+  port: 3000
+spring:
+  application:
+    name: sync
+  config:
+    import: optional:secret.properties
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5438/market_db
+    username: ${POSTGRES_USER:-postgres}
+    password: ${POSTGRES_PASSWORD:-password}
+  jpa:
+    show-sql: true
+    hibernate:
+      #     ddl-auto: create-drop # This tells Hibernate to recreate the database on startup.
+      ddl-auto: validate # in testing or production databases
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      transaction-id-prefix: tx.  # creates kafkaTransactionManager
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: sync
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      isolation-level: read_committed
+      properties:
+        spring.json.trusted.packages: "*"
+logging:
+  level:
+    org.springframework.transaction: trace
+    org.springframework.kafka.transaction: debug
+#    org.flywaydb: DEBUG
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  kafka:
+    producer:
+      transaction-id-prefix: tx1.  # creates kafkaTransactionManager + For applications running with multiple instances, the transactionIdPrefix must be unique per instance.
+server:
+  port: 3000
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  kafka:
+    producer:
+      transaction-id-prefix: tx2.  # creates kafkaTransactionManager + For applications running with multiple instances, the transactionIdPrefix must be unique per instance.
+server:
+  port: 3001
