@@ -25,6 +25,71 @@ public class EasyQuestionsTests {
         Assertions.assertEquals(first, second);
     }
 
+    ///
+    /// Java's `Integer` class contains the `IntegerCache` to improve performance and memory efficiency when dealing with frequently used integer values. Here's a detailed explanation:
+    ///
+    /// ### Why `IntegerCache` Exists
+    ///
+    /// 1. **Autoboxing Efficiency**:
+    ///    Java supports autoboxing, which allows you to automatically convert between primitive types (like `int`) and their corresponding wrapper classes (like `Integer`). Autoboxing occurs frequently, especially when working with collections or APIs that require object types (e.g., `List<Integer>` instead of `int[]`).
+    ///
+    ///    Without caching, every time you boxed an `int` into an `Integer`, a new `Integer` object would have to be created, even for commonly used values. This would lead to unnecessary object creation and memory consumption.
+    ///
+    /// 2. **Caching Common Values**:
+    ///    Most applications frequently use small integer values (e.g., for loop counters, array indices, etc.). To avoid creating new `Integer` objects for every occurrence of these values, Java uses the `IntegerCache` to cache instances of `Integer` for a predefined range of values. By default, this range is from `-128` to `127`.
+    ///
+    ///    When you box an `int` in this range, Java uses the cached instance from `IntegerCache` instead of creating a new `Integer` object, saving memory and improving performance.
+    ///
+    /// ### How `IntegerCache` Works
+    ///
+    /// - The `IntegerCache` is a private static inner class in `Integer`. It stores an array of `Integer` objects for the range `-128` to `127` by default.
+    /// - When an `int` is autoboxed into an `Integer`, if the value falls within this range, Java retrieves the `Integer` instance from the cache.
+    /// - If the value is outside the cache range, a new `Integer` object is created.
+    ///
+    /// ```java
+    /// public class Integer {
+    ///     private static class IntegerCache {
+    ///         static final int low = -128;
+    ///         static final int high;
+    ///         static final Integer cache[];
+    ///
+    ///         static {
+    ///             int h = 127;
+    ///             // The high value can be configured with the system property "java.lang.Integer.IntegerCache.high"
+    ///             cache = new Integer[(high - low) + 1];
+    ///             int j = low;
+    ///             for (int k = 0; k < cache.length; k++)
+    ///                 cache[k] = new Integer(j++);
+    ///         }
+    ///     }
+    ///
+    ///     public static Integer valuef(int i) {
+    ///         if (i >= IntegerCache.low && i <= IntegerCache.high)
+    ///             return IntegerCache.cache[i + (-IntegerCache.low)];
+    ///         return new Integer(i);
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Benefits of `IntegerCache`
+    ///
+    /// 1. **Memory Efficiency**: It avoids creating redundant `Integer` objects for frequently used values, reducing memory overhead.
+    /// 2. **Performance Improvement**: Accessing an object from a cache is much faster than allocating a new object in memory, which leads to better performance for common operations like autoboxing.
+    /// 3. **Consistency**: Since cached `Integer` instances are reused, the `==` operator works as expected for comparisons within the cache range (e.g., `Integer i1 = 127; Integer i2 = 127; i1 == i2` will return `true`).
+    ///
+    /// ### Customizing the Cache Range
+    ///
+    /// The cache range can be customized using the JVM option `-XX:AutoBoxCacheMax=<size>`, which allows you to adjust the upper bound of the cache. For example, if you know your application frequently uses numbers beyond `127`, you can increase the cache size to improve performance for those numbers.
+    ///
+    /// ```bash
+    /// java -XX:AutoBoxCacheMax=1000 MyApp
+    /// ```
+    ///
+    /// ### Summary:
+    /// - **Purpose**: `IntegerCache` exists to optimize performance and memory usage by caching frequently used `Integer` objects.
+    /// - **Default Range**: The cache by default ranges from `-128` to `127`.
+    /// - **Efficiency**: It reduces object creation and speeds up autoboxing for common integer values.
+    ///
     @SuppressWarnings("removal")
     @Test
     public void objectsByValue_Demo() {

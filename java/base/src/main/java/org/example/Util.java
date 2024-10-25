@@ -14,7 +14,6 @@ public class Util {
     measure.test();
     long endTime = System.nanoTime();
     long nano = endTime - startTime;
-    double usedMem = (double) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
     long minutes = TimeUnit.NANOSECONDS.toMinutes(nano);
     long seconds = TimeUnit.NANOSECONDS.toSeconds(nano) - TimeUnit.MINUTES.toSeconds(minutes);
     long milliseconds = TimeUnit.NANOSECONDS.toMillis(nano) - TimeUnit.MINUTES.toMillis(minutes) - TimeUnit.SECONDS.toMillis(seconds);
@@ -23,7 +22,8 @@ public class Util {
             seconds,
             milliseconds
     );
-    System.out.println(String.format("Took %s, Used %.2f MB", duration, usedMem));
+    double usedMem = (double) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024);
+    System.out.printf("Took %s, Used %.2f MB%n", duration, usedMem);
   }
 
   @FunctionalInterface
