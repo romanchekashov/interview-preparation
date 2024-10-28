@@ -91,7 +91,7 @@ public class VolatileExample {
             @Override
             public void run() {
                 value = 1;
-                volatileValue = 1;
+                volatileValue = 1; // happens-before
             }
         }).start();
 
